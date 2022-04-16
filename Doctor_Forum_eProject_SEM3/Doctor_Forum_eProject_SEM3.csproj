@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -124,13 +132,31 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountModelsController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountDetail.cs" />
+    <Compile Include="Models\Achievement.cs" />
+    <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\BigViewModel.cs" />
+    <Compile Include="Models\DistrictModel.cs" />
+    <Compile Include="Models\DoctorForumDbContext.cs" />
+    <Compile Include="Models\Experience.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Professional.cs" />
+    <Compile Include="Models\ProvinceModel.cs" />
+    <Compile Include="Models\Qualification.cs" />
+    <Compile Include="Models\Reply.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Specialization.cs" />
+    <Compile Include="Models\ViewModel\AccountModel.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -518,6 +544,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialHeaderTop.cshtml" />
+    <Content Include="Views\Shared\_PartialHeaderUper.cshtml" />
+    <Content Include="Views\Shared\_PartialNavbar.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Posts\PostDetail.cshtml" />
+    <Content Include="Views\AccountModels\Create.cshtml" />
+    <Content Include="Views\AccountModels\Delete.cshtml" />
+    <Content Include="Views\AccountModels\Details.cshtml" />
+    <Content Include="Views\AccountModels\Edit.cshtml" />
+    <Content Include="Views\AccountModels\Index.cshtml" />
     <Content Include="Views\UserAccount\Register.cshtml" />
     <Content Include="Views\UserAccount\Login.cshtml" />
   </ItemGroup>
@@ -526,6 +562,7 @@
     <Folder Include="Areas\Admin\assets\plugins\bootstrap-material-datetimepicker\css\" />
     <Folder Include="Areas\Admin\assets\plugins\bootstrap-material-datetimepicker\js\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="obj\Debug\TempPE\" />
