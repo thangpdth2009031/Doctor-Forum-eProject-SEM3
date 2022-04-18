@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using Doctor_Forum_eProject_SEM3.Common;
+using Doctor_Forum_eProject_SEM3.Dao;
 using Doctor_Forum_eProject_SEM3.Models;
 using Doctor_Forum_eProject_SEM3.Models.ViewModel;
 
@@ -111,16 +113,55 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 };
                 db.Experiences.Add(experience);
                 db.SaveChanges();
-                return View();
+                return View(accountModel);
 
             }
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return View(accountModel);
+            return RedirectToAction("Index", "Posts");
         }
         public ActionResult Login()
         {
-
             return View();
+        }
+        [HttpPost]
+        public ActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDao();
+                var result = dao.Login(model.Username, Encryptor.MD5Hash(model.Password));
+                if (result == 1)    
+                {
+                    var user = dao.GetById(model.Username);
+                    var userSession = new Account();
+                    userSession = user;                    
+                    Session.Add(UserSession.USER_SESSION, userSession);
+                    return RedirectToAction("Create", "Replies");
+                }
+                else if (result == 0)
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại.");
+                }
+                else if (result == -1)
+                {
+                    ModelState.AddModelError("", "Tài khoản đang bị khoá.");
+                }
+                else if (result == -2)
+                {
+                    ModelState.AddModelError("", "Mật khẩu không đúng.");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "đăng nhập không đúng.");
+                }
+            }
+
+            return View(model);
+        }
+        public ActionResult Logout()
+        {
+            Session[UserSession.USER_SESSION] = null;
+            return Redirect("/");
         }
         public JsonResult LoadProvince()
         {
