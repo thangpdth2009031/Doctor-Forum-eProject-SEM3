@@ -7,6 +7,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
+using Doctor_Forum_eProject_SEM3.Common;
 using Doctor_Forum_eProject_SEM3.Models;
 using Doctor_Forum_eProject_SEM3.Models.ViewModel;
 
@@ -14,31 +16,10 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 {
     public class AccountModelsController : Controller
     {
-        private DoctorForumDbContext db = new DoctorForumDbContext();
+        /*private DoctorForumDbContext db = new DoctorForumDbContext();*/
 
         // GET: AccountModels
-        public ActionResult Index()
-        {
-            var accountModels = db.AccountModels.Include(a => a.Specialization);
-            return View(accountModels.ToList());
-        }
-
-        // GET: AccountModels/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AccountModel accountModel = db.AccountModels.Find(id);
-            if (accountModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accountModel);
-        }
-
-        // GET: AccountModels/Create
+        DoctorForumDbContext db = new DoctorForumDbContext();
         public ActionResult Create()
         {
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
@@ -50,118 +31,141 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync(AccountModel accountModel)
+        public ActionResult Create(AccountModel accountModel)
         {
-            
             if (ModelState.IsValid)
             {
-                using (DoctorForumDbContext dc = new DoctorForumDbContext())
-                {                    
-                    Account account = new Account()
-                    {
-                        RoleId = 1,
-                        Avatar = accountModel.Avatar,
-                        UserName = accountModel.UserName,
-                        Password = accountModel.UserName,
-                        FullName = accountModel.FullName,
-                        AddressDetail = accountModel.AddressDetail,
-                        SpecializationId = accountModel.SpecializationId,
-                        DistrictId = accountModel.DistrictId,
-                        ProvinceId = accountModel.ProvinceId,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        Status = true
-                    };
-                    await db.Accounts.AddAsync(account);
-                    await db.SaveChangesAsync(); // Lưu các thay đổi đã xảy ra. khóa chính trong được chèn trong behaviorCase
-                    int pk = account.Id;  // Bạn có thể lấy khóa chính của hàng đã chèn của mình                  
-                    AccountDetail accountDetail = new AccountDetail()
-                    {
-                        Email = accountModel.Email,
-                        Phone = accountModel.Phone,
-                        Gender = accountModel.Gender,
-                        Status = true,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        AccountId = pk
-                    };                                       
-                    object p = await db.AccountDetails.AddAsync(accountDetail);
-                    await db.SaveChangesAsync();
-                    return View();
-
+                Account account = new Account();
+                account.RoleId = 1;
+                account.Avatar = accountModel.Avatar;
+                account.UserName = accountModel.UserName;
+                account.Password = Encryptor.MD5Hash(accountModel.UserName);
+                account.FullName = accountModel.FullName;
+                account.AddressDetail = accountModel.AddressDetail;
+                account.SpecializationId = accountModel.SpecializationId;
+                account.CreatedAt = DateTime.Now;
+                account.UpdatedAt = DateTime.Now;
+                account.Status = true;
+                if (!string.IsNullOrEmpty(accountModel.ProvinceId))
+                {
+                    account.ProvinceId = int.Parse(accountModel.ProvinceId);
                 }
-                
-            }
-            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return View(accountModel);
-        }
-
-        // GET: AccountModels/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AccountModel accountModel = db.AccountModels.Find(id);
-            if (accountModel == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return View(accountModel);
-        }
-
-        // POST: AccountModels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Avatar,UserName,Password,FullName,AddressDetail,DistrictId,ProvinceId,SpecializationId,Email,Phone,Gender,Year,Description,StartYear,EndYear,DescriptionExperiences,Wordplace,Position,ProfessionalName,YearAchievement,DescriptionQualifications,School")] AccountModel accountModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(accountModel).State = EntityState.Modified;
+                if (!string.IsNullOrEmpty(accountModel.ProvinceId))
+                {
+                    account.DistrictId = int.Parse(accountModel.DistrictId);
+                }
+                db.Accounts.Add(account);
+                int pk = account.Id;
+                AccountDetail accountDetail = new AccountDetail()
+                {
+                    Email = accountModel.Email,
+                    Phone = accountModel.Phone,
+                    Gender = accountModel.Gender,
+                    Status = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    AccountId = pk
+                };
+                db.AccountDetails.Add(accountDetail);
+                Achievement achievement = new Achievement()
+                {
+                    Year = accountModel.YearAchievement,
+                    Description = accountModel.Description,
+                    AccountId = pk,
+                    Status = true,
+                    CreatedAt = DateTime.Now,
+                    UpatedAt = DateTime.Now
+                };
+                db.Achievements.Add(achievement);
+                Professional professional = new Professional()
+                {
+                    ProfessionalName = accountModel.ProfessionalName,
+                    AccountId = pk,
+                    Status = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+                db.Professionals.Add(professional);
+                Qualification qualification = new Qualification()
+                {
+                    Year = accountModel.Year,
+                    Description = accountModel.Description,
+                    School = accountModel.School,
+                    AccountId = pk,
+                    Status = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                };
+                db.Qualifications.Add(qualification);
+                Experience experience = new Experience()
+                {
+                    StartYear = accountModel.StartYear,
+                    EndYear = accountModel.EndYear,
+                    Description = accountModel.DescriptionExperiences,
+                    Workplace = accountModel.Workplace,
+                    Position = accountModel.Position,
+                    AccountId = pk,
+                    Status = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+                db.Experiences.Add(experience);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View();
+
             }
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
             return View(accountModel);
         }
-
-        // GET: AccountModels/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Login()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AccountModel accountModel = db.AccountModels.Find(id);
-            if (accountModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accountModel);
+
+            return View();
         }
-
-        // POST: AccountModels/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public JsonResult LoadProvince()
         {
-            AccountModel accountModel = db.AccountModels.Find(id);
-            db.AccountModels.Remove(accountModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            var xmlDoc = XDocument.Load(Server.MapPath(@"~/Content/data/Provinces_Data.xml"));
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            var xElements = xmlDoc.Element("Root").Elements("Item").Where(x => x.Attribute("type").Value == "province");
+            var list = new List<ProvinceModel>();
+            ProvinceModel province = null;
+            foreach (var item in xElements)
             {
-                db.Dispose();
+                province = new ProvinceModel();
+                province.ID = int.Parse(item.Attribute("id").Value);
+                province.Name = item.Attribute("value").Value;
+                list.Add(province);
+
             }
-            base.Dispose(disposing);
+            return Json(new
+            {
+                data = list,
+                status = true
+            });
+        }
+        public JsonResult LoadDistrict(int provinceID)
+        {
+            var xmlDoc = XDocument.Load(Server.MapPath(@"~/Content/data/Provinces_Data.xml"));
+
+            var xElement = xmlDoc.Element("Root").Elements("Item")
+                .Single(x => x.Attribute("type").Value == "province" && int.Parse(x.Attribute("id").Value) == provinceID);
+
+            var list = new List<DistrictModel>();
+            DistrictModel district = null;
+            foreach (var item in xElement.Elements("Item").Where(x => x.Attribute("type").Value == "district"))
+            {
+                district = new DistrictModel();
+                district.ID = int.Parse(item.Attribute("id").Value);
+                district.Name = item.Attribute("value").Value;
+                district.ProvinceID = int.Parse(xElement.Attribute("id").Value);
+                list.Add(district);
+
+            }
+            return Json(new
+            {
+                data = list,
+                status = true
+            });
         }
     }
 }
