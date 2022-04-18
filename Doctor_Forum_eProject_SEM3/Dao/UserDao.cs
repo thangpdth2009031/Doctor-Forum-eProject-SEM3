@@ -15,7 +15,7 @@ namespace Doctor_Forum_eProject_SEM3.Dao
         }
         public int Login(string userName, string passWord)
         {
-            var result = db.Accounts.SingleOrDefault(x => x.UserName == userName);
+            var result = db.Accounts.SingleOrDefault(x => x.UserName == userName);   
             if (result == null)
             {
                 return 0;
@@ -30,7 +30,7 @@ namespace Doctor_Forum_eProject_SEM3.Dao
                 else
                 {
                     if (result.Password == passWord)
-
+                        
                         return 1;
 
                     else
@@ -46,7 +46,11 @@ namespace Doctor_Forum_eProject_SEM3.Dao
         public bool CheckUserName(string userName)
         {
             return db.Accounts.Count(x => x.UserName == userName) > 0;
-        }       
+        }
+        public Account GetById(string userName)
+        {
+            return db.Accounts.SingleOrDefault(x => x.UserName == userName);
+        }
     }
 
 }
