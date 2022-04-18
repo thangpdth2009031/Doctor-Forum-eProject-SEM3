@@ -23,9 +23,9 @@ namespace Doctor_Forum_eProject_SEM3.Models.ViewModel
 
         public string AddressDetail { get; set; }
 
-        public int? DistrictId { get; set; }
+        public string DistrictId { get; set; }
 
-        public int? ProvinceId { get; set; }
+        public string ProvinceId { get; set; }
 
         public int? SpecializationId { get; set; }
 
@@ -50,7 +50,7 @@ namespace Doctor_Forum_eProject_SEM3.Models.ViewModel
 
         public string DescriptionExperiences { get; set; }
 
-        public string Wordplace { get; set; }
+        public string Workplace { get; set; }
 
         public string Position { get; set; }
 

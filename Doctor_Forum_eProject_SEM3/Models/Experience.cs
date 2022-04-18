@@ -26,7 +26,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public DateTime? UpdatedAt { get; set; }
 
-        public string Wordplace { get; set; }
+        public string Workplace { get; set; }
 
         public string Position { get; set; }
 
