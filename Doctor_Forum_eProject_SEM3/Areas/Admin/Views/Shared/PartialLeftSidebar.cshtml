@@ -1,0 +1,253 @@
+﻿
+@{
+    ViewBag.Title = "PartialLeftSidebar";
+}
+<style>
+    .home-admin {
+        color: #a5a8ab;
+    }
+    .home-admin:hover {
+        color: white;
+    }
+</style>
+<aside class="left-sidebar" data-sidebarbg="skin5">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="pt-4">
+                <li class="sidebar-item d-flex">
+                    <div class="ms-3"></div>
+                    <h2>
+                        <i class="mdi mdi-view-dashboard home-admin" style="color: #a5a8ab;"></i>
+                    </h2>
+                    
+                    <a href="/Admin" class="m-2 home-admin" >Home</a>
+
+
+                </li>
+                @*<li class="sidebar-item d-flex">
+                    <div class="ms-3"></div>
+                    <h2>
+                        <i class="mdi mdi-chart-bar" style="color:#a5a8ab"></i>
+                    </h2>
+                    @Html.ActionLink("Charts", "Charts", "HomeAdmin", null, new { @Class = "text-white m-2" })
+                </li>*@
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)"
+                       aria-expanded="false">
+                        <i class="fa-solid fa-book-open"></i><span class="hide-menu">Khóa học </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item d-flex">
+                            <div ></div>
+                            <h5>
+                                <i class="fa-solid fa-circle-arrow-right mt-3 ms-3" style="color:#a5a8ab"></i>
+                            </h5>
+                            @Html.ActionLink("Thêm mới khóa học", "Create", "Cours", null, new { @Class = "sidebar-link sidebar-link Action-color" })
+                        </li>
+                        <li class="sidebar-item d-flex">
+                            <div class=""></div>
+                            <h5>
+                                <i class="fa-solid fa-circle-arrow-right mt-3 ms-3" style="color:#a5a8ab"></i>
+                            </h5>
+                            @Html.ActionLink("Quản lý khóa học", "Index", "Cours", null, new { @Class = "sidebar-link sidebar-link Action-color" })
+                        </li>
+                    </ul>
+                </li>
+
+                @*<li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)"
+                       aria-expanded="false">
+                        <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                        <span class="hide-menu">Income management </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="form-basic.html" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Daily income management </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="form-wizard.html" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Weekly income management </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="form-wizard.html" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Manage monthly income </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="form-wizard.html" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Yearly income management </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>*@
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)"
+                       aria-expanded="false">
+                        <i class="fa-solid fa-user"></i><span class="hide-menu">Người dùng </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item d-flex">
+                            <div class="ms-2"></div>
+                            <h5>
+                                <i class="fa-solid fa-circle-arrow-right mt-3 ms-3" style="color:#a5a8ab"></i>
+                            </h5>
+                            @Html.ActionLink("Thêm mới tài khoản", "Create", "Users", null, new { @Class = "sidebar-link sidebar-link Action-color" })
+                        </li>
+                        <li class="sidebar-item d-flex">
+                            <div class="ms-2"></div>
+                            <h5>
+                                <i class="fa-solid fa-circle-arrow-right mt-3 ms-3" style="color:#a5a8ab"></i>
+                            </h5>
+                            @Html.ActionLink("Quản lý tài khoản", "Index", "Users", null, new { @Class = "sidebar-link sidebar-link Action-color" })
+                        </li>                       
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)"
+                       aria-expanded="false">
+                        <i class="fa-solid fa-book-bible"></i>
+                        <span class="hide-menu">Chủ đề </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="/Admin/Topics/Create" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Thêm chủ đề mới </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="/Admin/Topics/Index" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Quản lý chủ đề </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)"
+                       aria-expanded="false">
+                        <i class="fa-solid fa-book"></i>
+                        <span class="hide-menu">Bài học </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="/Admin/Lessons/Create" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Thêm mới mài học </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="/Admin/Lessons/Index" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Quản lý bài học</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)"
+                       aria-expanded="false">
+                        <i class="mdi mdi-blur-linear"></i>
+                        <span class="hide-menu">Danh mục </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="/Admin/Categories/Create" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Thêm mới Danh mục </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="/Admin/Categories/Index" class="sidebar-link">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                                <span class="hide-menu">Quản lý danh mục</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                @*<li class="sidebar-item">
+                <li class="sidebar-item d-flex">
+                    <div class="ms-3"></div>
+                    <h2>
+                        <i class="mdi mdi-view-dashboard 2" style="color:#a5a8ab"></i>
+                    </h2>
+                    @Html.ActionLink("Widgets", "Widgets", "HomeAdmin", null, new { @Class = "text-white m-2 Action-color" })
+
+
+                </li>
+                </li>
+                <li class="sidebar-item">
+                <li class="sidebar-item d-flex">
+                    <div class="ms-3"></div>
+                    <h2>
+                        <i class="mdi mdi-chart-bar" style="color:#a5a8ab"></i>
+                    </h2>
+                    @Html.ActionLink("Tables", "Tables", "HomeAdmin", null, new { @Class = "text-white m-2 Action-color" })
+                </li>               
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)"
+                       aria-expanded="false">
+                        <i class="mdi mdi-receipt"></i><span class="hide-menu">Forms </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item d-flex">
+                            <div class="ms-2"></div>
+                            <h5>
+                                <i class="fa-solid fa-circle-arrow-right mt-3 ms-3" style="color:#a5a8ab"></i>
+                            </h5>
+                            @Html.ActionLink("Form basic", "Form", "HomeAdmin", null, new { @Class = "sidebar-link sidebar-link Action-color" })
+                        </li>
+                        <li class="sidebar-item d-flex">
+                            <div class="ms-2"></div>
+                            <h5>
+                                <i class="fa-solid fa-circle-arrow-right mt-3 ms-3" style="color:#a5a8ab"></i>
+                            </h5>
+                            @Html.ActionLink("Form wizard", "FormWizard", "HomeAdmin", null, new { @Class = "sidebar-link sidebar-link Action-color" })
+                        </li>
+                    </ul>
+                </li>*@
+                            
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark"
+                       href="javascript:void(0)"
+                       aria-expanded="false">
+                        <i class="mdi mdi-account-key"></i><span class="hide-menu">Tài khoản </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="/Admin/Login/Index" class="sidebar-link">
+                                <i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Đăng nhập </span>
+                            </a>
+                        </li>
+                    
+                    </ul>
+                </li>              
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+
