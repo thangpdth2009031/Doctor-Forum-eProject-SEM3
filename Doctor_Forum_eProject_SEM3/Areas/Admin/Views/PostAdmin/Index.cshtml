@@ -80,7 +80,7 @@
                                             <th>
                                                 Title
                                             </th>
-                                            <th>
+                                            <th style="width:300px">
                                                 Content
                                             </th>
                                             <th>
@@ -110,7 +110,9 @@
                                                     @Html.DisplayFor(modelItem => item.Title)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Content)
+                                                    <div style="width:300px!important">
+                                                        @Html.Raw(HttpUtility.HtmlDecode(item.Content))
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Type)
