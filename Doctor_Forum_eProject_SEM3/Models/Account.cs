@@ -35,6 +35,9 @@ namespace Doctor_Forum_eProject_SEM3.Models
         [StringLength(250)]
         public string FullName { get; set; }
 
+        [StringLength(250)]
+        public String Email { get; set; }
+
         public string AddressDetail { get; set; }
 
         public int? DistrictId { get; set; }
