@@ -3,110 +3,241 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .click-view-all {
+        background-color: #e5e6ed;
+        color: black;
+        padding: 6px 0;
+        width: 330px;
+        height: 40px;
+        border: solid 1px #cfcfcf;
+    }
 
+    .click:hover {
+        color: #0d95e8 !important;
+    }
+</style>
+<div class="section-searchbar" id="search-bar">
+    <div class="container">
+        <div class="row" style="height: 120px; padding: 20px; background-color: #2FBBB0">
+            <div class="col-md-12 ">
+                <span style="color: white; font-size: 20px;padding-bottom: 3px">Bạn muốn tìm gì ?</span>
+                <!-- BEGIN Search Bar -->
+                <form action="/tim-kiem" method="get" id="srchfrm">
+                    <div class="search-bar clearfix form-group-lg row" style="margin-left: 1px">
+                        <div class="search-input-col text-center" style="width: 38%">
+                            <input type="text" value="" maxlength="255" id="search_top_content" name="q" placeholder="Tìm kiếm phòng khám, bệnh viện, bác sỹ, nhà thuốc từ A - Z và hơn thế nữa." class="form-control">
+                        </div>
+                        <div class="location-col text-center" id="select_city" style="margin-left: 15px; width: 15%">
+                            <select class="form-control py-0" name="c">
+                                <option>Thành Phố</option>
+                            </select>
+                        </div>
+                        <div class="location-col text-center" style="margin-left: 15px; width: 15%">
+                            <select class="form-control py-0" name="c">
+                                <option>Quận Huyện</option>
+                            </select>
+                        </div>
+                        <div class="department-col" style="margin-left: 15px ; width: 15%">
+                            <select class="form-control py-0" name="s" id="chuyen-khoa">
+                                <option value='-1'>Chuyên khoa</option>
+                                <option value='Chẩn đoán hình ảnh'>Chẩn đoán hình ảnh</option>
+                                <option value='Chấn thương chỉnh hình - Cột sống'>Chấn thương chỉnh hình - Cột sống</option>
+                                <option value='Cơ Xương Khớp'>Cơ Xương Khớp</option>
+                                <option value='Da liễu'>Da liễu</option>
+                                <option value='Dinh dưỡng'>Dinh dưỡng</option>
+                                <option value='Di truyền & Sinh học phân tử'>Di truyền & Sinh học phân tử</option>
+                                <option value='Dị ứng'>Dị ứng</option>
+                                <option value='Dược'>Dược</option>
+                                <option value='Đông y'>Đông y</option>
+                                <option value='Gây mê hồi sức'>Gây mê hồi sức</option>
+                                <option value='Giải phẫu bệnh'>Giải phẫu bệnh</option>
+                                <option value='Hiếm muộn - Vô sinh'>Hiếm muộn - Vô sinh</option>
+                                <option value='Hô hấp'>Hô hấp</option>
+                                <option value='Hồi sức - Cấp cứu'>Hồi sức - Cấp cứu</option>
+                                <option value='Kiểm soát nhiễm khuẩn'>Kiểm soát nhiễm khuẩn</option>
+                                <option value='Lão khoa'>Lão khoa</option>
+                                <option value='Mắt'>Mắt</option>
+                                <option value='Nam khoa'>Nam khoa</option>
+                                <option value='Ngoại'>Ngoại</option>
+                                <option value='Nha khoa'>Nha khoa</option>
+                                <option value='Nhi'>Nhi</option>
+                                <option value='Nội'>Nội</option>
+                                <option value='Nội soi'>Nội soi</option>
+                                <option value='Nội tiết'>Nội tiết</option>
+                                <option value='Răng hàm mặt'>Răng hàm mặt</option>
+                                <option value='Sản phụ khoa'>Sản phụ khoa</option>
+                                <option value='Tai mũi họng'>Tai mũi họng</option>
+                                <option value='Tâm thần'>Tâm thần</option>
+                                <option value='Thăm dò chức năng'>Thăm dò chức năng</option>
+                                <option value='Thẩm mỹ'>Thẩm mỹ</option>
+                                <option value='Thần kinh'>Thần kinh</option>
+                                <option value='Thận - Tiết niệu'>Thận - Tiết niệu</option>
+                                <option value='Tiêu hóa - Gan mật'>Tiêu hóa - Gan mật</option>
+                                <option value='Tim mạch'>Tim mạch</option>
+                                <option value='Truyền nhiễm'>Truyền nhiễm</option>
+                                <option value='Ung bướu'>Ung bướu</option>
+                                <option value='Vật lý trị liệu - Phục hồi chức năng'>Vật lý trị liệu - Phục hồi chức năng</option>
+                                <option value='Xét nghiệm'>Xét nghiệm</option>
+                                <option value='Y tế dự phòng'>Y tế dự phòng</option>
+                            </select>
+                        </div>
+                        <div class="search-submit-col" style="margin-left: 15px; background-color: hotpink; width: 11%">
+                            <a href="#" id="btn-search-top" class="btn btn-block btn-lg btn-search" ; style="font-size: 14px"><i class="icon-magnifier icons"></i> Tìm kiếm</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="blog-section style-four section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
-                <div class="left-side">
-                    <div class="item-holder">
-                        <div class="image-box">
-                            <figure>
-                                <a href="blog-details.html"><img loading="lazy" class="img-fluid" src="~/Content/images/blog/5.jpg" alt=""></a>
-                            </figure>
+            <div class="col-9">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8">
+                            <img style="height: 337px; width: 100%; object-fit: cover; border-bottom: #1a1a1a 1px solid; border-radius: 10px; margin: 10px 0 5px 0" src="images/blog/Aiđẹptraizị.png">
+                            <p>LeeThànhĐạt♥</p>
+                            <h4 style="color: #1a1a1a">Aissss cái thằng chết tịt này sao mày đẹp zai vậy hẻ???</h4>
                         </div>
-                        <div class="content-text">
-                            <a href="blog-details.html">
-                                <h4>A lesson in Surgery Preparedness - From Hurricane Season</h4>
-                            </a>
-                            <span>By Donult Trum / 02 January 2020</span>
-                            <p>
-                                Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh.
-                                Curabitur aliquet quam
-                                id dui posuere blandit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-                            </p>
-                            <div class="link-btn">
-                                <a href="blog-details.html" class="btn-style-one">read more</a>
+                        <div class="col-4">
+                            <img style="height: 163px; width: 100%;object-fit: cover; border-bottom:  #b2b2b7 1px solid; border-radius: 10px 10px 0 0; margin: 10px 0 0 0" src="images/blog/idol.jpg">
+                            <div style="background-color: #f7f7fa">
+                                <span style="margin-left: 15px">Eimi Fukada 27092002</span>
+                                <h6 style="margin-left: 15px"><a style="color: #343434" href=""><div class="click">Và đó là Eimi Fukada!!!!!</div></a></h6>
+                                <p style="margin-left: 15px">Có thằng nào đó tự nhận mình nam thần đẹp trai hơn Đạt các kiểu... aisss suy nghĩ thật điên rồ vì thế Đạt chỉ cười nhẹ cho qua!!! Thật buồn vì đất nước chúng ta có những thằng Phú Thọ như Phạm Đức Thắng</p>
                             </div>
                         </div>
                     </div>
-                    <div class="item-holder">
-                        <div class="image-box">
-                            <figure>
-                                <a href="blog-details.html"><img loading="lazy" class="img-fluid" src="~/Content/images/blog/6.jpg" alt=""></a>
-                            </figure>
-                        </div>
-                        <div class="content-text">
-                            <a href="blog-details.html">
-                                <h4>To support patients recovery and improve their experiences of care.</h4>
-                            </a>
-                            <span>By James Anderson / 08 January 2020</span>
-                            <p>
-                                Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
-                                Nulla porttitor accumsan
-                                tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
-                            </p>
-                            <div class="link-btn">
-                                <a href="blog-details.html" class="btn-style-one">read more</a>
+                </div>
+                <div class="container">
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-4">
+                            <div>
+                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
+                            </div>
+                            <div style="padding: 7px">
+                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
+                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="item-holder">
-                        <div class="image-box">
-                            <figure>
-                                <a href="blog-details.html"><img loading="lazy" class="img-fluid" src="~/Content/images/blog/7.jpg" alt=""></a>
-                            </figure>
-                        </div>
-                        <div class="content-text">
-                            <a href="blog-details.html">
-                                <h4>A lesson in Surgery Preparedness - From Hurricane Season</h4>
-                            </a>
-                            <span>By Garry Moe / 12 January 2020</span>
-                            <p>
-                                Sed porttitor lectus nibh. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-                                Quisque velit nisi, pretium
-                                ut lacinia in, elementum id enim. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-                            </p>
-                            <div class="link-btn">
-                                <a href="blog-details.html" class="btn-style-one">read more</a>
+                        <div class="col-4">
+                            <div>
+                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
+                            </div>
+                            <div style="padding: 7px">
+                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
+                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="item-holder">
-                        <div class="image-box">
-                            <figure>
-                                <a href="blog-details.html"><img loading="lazy" class="img-fluid" src="~/Content/images/blog/8.jpg" alt=""></a>
-                            </figure>
-                        </div>
-                        <div class="content-text">
-                            <a href="blog-details.html">
-                                <h4>To support patients recovery and improve their experiences of care.</h4>
-                            </a>
-                            <span>By Luis Morris / 25 January 2020</span>
-                            <p>
-                                Proin eget tortor risus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.
-                                Praesent sapien massa, convallis
-                                a pellentesque nec, egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat.
-                            </p>
-                            <div class="link-btn">
-                                <a href="blog-details.html" class="btn-style-one">read more</a>
+                        <div class="col-4">
+                            <div>
+                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
+                            </div>
+                            <div style="padding: 7px">
+                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
+                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
                             </div>
                         </div>
-                    </div>
-
-
-                    <div class="styled-pagination">
-                        <ul>
-                            <li><a class="prev" href="blog.html"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>
-                            <li><a href="blog.html" class="active">1</a></li>
-                            <li><a href="blog.html">2</a></li>
-                            <li><a href="blog.html">3</a></li>
-                            <li><a class="next" href="blog.html"><span class="fas fa-angle-right" aria-hidden="true"></span></a></li>
-                        </ul>
+                        <div class="col-lg-12 mt-5">
+                            <div class="left-side">
+                                <div class="item-holder row">
+                                    <div class="image-box col-4">
+                                        <figure>
+                                            <a href="blog-details.html"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="images/blog/5.jpg" alt=""></a>
+                                        </figure>
+                                    </div>
+                                    <div class="content-text col-8">
+                                        <a href="blog-details.html">
+                                            <h6>A lesson in Surgery Preparedness - From Hurricane Season</h6>
+                                        </a>
+                                        <p class="an">
+                                            Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh.
+                                            Curabitur aliquet quam
+                                            id dui posuere blandit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui<button onclick="myFunction()" style="border: none; background-color: white">...</button>
+                                            <div>
+                                                <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="images/blog/dung.png">
+                                                <span>2 mình là Dũng</span>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="item-holder row">
+                                    <div class="image-box col-4">
+                                        <figure>
+                                            <a href="blog-details.html"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="images/blog/6.jpg" alt=""></a>
+                                        </figure>
+                                    </div>
+                                    <div class="content-text col-8">
+                                        <a href="blog-details.html">
+                                            <h6>To support patients recovery and improve their experiences of care.</h6>
+                                        </a>
+                                        <p>
+                                            Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
+                                            Nulla porttitor accumsan
+                                            tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim<button onclick="myFunction()" style="border: none; background-color: white">...</button>
+                                        </p>
+                                        <div>
+                                            <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="images/blog/Thắng.png">
+                                            <span>Hi mình là Thắng</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-holder row">
+                                    <div class="image-box col-4">
+                                        <figure>
+                                            <a href="blog-details.html"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="images/blog/7.jpg" alt=""></a>
+                                        </figure>
+                                    </div>
+                                    <div class="content-text col-8">
+                                        <a href="blog-details.html">
+                                            <h6>A lesson in Surgery Preparedness - From Hurricane Season</h6>
+                                        </a>
+                                        <p>
+                                            Sed porttitor lectus nibh. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
+                                            Quisque velit nisi, pretium ut lacinia in. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi<button onclick="myFunction()" style="border: none; background-color: white">...</button>
+                                        </p>
+                                        <div>
+                                            <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="images/blog/Cường.jpg">
+                                            <span>Hi các bạn mình là Cường Cà Mau</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-holder row">
+                                    <div class="image-box col-4">
+                                        <figure>
+                                            <a href="blog-details.html"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="images/blog/ThắngLinh.jpg" alt=""></a>
+                                        </figure>
+                                    </div>
+                                    <div class="content-text col-8">
+                                        <a href="blog-details.html">
+                                            <h6>To support patients recovery and improve their experiences of care.</h6>
+                                        </a>
+                                        <p>
+                                            Hi các bạn mình xin tự giới thiệu mình là Phạm Đức Thắng mình đến từ Phú Thọ và mình đang cà rốt
+                                            bạn Linh cùng lớp với mình.Được cà rốt bạn Linh là điều may mắn với mình mình rất là hạnh phúc
+                                        </p>
+                                        <div>
+                                            <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover " src="images/blog/ThắngLinh.jpg">
+                                            <span>Và đây là ảnh mình chụp cùng bạn ý<i style="color: red">♥</i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="styled-pagination">
+                                    <ul>
+                                        <li><a class="prev" href="blog.html"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>
+                                        <li><a href="blog.html" class="active">1</a></li>
+                                        <li><a href="blog.html">2</a></li>
+                                        <li><a href="blog.html">3</a></li>
+                                        <li><a class="next" href="blog.html"><span class="fas fa-angle-right" aria-hidden="true"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-3">
                 <div class="right-side">
                     <div class="text-title">
@@ -142,6 +273,81 @@
                         <a href="blog.html">Surgery</a>
                         <a href="blog.html">Doctor</a>
                         <a href="blog.html">Pediatric</a>
+                    </div>
+                    <div class="row">
+                        <h3 style="border: #0d1a2f 1px solid; background-color: #0d1a2f; color: white">Thủ Thuật Tinh Tế</h3>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-8">
+                                <p>Tôi muốn đi chơi, tôi muốn đi Hồ Tây....</p>
+                            </div>
+                            <div class="col-4">
+                                <img style="height: 60px; width: 96px; object-fit: cover; border-radius: 7px" src="images/blog/Cường.jpg">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-8">
+                                <p>Tôi muốn đi chơi, tôi muốn đi Hồ Tây....</p>
+                            </div>
+                            <div class="col-4">
+                                <img style="height: 60px; width: 96px; object-fit: cover; border-radius: 7px" src="images/blog/Cường.jpg">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-8">
+                                <p>Tôi muốn đi chơi, tôi muốn đi Hồ Tây....</p>
+                            </div>
+                            <div class="col-4">
+                                <img style="height: 60px; width: 96px; object-fit: cover; border-radius: 7px" src="images/blog/Cường.jpg">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-8">
+                                <p>Tôi muốn đi chơi, tôi muốn đi Hồ Tây....</p>
+                            </div>
+                            <div class="col-4">
+                                <img style="height: 60px; width: 96px; object-fit: cover; border-radius: 7px" src="images/blog/Cường.jpg">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-8">
+                                <p>Tôi muốn đi chơi, tôi muốn đi Hồ Tây....</p>
+                            </div>
+                            <div class="col-4">
+                                <img style="height: 60px; width: 96px; object-fit: cover; border-radius: 7px" src="images/blog/Cường.jpg">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 ml-2 text-center click-view-all">Xem Tất Cả</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
+                        <div style="width: 33%; padding: 10px 5px 0 3px">
+                            <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
+                        </div>
                     </div>
                 </div>
             </div>
