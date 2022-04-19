@@ -6,21 +6,17 @@ using System.Web.Mvc;
 
 namespace Doctor_Forum_eProject_SEM3.Controllers
 {
-    public class PostsController : Controller
+    public class AccountsController : Controller
     {
-        // GET: Posts
-        public ActionResult Index()
+        // GET: Accounts
+        public ActionResult BlogDetails()
         {
             return View();
         }
-        public ActionResult PostDetail()
-        {
-            return View();
-        }
-
-        public ActionResult AddPost()
+        public ActionResult AccountProfile()
         {
             return View();
         }
     }
+
 }

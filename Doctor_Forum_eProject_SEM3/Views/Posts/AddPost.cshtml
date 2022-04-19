@@ -1,0 +1,125 @@
+﻿@model Doctor_Forum_eProject_SEM3.Models.Post
+@{
+    ViewBag.Title = "AddPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .avatar {
+        padding: 8px 15px 8px 15px;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        margin-bottom: 10px;
+        margin-top: 2px;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: montserrat;
+        color: #2C3E50;
+        background-color: #ECEFF1;
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+</style>
+
+<section>
+    <div class="container mt-5">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1>Add posts</h1>
+
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <div class="col mt-4">
+                            <label>Tag</label>
+                            <input type="text" class="form-control" placeholder="Tag">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center mt-4">
+                        <div class="col">
+                            <label>Title</label>
+                            <input type="text" class="form-control" placeholder="Title">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center mt-4">
+                        <div class="col">
+                            <label>Specialized</label>
+                            <input type="text" class="form-control" placeholder="Specialized">
+                        </div>
+                        <div class="col">
+                            <label>Type</label>
+                            <input type="text" class="form-control" placeholder="Type">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 p-0">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
+                                    <span class="input-group-addon" onclick="ChooseImg()">
+                                        <i class="fa fa-upload fa-lg"></i>
+                                    </span>
+                                </div>
+                                <img class="img img-thumbnail ml-3" id="Img" src="~/Content/img/5f660a6763af6a0025a73587.jpg" style="height: 150px;width:150px" />
+                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                            </div>
+                        </div>                      
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 p-0">
+                            @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, id = "txtDescription" })
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="row justify-content-start mt-4">
+                        <div class="col-12">
+                           
+                            <button type="submit" class="btn btn-primary p-2 mt-4" style="width:100%">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+@section jsFooter {
+    <script>
+
+        function ChooseImg() {
+            const finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $("#Img").attr("src", fileUrl);
+                $("#txtImage").val(fileUrl);
+            }
+            finder.popup();
+        }
+        var editor = CKEDITOR.replace('txtDescription', {
+            customConfig: '/Content/js/plugins/ckeditor/ckeditor.js',
+            htmlEncodeOutput: true
+        })
+        var editor = CKEDITOR.replace('txtBenefits', {
+            customConfig: '/Content/js/plugins/ckeditor/ckeditor.js',
+            htmlEncodeOutput: true
+        })
+        function ChooseFile() {
+            const finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $("#UrlDocument").val(fileUrl);
+            }
+            finder.popup();
+        }
+        const content = CKEDITOR.instances['txtDescription'].getData();
+    </script>
+}

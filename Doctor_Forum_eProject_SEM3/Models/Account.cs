@@ -29,7 +29,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
         [StringLength(250)]
         public string UserName { get; set; }
 
-        [StringLength(250)]
+        [StringLength(250)]        
         public string Password { get; set; }
 
         [StringLength(250)]
