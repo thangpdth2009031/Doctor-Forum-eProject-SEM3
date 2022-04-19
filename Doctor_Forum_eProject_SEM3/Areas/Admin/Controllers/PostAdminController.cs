@@ -41,7 +41,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // GET: Admin/PostAdmin/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
+           /* ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");*/
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
             return View();
         }
@@ -65,8 +65,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
+/*
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);*/
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
