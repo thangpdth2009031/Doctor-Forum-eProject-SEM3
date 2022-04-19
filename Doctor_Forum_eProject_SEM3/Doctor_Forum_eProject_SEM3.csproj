@@ -179,6 +179,7 @@
     <Content Include="Areas\Admin\assets\bundles\mainscripts.bundle.js" />
     <Content Include="Areas\Admin\assets\bundles\morrisscripts.bundle.js" />
     <Content Include="Areas\Admin\assets\bundles\vendorscripts.bundle.js" />
+    <Content Include="Areas\Admin\assets\css\AccountProfile.css" />
     <Content Include="Areas\Admin\assets\css\authentication.css" />
     <Content Include="Areas\Admin\assets\css\blog.css" />
     <Content Include="Areas\Admin\assets\css\chatapp.css" />
@@ -204,6 +205,8 @@
     <Content Include="Areas\Admin\assets\images\blog\blog-page-2.jpg" />
     <Content Include="Areas\Admin\assets\images\blog\blog-page-3.jpg" />
     <Content Include="Areas\Admin\assets\images\blog\blog-page-4.jpg" />
+    <Content Include="Areas\Admin\assets\images\doctors\1.png" />
+    <Content Include="Areas\Admin\assets\images\doctors\2.png" />
     <Content Include="Areas\Admin\assets\images\doctors\member1.png" />
     <Content Include="Areas\Admin\assets\images\doctors\member2.png" />
     <Content Include="Areas\Admin\assets\images\doctors\member3.png" />
@@ -1711,6 +1714,7 @@
     <Content Include="Views\AccountModels\Index.cshtml" />
     <Content Include="Views\UserAccount\Register.cshtml" />
     <Content Include="Views\UserAccount\Login.cshtml" />
+    <Content Include="Views\Accounts\AccountProfile.cshtml" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
     <Content Include="Views\Shared\_PartialSlide.cshtml" />
     <Content Include="Views\Replies\Create.cshtml" />
