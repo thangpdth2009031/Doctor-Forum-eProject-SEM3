@@ -132,12 +132,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Controllers\AccountModelsController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserAccountController.cs" />
+    <Compile Include="Controllers\AccountModelsController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,6 +170,7 @@
     <Content Include="Areas\Admin\assets\bundles\mainscripts.bundle.js" />
     <Content Include="Areas\Admin\assets\bundles\morrisscripts.bundle.js" />
     <Content Include="Areas\Admin\assets\bundles\vendorscripts.bundle.js" />
+    <Content Include="Areas\Admin\assets\css\AccountProfile.css" />
     <Content Include="Areas\Admin\assets\css\authentication.css" />
     <Content Include="Areas\Admin\assets\css\blog.css" />
     <Content Include="Areas\Admin\assets\css\chatapp.css" />
@@ -194,6 +196,8 @@
     <Content Include="Areas\Admin\assets\images\blog\blog-page-2.jpg" />
     <Content Include="Areas\Admin\assets\images\blog\blog-page-3.jpg" />
     <Content Include="Areas\Admin\assets\images\blog\blog-page-4.jpg" />
+    <Content Include="Areas\Admin\assets\images\doctors\1.png" />
+    <Content Include="Areas\Admin\assets\images\doctors\2.png" />
     <Content Include="Areas\Admin\assets\images\doctors\member1.png" />
     <Content Include="Areas\Admin\assets\images\doctors\member2.png" />
     <Content Include="Areas\Admin\assets\images\doctors\member3.png" />
@@ -310,6 +314,10 @@
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\Doctor_Forum_eProject_SEM3.dll" />
     <Content Include="bin\Doctor_Forum_eProject_SEM3.pdb" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
@@ -556,15 +564,14 @@
     <Content Include="Views\AccountModels\Index.cshtml" />
     <Content Include="Views\UserAccount\Register.cshtml" />
     <Content Include="Views\UserAccount\Login.cshtml" />
+    <Content Include="Views\Accounts\AccountProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\assets\plugins\bootstrap-material-datetimepicker\css\" />
     <Folder Include="Areas\Admin\assets\plugins\bootstrap-material-datetimepicker\js\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Data\" />
-    <Folder Include="Models\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
