@@ -1,0 +1,453 @@
+﻿
+@{
+    ViewBag.Title = "ListDoctor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .card {
+        background: #fff;
+        margin-bottom: 30px;
+        transition: .5s;
+        border: 0;
+        border-radius: 0.1875rem;
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .xl-khaki {
+        background: #f7f1de !important;
+    }
+
+    .doctor.member-card .member-thumb {
+        border-bottom: 2px solid #fff;
+    }
+
+    .card .body {
+        font-size: 14px;
+        color: #424242;
+        padding: 20px;
+        font-weight: 400;
+    }
+
+    .m-t-10, .member-card .social-links, .profile_state li h4, .w_calender span + span, .doctor .detail {
+        margin-top: 10px;
+    }
+
+    .btn.btn-simple, .navbar .navbar-nav > a.btn.btn-simple {
+        color: #888;
+        border-color: #888;
+    }
+
+    .btn-simple {
+        border: 1px solid;
+        border-color: #888;
+        padding: 8px 18px;
+        border-radius: 30px;
+        background-color: rgba(0,0,0,0);
+    }
+
+    .xl-blue {
+        background: #e0eff5 !important;
+    }
+
+    .xl-parpl {
+        background: #efebf4 !important;
+    }
+
+    .xl-pink {
+        background: #f9edee !important;
+    }
+
+    .xl-seagreen {
+        background: #ebf2e8 !important;
+    }
+
+    .text-muted {
+        color: #6c757d !important;
+    }
+
+    .doctor.member-card .member-thumb img {
+        -webkit-filter: grayscale(1);
+        -webkit-transition: all .8s ease-in-out;
+    }
+
+        .doctor.member-card .member-thumb img:hover {
+            -webkit-filter: grayscale(0);
+            -webkit-transition: all .8s ease-in-out;
+        }
+
+    .member-card {
+        text-align: center;
+    }
+
+    .accordion {
+        background-color: #f8f8f8;
+        color: #444;
+        cursor: pointer;
+        padding: 12px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        border-bottom: solid 1px #bfbfbf;
+    }
+
+      .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .accordion:after {
+            content: '\002B';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+    .active:after {
+        content: "\2212";
+    }
+
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+    .form {
+        position: relative;
+    }
+
+        .form .fa-search {
+            position: absolute;
+            top: 16px;
+            left: 195px;
+            color: #9ca3af;
+        }
+
+        .form span {
+            position: absolute;
+            right: 17px;
+            top: 13px;
+            padding: 2px;
+            border-left: 1px solid #d1d5db
+        }
+</style>
+
+<!-- Custom Css -->
+@section head {
+    <link rel="stylesheet" href="~/Areas/Admin/assets/css/color_skins.css">
+}
+
+
+
+
+<h1 class="text-center py-5">List Doctor</h1>
+<div class="container-fluid d-flex" style="padding:0 100px">
+    <div class="">
+        <form class="form">
+            <i class="fa fa-search"></i>
+            <input type="text" name="keyword" class="form-control form-input" placeholder="Tìm kiếm..." style="background-color: #f0fbfc; padding:22px">
+        </form>
+        <button class="accordion">Section 1</button>
+        <div class="panel">
+            <p>Danh muc 1</p>
+            <p>Danh muc 2</p>
+            <p>Danh muc 3</p>
+        </div>
+
+        <button class="accordion">Section 2</button>
+        <div class="panel">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+
+        <button class="accordion">Section 3</button>
+        <div class="panel">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+    </div>
+    <div class="col-10">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="Permanent">
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-blue member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member1.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. John</h4>
+                                            <p class="text-muted">Dentist</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-khaki member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member2.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Amelia</h4>
+                                            <p class="text-muted">Gynecologist</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-blue member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member3.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Jack </h4>
+                                            <p class="text-muted">Dentist</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-parpl member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member4.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Jessica </h4>
+                                            <p class="text-muted">Nursing</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-pink member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member5.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Joseph </h4>
+                                            <p class="text-muted">Audiology</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107 795 Folsom Ave, Suite 600 San Francisco, CADGE 94107 795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-seagreen member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member6.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Charlie </h4>
+                                            <p class="text-muted">Physical Therapy</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-blue member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member7.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. William </h4>
+                                            <p class="text-muted">Dentist</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-seagreen member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member8.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Sophie </h4>
+                                            <p class="text-muted">Physical Therapy</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Consultant">
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-khaki member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member2.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Amelia</h4>
+                                            <p class="text-muted">Gynecologist</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-blue member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member3.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Jack </h4>
+                                            <p class="text-muted">Dentist</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-pink member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member5.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Joseph </h4>
+                                            <p class="text-muted">Audiology</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="card xl-seagreen member-card doctor">
+                                    <div class="body">
+                                        <div class="member-thumb">
+                                            <img src="~/Areas/Admin/assets/images/doctors/member6.png" class="img-fluid" alt="profile-image">
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-b-0">Dr. Charlie </h4>
+                                            <p class="text-muted">Physical Therapy</p>
+                                            <ul class="social-links list-inline m-t-20">
+                                                <li><a title="facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                                <li><a title="twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                                <li><a title="instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                            </ul>
+                                            <p class="text-muted">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                                            <a href="profile.html" class="btn btn-default btn-round btn-simple">View Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+</script>

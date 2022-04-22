@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
+using Doctor_Forum_eProject_SEM3.Common;
+using Doctor_Forum_eProject_SEM3.Dao;
 using Doctor_Forum_eProject_SEM3.Models;
 using Doctor_Forum_eProject_SEM3.Models.ViewModel;
 
@@ -14,31 +18,11 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 {
     public class AccountModelsController : Controller
     {
-        private DoctorForumDbContext db = new DoctorForumDbContext();
+        /*private DoctorForumDbContext db = new DoctorForumDbContext();*/
 
         // GET: AccountModels
-        public ActionResult Index()
-        {
-            var accountModels = db.AccountModels.Include(a => a.Specialization);
-            return View(accountModels.ToList());
-        }
+        DoctorForumDbContext db = new DoctorForumDbContext();
 
-        // GET: AccountModels/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AccountModel accountModel = db.AccountModels.Find(id);
-            if (accountModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accountModel);
-        }
-
-        // GET: AccountModels/Create
         public ActionResult Create()
         {
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
@@ -50,31 +34,45 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync(AccountModel accountModel)
+        public ActionResult Create(AccountModel accountModel)
         {
-            
             if (ModelState.IsValid)
             {
-                using (DoctorForumDbContext dc = new DoctorForumDbContext())
-                {                    
-                    Account account = new Account()
+                var dao = new UserDao();
+                if (dao.CheckUserName(accountModel.UserName))
+                {
+                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
+                }
+                /*else if (dao.CheckEmail(accountModel.Email))*/
+                /*{
+                    ModelState.AddModelError("", "Email đã tồn tại");
+                }*/
+                else
+                {
+                    
+                    Account account = new Account();
+                    account.RoleId = 1;
+                    account.Avatar = accountModel.Avatar;
+                    account.UserName = accountModel.UserName;
+                    account.Password = Encryptor.MD5Hash(accountModel.Password);
+                    account.FullName = accountModel.FullName;
+                    account.AddressDetail = accountModel.AddressDetail;
+                    account.SpecializationId = accountModel.SpecializationId;
+                    account.CreatedAt = DateTime.Now;
+                    account.UpdatedAt = DateTime.Now;
+                    account.Status = true;
+                    if (!string.IsNullOrEmpty(accountModel.ProvinceId))
                     {
-                        RoleId = 1,
-                        Avatar = accountModel.Avatar,
-                        UserName = accountModel.UserName,
-                        Password = accountModel.UserName,
-                        FullName = accountModel.FullName,
-                        AddressDetail = accountModel.AddressDetail,
-                        SpecializationId = accountModel.SpecializationId,
-                        DistrictId = accountModel.DistrictId,
-                        ProvinceId = accountModel.ProvinceId,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        Status = true
-                    };
-                    await db.Accounts.AddAsync(account);
-                    await db.SaveChangesAsync(); // Lưu các thay đổi đã xảy ra. khóa chính trong được chèn trong behaviorCase
-                    int pk = account.Id;  // Bạn có thể lấy khóa chính của hàng đã chèn của mình                  
+                        account.ProvinceId = int.Parse(accountModel.ProvinceId);
+                    }
+
+                    if (!string.IsNullOrEmpty(accountModel.ProvinceId))
+                    {
+                        account.DistrictId = int.Parse(accountModel.DistrictId);
+                    }
+
+                    db.Accounts.Add(account);
+                    int pk = account.Id;
                     AccountDetail accountDetail = new AccountDetail()
                     {
                         Email = accountModel.Email,
@@ -84,84 +82,154 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now,
                         AccountId = pk
-                    };                                       
-                    object p = await db.AccountDetails.AddAsync(accountDetail);
-                    await db.SaveChangesAsync();
-                    return View();
-
+                    };
+                    db.AccountDetails.Add(accountDetail);
+                    Achievement achievement = new Achievement()
+                    {
+                        Year = accountModel.YearAchievement,
+                        Description = accountModel.Description,
+                        AccountId = pk,
+                        Status = true,
+                        CreatedAt = DateTime.Now,
+                        UpatedAt = DateTime.Now
+                    };
+                    db.Achievements.Add(achievement);
+                    Professional professional = new Professional()
+                    {
+                        ProfessionalName = accountModel.ProfessionalName,
+                        AccountId = pk,
+                        Status = true,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now
+                    };
+                    db.Professionals.Add(professional);
+                    Qualification qualification = new Qualification()
+                    {
+                        Year = accountModel.Year,
+                        Description = accountModel.Description,
+                        School = accountModel.School,
+                        AccountId = pk,
+                        Status = true,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                    };
+                    db.Qualifications.Add(qualification);
+                    Experience experience = new Experience()
+                    {
+                        StartYear = accountModel.StartYear,
+                        EndYear = accountModel.EndYear,
+                        Description = accountModel.DescriptionExperiences,
+                        Workplace = accountModel.Workplace,
+                        Position = accountModel.Position,
+                        AccountId = pk,
+                        Status = true,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now
+                    };
+                    Debug.WriteLine(accountModel.FullName);
+                    var result = dao.Insert(account);
+                    if (result > 0)
+                    {
+                        ViewBag.Success = "Đăng ký thành công";
+                        accountModel = new AccountModel();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Đăng ký không thành công.");
+                    }
                 }
-                
             }
-            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
             return View(accountModel);
         }
 
-        // GET: AccountModels/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Login()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AccountModel accountModel = db.AccountModels.Find(id);
-            if (accountModel == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return View(accountModel);
+            return View();
         }
-
-        // POST: AccountModels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Avatar,UserName,Password,FullName,AddressDetail,DistrictId,ProvinceId,SpecializationId,Email,Phone,Gender,Year,Description,StartYear,EndYear,DescriptionExperiences,Wordplace,Position,ProfessionalName,YearAchievement,DescriptionQualifications,School")] AccountModel accountModel)
+        public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(accountModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var dao = new UserDao();
+                var result = dao.Login(model.Username, Encryptor.MD5Hash(model.Password));
+                if (result == 1)    
+                {
+                    var user = dao.GetById(model.Username);
+                    var userSession = new Account();
+                    userSession = user;                    
+                    Session.Add(UserSession.USER_SESSION, userSession);
+                    return RedirectToAction("Create", "Replies");
+                }
+                else if (result == 0)
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại.");
+                }
+                else if (result == -1)
+                {
+                    ModelState.AddModelError("", "Tài khoản đang bị khoá.");
+                }
+                else if (result == -2)
+                {
+                    ModelState.AddModelError("", "Mật khẩu không đúng.");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "đăng nhập không đúng.");
+                }
             }
-            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return View(accountModel);
-        }
 
-        // GET: AccountModels/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AccountModel accountModel = db.AccountModels.Find(id);
-            if (accountModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accountModel);
+            return View(model);
         }
-
-        // POST: AccountModels/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Logout()
         {
-            AccountModel accountModel = db.AccountModels.Find(id);
-            db.AccountModels.Remove(accountModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Session[UserSession.USER_SESSION] = null;
+            return Redirect("/");
         }
-
-        protected override void Dispose(bool disposing)
+        public JsonResult LoadProvince()
         {
-            if (disposing)
+            var xmlDoc = XDocument.Load(Server.MapPath(@"~/Content/data/Provinces_Data.xml"));
+
+            var xElements = xmlDoc.Element("Root").Elements("Item").Where(x => x.Attribute("type").Value == "province");
+            var list = new List<ProvinceModel>();
+            ProvinceModel province = null;
+            foreach (var item in xElements)
             {
-                db.Dispose();
+                province = new ProvinceModel();
+                province.ID = int.Parse(item.Attribute("id").Value);
+                province.Name = item.Attribute("value").Value;
+                list.Add(province);
+
             }
-            base.Dispose(disposing);
+            return Json(new
+            {
+                data = list,
+                status = true
+            });
+        }
+        public JsonResult LoadDistrict(int provinceID)
+        {
+            var xmlDoc = XDocument.Load(Server.MapPath(@"~/Content/data/Provinces_Data.xml"));
+
+            var xElement = xmlDoc.Element("Root").Elements("Item")
+                .Single(x => x.Attribute("type").Value == "province" && int.Parse(x.Attribute("id").Value) == provinceID);
+
+            var list = new List<DistrictModel>();
+            DistrictModel district = null;
+            foreach (var item in xElement.Elements("Item").Where(x => x.Attribute("type").Value == "district"))
+            {
+                district = new DistrictModel();
+                district.ID = int.Parse(item.Attribute("id").Value);
+                district.Name = item.Attribute("value").Value;
+                district.ProvinceID = int.Parse(xElement.Attribute("id").Value);
+                list.Add(district);
+
+            }
+            return Json(new
+            {
+                data = list,
+                status = true
+            });
         }
     }
 }
