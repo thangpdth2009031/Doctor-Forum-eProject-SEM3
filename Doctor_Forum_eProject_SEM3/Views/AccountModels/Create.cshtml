@@ -109,7 +109,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Gender", (SelectList)ViewBag.Genders, new { @class = "form-control", @required = "required" })
+                @Html.DropDownList("Gender", (SelectList)ViewBag.Genders, new { @class = "form-control", @required = "required", @style = "padding: 0 15px;"})
                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
             </div>
         </div>
