@@ -1,8 +1,9 @@
 ﻿@model Doctor_Forum_eProject_SEM3.Models.Post
-
+@using Doctor_Forum_eProject_SEM3.Common
 @{
     ViewBag.Title = "Add Post | Doctor forum";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.TypePost = new SelectList(TypePost.ListTypePost(), "Key", "Value");
 }
 
 <style>
@@ -19,74 +20,32 @@
         background-color: #ECEFF1;
         font-size: 16px;
         letter-spacing: 1px;
-    }
-    .zmdi-plus:before {
-        content: '\271B';
-    }
-
-    A.applink:hover {
-        border: 2px dotted #DCE6F4;
-        padding: 2px;
-        background-color: #ffff00;
-        color: green;
-        text-decoration: none
-    }
-
-    A.applink {
-        border: 2px dotted #DCE6F4;
-        padding: 2px;
-        color: #2F5BFF;
-        background: transparent;
-        text-decoration: none
-    }
-
-    A.info {
-        color: #2F5BFF;
-        background: transparent;
-        text-decoration: none
-    }
-
-        A.info:hover {
-            color: green;
-            background: transparent;
-            text-decoration: underline
-        }
+    } 
 </style>
 
-<section class="content home p-0">
-    <div class="block-header">
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
         <div class="row">
-            <div class="col-lg-5 col-md-5 col-sm-12">
-                <h2>Create Post <small class="text-muted">Welcome to Oreo</small></h2>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-
-                @*<button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10" type="button">
-                        <i class="zmdi zmdi-plus"></i>
-                    </button>*@
-                @*
-
-                    <ul class="breadcrumb float-md-right">
-                        <li class="breadcrumb-item"><a href="../dashboard/index.html"><i class="fa-solid fa-house"></i>Oreo</a></li>
-                        <li class="breadcrumb-item">Doctors</li>
-                        <li class="breadcrumb-item active">Add Doctors</li>
-                    </ul>*@
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Create Post</h4>
+                <div class="ms-auto text-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Library
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
-                    @*<div class="header">
-                            <h2><strong>Basic</strong> Information <small>Description text here...</small> </h2>
-                            <ul class="header-dropdown">
-                                <li class="remove">
-                                    <a role="button" class="boxs-close"><i class="fa-solid fa-xmark"></i>   </a>
-                                </li>
-                            </ul>
-                        </div>*@
-                    <div class="body">
+                    <div class="card-body">
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
@@ -95,54 +54,51 @@
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="col-12">
                                     <div class="form-group row align-items-center">
-                                        <div class="col mt-4">
-                                            <label>Tag</label>
-                                            @Html.EditorFor(model => model.Tag, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Tag, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group row align-items-center mt-4">
                                         <div class="col">
                                             <label>Title</label>
                                             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+
                                     <div class="form-group row align-items-center mt-4">
-                                        <div class="col">
-                                            <label>Specialized</label>
+                                        <div class="col-md-6">
+                                            <label>Specialization</label>
                                             @Html.DropDownList("SpecializationId", null, htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.SpecializationId, "", new { @class = "text-danger" })
                                         </div>
+
+                                        <div class="col-md-6">
+                                            <label>Tag</label>
+                                            @Html.EditorFor(model => model.Tag, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Tag, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
+
                                     <div class="form-group row align-items-center mt-4">
-                                        <div class="col">
+                                        <div class="col-md-6">
+                                            <label>Image</label>
+                                            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
+                                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-6">
                                             <label>Type</label>
-                                            @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.DropDownList("Type", (SelectList)ViewBag.TypePost, htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                                         </div>
-                                    </div>                                    
+                                    </div>
+                                    <span class="input-group-addon" onclick="ChooseImg()">
+                                        <i class="fa fa-upload fa-lg"></i>
+                                    </span>
                                     <div class="row">
-                                        <div class="col-md-12 p-0">
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-12">
-                                                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
-                                                    <span class="" onclick="ChooseImg()">
-                                                        <i class="fa fa-upload fa-lg"></i>
-                                                    </span>
-                                                </div>
-                                                <img class="img img-thumbnail ml-3" id="Img" src="~/Content/img/5f660a6763af6a0025a73587.jpg" style="height: 150px;width:150px" />
-                                               @* @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })*@
-                                            </div>
-                                        </div>
+                                        <img class="img ml-3" id="Img" src="~/Content/img/5f660a6763af6a0025a73587.jpg" style="height:125px; width:200px;object-fit:cover;" />
                                     </div>
 
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-12 p-0">
-                                            @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, id = "txtDescription" })
+                                            @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, id = "txtContent" })
                                             @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -162,32 +118,30 @@
             </div>
         </div>
     </div>
+</div>
 
-</section>
-<script>
+@section Scripts {
+    <script>
+        function ChooseImg() {
+            const finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $("#Img").attr("src", fileUrl);
+                $("#txtImage").val(fileUrl);
+            }
+            finder.popup();
+        }
+    </script>    
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#txtContent'), {
+                //toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
 
-    function ChooseImg() {
-        const finder = new CKFinder();
-        finder.selectActionFunction = function (fileUrl) {
-            $("#Img").attr("src", fileUrl);
-            $("#txtImage").val(fileUrl);
-        }
-        finder.popup();
-    }
-    var editor = CKEDITOR.replace('txtDescription', {
-        customConfig: '/Content/js/plugins/ckeditor/ckeditor.js',
-        htmlEncodeOutput: true
-    })
-    var editor = CKEDITOR.replace('txtBenefits', {
-        customConfig: '/Content/js/plugins/ckeditor/ckeditor.js',
-        htmlEncodeOutput: true
-    })
-    function ChooseFile() {
-        const finder = new CKFinder();
-        finder.selectActionFunction = function (fileUrl) {
-            $("#UrlDocument").val(fileUrl);
-        }
-        finder.popup();
-    }
-    const content = CKEDITOR.instances['txtDescription'].getData();
-</script>
+    </script>
+}

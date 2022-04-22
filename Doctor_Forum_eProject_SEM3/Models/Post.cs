@@ -5,6 +5,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     public partial class Post
     {
@@ -17,8 +18,8 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public int Id { get; set; }
 
         public string Title { get; set; }
-
-        [Column(TypeName = "text")]
+        [AllowHtml]
+        [Column(TypeName = "nvarchar(MAX)")]
         public string Content { get; set; }
 
         public int? Type { get; set; }
@@ -31,10 +32,10 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public string Tag { get; set; }
 
-        public bool? Status { get; set; }
-
+        public bool Status { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? CreatedAt { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? UpdatedAt { get; set; }
 
         public virtual Account Account { get; set; }

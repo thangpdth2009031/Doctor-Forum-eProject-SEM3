@@ -1,0 +1,77 @@
+﻿@model Doctor_Forum_eProject_SEM3.Models.Account
+@{
+    ViewBag.Title = "AccountProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Areas/Admin/assets/css/AccountProfile.css" rel="stylesheet" />
+<section class="blog-section style-four section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="avatar detail-avatar">
+                    <img src="https://www.victoriavn.com/images/Suong_-_Tim_bac_si/bs_thuy_anh.png" class="avatar" alt="">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="doctors_detail_text">
+                    <h2 style="margin-left: 40px">ANH, LÊ ĐẠT</h2>
+                    <ul class="ul01">
+                        <li class="row border-specialization">
+                            <p class="p01 col-3"><b>Chuyên Khoa</b></p>
+                            <p class="p02 col-5" style="margin-left: 40px">Khoa Nội – Hô hấp</p>
+                        </li>
+
+                        <li class="row row border-specialization">
+                            <p class="p01 col-3"><b>Ngoại ngữ</b></p>
+                            <p class="p02 col-5" style="margin-left: 40px">Tiếng Việt, Tiếng Anh</p>
+                        </li>
+                    </ul>
+                    <button class="tablink" onclick="openPage('Home', this, '#7194c9')">Kinh Nghiệm</button>
+                    <button class="tablink" onclick="openPage('News', this, '#7194c9')" id="defaultOpen">Chuyên Khoa</button>
+                    <button class="tablink" onclick="openPage('Contact', this, '#7194c9')">Giải Thưởng</button>
+
+                    <div id="Home" class="tabcontent">
+                        <ul>
+                            <li class="d-flex"><i class="fas fa-solid fa-angle-right d-block mt-2"></i>&ensp;&nbsp;<p class="d-block">Vi phẫu thuật, Bệnh viện Chấn thương chỉnh hình, 2003</p></li>
+                            <li class="d-flex"><i class="fas fa-solid fa-angle-right d-block mt-2"></i>&ensp;&nbsp;<p class="d-block">Bác sĩ chuyên khoa cấp 1 chuyên ngành Chấn Thương Chỉnh Hình, Đại Học Y Dược Tp.Hồ Chí Minh, 2005</p></li>
+                            <li class="d-flex"><i class="fas fa-solid fa-angle-right d-block mt-2"></i>&ensp;&nbsp;<p class="d-block">Chứng chỉ Tu nghiệp Phẫu thuật bàn tay, Kaiser Hospital, California, U.S., 2006</p></li>
+                            <li class="d-flex"><i class="fas fa-solid fa-angle-right d-block mt-2"></i>&ensp;&nbsp;<p class="d-block">Tu nghiệp Hoa Kỳ năm 2017</p></li>
+                        </ul>
+                    </div>
+
+                    <div id="News" class="tabcontent">
+                        <ul>
+                            <li class="d-flex"><i class="fas fa-solid fa-angle-right d-block mt-2"></i>&ensp;&nbsp;<p class="d-block">Dữ liệu đang được cập nhật</p></li>
+                        </ul>
+                    </div>
+
+                    <div id="Contact" class="tabcontent">
+                        <ul>
+                            <li class="d-flex"><i class="fas fa-solid fa-angle-right d-block mt-2"></i>&ensp;&nbsp;<p class="d-block">Dữ liệu đang được cập nhật</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script>
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+

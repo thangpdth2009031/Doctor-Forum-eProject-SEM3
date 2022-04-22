@@ -1,8 +1,9 @@
 ﻿@model Doctor_Forum_eProject_SEM3.Models.ViewModel.AccountModel
-
+@using Doctor_Forum_eProject_SEM3.Common
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Genders = new SelectList(GenderKey.GetDic(), "Key", "Value");
 }
 @section jsFooter{
 
@@ -108,7 +109,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Gender", (SelectList)ViewBag.Genders, new { @class = "form-control", @required = "required" })
                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
             </div>
         </div>
