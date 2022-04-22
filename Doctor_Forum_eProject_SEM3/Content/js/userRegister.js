@@ -1,6 +1,7 @@
-﻿var user = {
+﻿alert(1);
+var user = {
     init: function () {
-
+     
         user.loadProvince();
         user.registerEvent();
     },
@@ -18,7 +19,7 @@
     loadProvince: function () {
 
         $.ajax({
-            url: '/AccountModels/LoadProvince',
+            url: '/UserAccount/LoadProvince',
             type: "POST",
             dataType: "json",
             success: function (response) {
@@ -35,7 +36,7 @@
     },
     loadDistrict: function (id) {
         $.ajax({
-            url: '/AccountModels/LoadDistrict',
+            url: '/UserAccount/LoadDistrict',
             type: "POST",
             data: { provinceId: id },
             dataType: "json",
