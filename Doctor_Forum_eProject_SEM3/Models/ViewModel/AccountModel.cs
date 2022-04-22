@@ -13,13 +13,25 @@ namespace Doctor_Forum_eProject_SEM3.Models.ViewModel
         public string Avatar { get; set; }
 
         [StringLength(250)]
+
+        [Required(ErrorMessage = "Please enter your username")]
         public string UserName { get; set; }
 
-        [StringLength(250)]
+        [StringLength(50, ErrorMessage = "Maximum 100 characters")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password: ")]
         public string Password { get; set; }
 
+
+        [StringLength(50, ErrorMessage = "Maximum 100 characters")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password: ")]
+        public string ConfirmPassword { get; set; }
+
         [StringLength(250)]
+        [Required(ErrorMessage = "Please enter your full name")]
         public string FullName { get; set; }
+
 
         public string AddressDetail { get; set; }
 
@@ -30,6 +42,7 @@ namespace Doctor_Forum_eProject_SEM3.Models.ViewModel
         public int? SpecializationId { get; set; }
 
         [StringLength(250)]
+        [Required(ErrorMessage = "Please enter your full name")]
         public string Email { get; set; }
 
         [StringLength(15)]
