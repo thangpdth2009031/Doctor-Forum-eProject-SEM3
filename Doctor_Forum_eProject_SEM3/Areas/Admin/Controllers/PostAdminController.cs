@@ -15,11 +15,11 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
     public class PostAdminController : Controller
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
-
+        Post post = new Post();
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
+            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);            
             return View(posts.ToList());
         }
 
@@ -41,7 +41,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // GET: Admin/PostAdmin/Create
         public ActionResult Create()
         {
-           /* ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");*/
+            /* ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");*/
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
             return View();
         }
@@ -51,12 +51,11 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Content,Type,SpecializationId,Image,AccountId,Tag,Status,CreatedAt,UpdatedAt")] Post post)
+        public ActionResult Create(Post post)
         {
             if (ModelState.IsValid)
             {
                 var account = (Account)Session[UserSession.USER_SESSION];
-                Debug.WriteLine(account);
                 post.AccountId = account.Id;
                 post.Status = true;
                 post.CreatedAt = DateTime.Now;
@@ -65,8 +64,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-/*
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);*/
+            /*
+                        ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);*/
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
@@ -93,10 +92,14 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,Type,SpecializationId,Image,AccountId,Tag,Status,CreatedAt,UpdatedAt")] Post post)
+        public ActionResult Edit(Post post)
         {
             if (ModelState.IsValid)
             {
+                var account = (Account)Session[UserSession.USER_SESSION];
+                post.AccountId = account.Id;
+                post.Status = true;                
+                post.UpdatedAt = DateTime.Now;               
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -121,14 +124,44 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             return View(post);
         }
 
-        // POST: Admin/PostAdmin/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(Post post)
         {
-            Post post = db.Posts.Find(id);
-            db.Posts.Remove(post);
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var account = (Account)Session[UserSession.USER_SESSION];
+                post.AccountId = account.Id;
+                post.Status = false;
+                post.UpdatedAt = DateTime.Now;
+                db.Entry(post).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
+            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
+            return View(post);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll(string[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+            {
+                ModelState.AddModelError("", "No item selected to delete");
+                return View();
+            }
+            List<int> TaskIds = ids.Select(x => Int32.Parse(x)).ToList();
+            for (var i = 0; i < TaskIds.Count(); i++)
+            {
+                var todo = db.Posts.Find(TaskIds[i]);
+                todo.Status = false;
+                db.Entry(todo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
             return RedirectToAction("Index");
         }
 

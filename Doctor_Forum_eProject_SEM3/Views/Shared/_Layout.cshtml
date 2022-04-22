@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zxx">
 <head>
 
@@ -30,12 +29,12 @@
     <link href="~/Content/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
     <!-- timePicker -->
     <link href="~/Content/plugins/timePicker/timePicker.css" rel="stylesheet" />
-
+   
     <!-- Stylesheets -->
     <link href="~/Content/css/style.css" rel="stylesheet" />
 
     <!--Favicon-->
-    <link rel="icon" href="~/Content/~/Content/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="~/Content/images/favicon.png" type="image/x-icon">
     @RenderSection("head", required: false)
 </head>
 
@@ -58,7 +57,7 @@
         <!--=================================
         =            Page Slider            =
         ==================================-->
-        @Html.Partial("_PartialSlide")
+        @*@Html.Partial("_PartialSlide")*@
         @RenderBody()
         <!--footer-main-->
         @Html.Partial("_PartialFooter")
@@ -77,6 +76,7 @@
 
 
     <!-- jquery -->
+
     <script src="~/Content/plugins/jquery.min.js"></script>
     <!-- bootstrap -->
     <script src="~/Content/plugins/bootstrap/bootstrap.min.js"></script>
@@ -88,13 +88,13 @@
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
     <script src="~/Content/plugins/google-map/gmap.js" defer></script>
-    <script src="~/Content/js/plugins/ckfinder/ckfinder.js" charset="utf-8"></script>
-    <script src="~/Content/js/plugins/ckeditor/ckeditor.js" charset="utf-8"></script>
+
     <!-- jquery-ui -->
     <script src="~/Content/plugins/jquery-ui/jquery-ui.js" defer></script>
     <!-- timePicker -->
     <script src="~/Content/plugins/timePicker/timePicker.js" defer></script>
-
+    <script src="/Content/js/plugins/ckfinder/ckfinder.js"></script>
+    <script src="~/ckeditor5-build-classic/ckeditor.js"></script>
     <!-- script js -->
     <script src="~/Content/js/script.js"></script>
     @RenderSection("jsFooter", required: false)

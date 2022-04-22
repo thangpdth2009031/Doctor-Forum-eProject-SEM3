@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Doctor_Forum_eProject_SEM3.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,9 +10,25 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 {
     public class HomeController : Controller
     {
+        private DoctorForumDbContext db = new DoctorForumDbContext();
+        // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-            return View();
+            var posts = db.Posts.ToList();
+            return View(posts.ToList());
+        }
+        public ActionResult PostDetail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Post post = db.Posts.Find(id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
         }
 
         public ActionResult About()

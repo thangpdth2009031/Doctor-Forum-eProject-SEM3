@@ -22,10 +22,27 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 
         // GET: AccountModels
         DoctorForumDbContext db = new DoctorForumDbContext();
+        public ActionResult ListAccount()
+        {            
+            return View(db.Accounts.ToList());
+        }  
         public ActionResult Create()
         {
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
             return View();
+        }      
+        public ActionResult AccountProfile(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Account account = db.Accounts.Find(id);          
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            return View(account);
         }
 
         // POST: AccountModels/Create
@@ -113,11 +130,11 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 };
                 db.Experiences.Add(experience);
                 db.SaveChanges();
-                return View(accountModel);
+                return RedirectToAction("Index", "Home");
 
             }
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return RedirectToAction("Index", "Posts");
+            return View(accountModel);
         }
         public ActionResult Login()
         {
@@ -136,7 +153,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     var userSession = new Account();
                     userSession = user;                    
                     Session.Add(UserSession.USER_SESSION, userSession);
-                    return RedirectToAction("Create", "Replies");
+                    return RedirectToAction("Index", "Home");
                 }
                 else if (result == 0)
                 {
