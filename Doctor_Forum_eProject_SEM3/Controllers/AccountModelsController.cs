@@ -33,9 +33,15 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
             return View();
         }
+<<<<<<< HEAD
         public ActionResult AccountProfile()
         {
            /* if (id == null)
+=======
+        public ActionResult AccountProfile(int? id)
+        {
+            if (id == null)
+>>>>>>> master
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -43,8 +49,13 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             if (account == null)
             {
                 return HttpNotFound();
+<<<<<<< HEAD
             }*/
             return View();
+=======
+            }
+            return View(account);
+>>>>>>> master
         }
 
         // POST: AccountModels/Create

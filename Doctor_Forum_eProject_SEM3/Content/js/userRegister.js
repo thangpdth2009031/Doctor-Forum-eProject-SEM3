@@ -1,4 +1,5 @@
-﻿var user = {
+﻿alert(1);
+var user = {
     init: function () {
      
         user.loadProvince();
