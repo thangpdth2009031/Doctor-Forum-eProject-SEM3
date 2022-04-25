@@ -10,129 +10,116 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class SpecializationsController : Controller
+    public class AchievementsController : Controller
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
 
-        // GET: Admin/Specializations
+        // GET: Admin/Achievements
         public ActionResult Index()
         {
-            return View(db.Specializations.ToList());
+            var achievements = db.Achievements.Include(a => a.Account);
+            return View(achievements.ToList());
         }
 
-        // GET: Admin/Specializations/Details/5
+        // GET: Admin/Achievements/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Specialization specialization = db.Specializations.Find(id);
-            if (specialization == null)
+            Achievement achievement = db.Achievements.Find(id);
+            if (achievement == null)
             {
                 return HttpNotFound();
             }
-            return View(specialization);
+            return View(achievement);
         }
 
-        // GET: Admin/Specializations/Create
+        // GET: Admin/Achievements/Create
         public ActionResult Create()
         {
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
             return View();
         }
 
-        // POST: Admin/Specializations/Create
+        // POST: Admin/Achievements/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Specialization specialization)
+        public ActionResult Create([Bind(Include = "Id,Year,Description,AccountId,Status,CreatedAt,UpatedAt")] Achievement achievement)
         {
             if (ModelState.IsValid)
             {
-                db.Specializations.Add(specialization);
+                achievement.Status = true;
+                achievement.CreatedAt = DateTime.Now;
+                achievement.UpatedAt = DateTime.Now;
+                db.Achievements.Add(achievement);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(specialization);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", achievement.AccountId);
+            return View(achievement);
         }
 
-        // GET: Admin/Specializations/Edit/5
+        // GET: Admin/Achievements/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Specialization specialization = db.Specializations.Find(id);
-            if (specialization == null)
+            Achievement achievement = db.Achievements.Find(id);
+            if (achievement == null)
             {
                 return HttpNotFound();
             }
-            return View(specialization);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", achievement.AccountId);
+            return View(achievement);
         }
 
-        // POST: Admin/Specializations/Edit/5
+        // POST: Admin/Achievements/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Specialization specialization)
+        public ActionResult Edit([Bind(Include = "Id,Year,Description,AccountId,Status,CreatedAt,UpatedAt")] Achievement achievement)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(specialization).State = EntityState.Modified;
+                db.Entry(achievement).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(specialization);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", achievement.AccountId);
+            return View(achievement);
         }
 
-        // GET: Admin/Specializations/Delete/5
+        // GET: Admin/Achievements/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Specialization specialization = db.Specializations.Find(id);
-            if (specialization == null)
+            Achievement achievement = db.Achievements.Find(id);
+            if (achievement == null)
             {
                 return HttpNotFound();
             }
-            return View(specialization);
+            return View(achievement);
         }
 
-        // POST: Admin/Specializations/Delete/5
+        // POST: Admin/Achievements/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Specialization specialization = db.Specializations.Find(id);
-            db.Specializations.Remove(specialization);
+            Achievement achievement = db.Achievements.Find(id);
+            db.Achievements.Remove(achievement);
             db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteAll(string[] ids)
-        {
-            if (ids == null || ids.Length == 0)
-            {
-                ModelState.AddModelError("", "No item selected to delete");
-                return View();
-            }
-            List<int> TaskIds = ids.Select(x => Int32.Parse(x)).ToList();
-            for (var i = 0; i < TaskIds.Count(); i++)
-            {
-                var todo = db.Specializations.Find(TaskIds[i]);
-                todo.Status = false;
-                db.Entry(todo).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-
             return RedirectToAction("Index");
         }
 

@@ -1,24 +1,23 @@
-﻿@model IEnumerable<Doctor_Forum_eProject_SEM3.Models.Specialization>
+﻿@model IEnumerable<Doctor_Forum_eProject_SEM3.Models.Experience>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <style>
     .icon-list {
         background-color: blue;
         color: white;
         padding: 5px;
     }
-</style>    
-<h2>Index</h2>
-
+</style>
 
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">List Specializations</h4>
+                <h4 class="page-title">List Experiences</h4>
                 <div class="ms-auto text-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -40,13 +39,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"></h5>
-                        @using (Html.BeginForm("DeleteAll", "Specializations", FormMethod.Post))
+                        @using (Html.BeginForm("DeleteAll", "Experiences", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
 
                             <p>
-                                @Html.ActionLink("Create Specialization", "Create", null, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Create Experiences", "Create", null, new { @class = "btn btn-primary" })
                                 <input type="submit" value="Delete" onclick="return confirm('Are you sure you wish to delete selected?');" class="btn btn-danger" />
                             </p>
                             <div class="table-responsive">
@@ -58,16 +56,31 @@
                                                 <input type="checkbox" id="checkBoxAll" class="custom-checkbox" />
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Name)
+                                                @Html.DisplayNameFor(model => model.Account.Avatar)
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Title)
+                                                @Html.DisplayNameFor(model => model.StartYear)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.EndYear)
                                             </th>
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Description)
                                             </th>
+                                            @*<th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </th>*@
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Image)
+                                                @Html.DisplayNameFor(model => model.Workplace)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Position)
                                             </th>
                                             <th>Action</th>
                                         </tr>
@@ -81,23 +94,38 @@
                                                 <input type="checkbox" name="ids" value="@item.Id" />
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Name)
+                                                <img src="@Html.DisplayFor(modelItem => item.Account.Avatar)" style="width: 100px; height: 80px; object-fit: cover" />
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Title)
+                                                @Html.DisplayFor(modelItem => item.StartYear)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EndYear)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Description)
                                             </td>
+                                            @*<td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>*@
                                             <td>
-                                                <img src="@Html.DisplayFor(modelItem => item.Image)" style="width:90px; height: 80px" />
+                                                @Html.DisplayFor(modelItem => item.Workplace)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Position)
                                             </td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a class="m-2" href="/Admin/Specializations/Edit/@item.Id">
+                                                    <a class="m-2" href="/Admin/Experiences/Edit/@item.Id">
                                                         <h5><i class="fa-solid fa-pen icon-list"></i></h5>
                                                     </a>
-                                                    <a class="m-2" href="/Admin/Specializations/Details/@item.Id">
+                                                    <a class="m-2" href="/Admin/Experiences/Details/@item.Id">
                                                         <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
                                                     </a>
                                                 </div>

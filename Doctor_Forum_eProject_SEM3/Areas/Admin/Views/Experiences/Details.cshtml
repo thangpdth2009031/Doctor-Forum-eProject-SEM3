@@ -1,9 +1,10 @@
-﻿@model Doctor_Forum_eProject_SEM3.Models.Account
+﻿@model Doctor_Forum_eProject_SEM3.Models.Experience
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 
 <div class="page-wrapper">
     <div class="page-breadcrumb">
@@ -29,103 +30,80 @@
                 <div class="card">
                     <div class="card-body">
                         <div>
-                            <h4>Account</h4>
+                            <h4>Experience</h4>
                             <hr />
                             <dl class="dl-horizontal">
                                 <dt>
-                                    @Html.DisplayNameFor(model => model.Avatar)
+                                    @Html.DisplayNameFor(model => model.Account.Avatar)
                                 </dt>
 
                                 <dd>
-                                    <img src="@Html.DisplayFor(model => model.Avatar)" style="width: 230px; height: 180px; object-fit: cover;" />
-                                </dd>
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.Specialization.Name)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.Specialization.Name)
+                                    <img src=" @Html.DisplayFor(model => model.Account.Avatar)" style="width: 250px; height: 250px; object-fit: cover;" />
                                 </dd>
 
                                 <dt>
-                                    @Html.DisplayNameFor(model => model.RoleId)
+                                    @Html.DisplayNameFor(model => model.StartYear)
                                 </dt>
 
                                 <dd>
-                                    @Html.DisplayFor(model => model.RoleId)
+                                    @Html.DisplayFor(model => model.StartYear)
                                 </dd>
 
                                 <dt>
-                                    @Html.DisplayNameFor(model => model.UserName)
+                                    @Html.DisplayNameFor(model => model.EndYear)
                                 </dt>
 
                                 <dd>
-                                    @Html.DisplayFor(model => model.UserName)
+                                    @Html.DisplayFor(model => model.EndYear)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Description)
                                 </dd>
 
                                 @*<dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>*@
-
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.FullName)
+                                    @Html.DisplayNameFor(model => model.Status)
                                 </dt>
 
                                 <dd>
-                                    @Html.DisplayFor(model => model.FullName)
+                                    @Html.DisplayFor(model => model.Status)
                                 </dd>
 
                                 <dt>
-                                    @Html.DisplayNameFor(model => model.AddressDetail)
+                                    @Html.DisplayNameFor(model => model.CreatedAt)
                                 </dt>
 
                                 <dd>
-                                    @Html.DisplayFor(model => model.AddressDetail)
+                                    @Html.DisplayFor(model => model.CreatedAt)
                                 </dd>
 
                                 <dt>
-                                    @Html.DisplayNameFor(model => model.DistrictId)
+                                    @Html.DisplayNameFor(model => model.UpdatedAt)
                                 </dt>
 
                                 <dd>
-                                    @Html.DisplayFor(model => model.DistrictId)
+                                    @Html.DisplayFor(model => model.UpdatedAt)
+                                </dd>*@
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Workplace)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Workplace)
                                 </dd>
 
                                 <dt>
-                                    @Html.DisplayNameFor(model => model.ProvinceId)
+                                    @Html.DisplayNameFor(model => model.Position)
                                 </dt>
 
                                 <dd>
-                                    @Html.DisplayFor(model => model.ProvinceId)
+                                    @Html.DisplayFor(model => model.Position)
                                 </dd>
-
-                                @*<dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>*@
 
                             </dl>
                         </div>
