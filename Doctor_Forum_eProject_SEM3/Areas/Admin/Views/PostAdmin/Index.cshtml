@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <style>
     .an {
         display: block;
@@ -11,7 +12,7 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-    } 
+    }
 </style>
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -84,13 +85,16 @@
                                                 @Html.DisplayNameFor(model => model.Tag)
                                             </th>
                                             <th>
+                                                Status
+                                            </th>
+                                            <th>
                                                 Action
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach (var item in Model.Where(x=>x.Status==true).Reverse())
+                                        @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                                         {
                                             <tr>
                                                 <td>
@@ -162,9 +166,10 @@
     <!-- ============================================================== -->
 </div>
 @section Scripts {
+    <script src="~/Content/js/admin/postsController.js"></script>
     <script>
         $("#checkBoxAll").click(function () {
             $('input:checkbox').not(this).prop('checked', this.checked);
         });
     </script>
-    }
+}
