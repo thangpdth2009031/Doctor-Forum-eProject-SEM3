@@ -43,17 +43,16 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         }
         public ActionResult AccountProfile()
         {
-           /* if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Account account = db.Accounts.Find(id);
-            if (account == null)
-            {
-                return HttpNotFound();
-            }*/
+            /* if (id == null)
+             {
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }
+             Account account = db.Accounts.Find(id);
+             if (account == null)
+             {
+                 return HttpNotFound();
+             }*/
             return View();
-            }
         }
 
         // POST: AccountModels/Create
@@ -275,7 +274,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         {
             return View();
         }
-        /*[HttpPost]
+        [HttpPost]
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
@@ -309,42 +308,42 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             }
 
             return View(model);
-        }*/
-        [HttpPost]
-        public async Task<ActionResult> Login(LoginModel model)
-        {
-            SignInManager<Account, string> signInManager;
-            // sử dụng userManager để check thông tin đăng nhập.d
-            var account = await userManager.FindAsync(model.Username, model.Password);
-            if (account == null)
-            {
-                ModelState.AddModelError("", "Tài khoản không tồn tại.");
-            }
-            else
-            {
-                if (account.Status == false)
+        }
+        /*        [HttpPost]
+                public async Task<ActionResult> Login(LoginModel model)
                 {
-                    ModelState.AddModelError("", "Tài khoản đang bị khoá.");
-                }
-                else
-                {
-                    if (account.Password == model.Password)
+                    SignInManager<Account, string> signInManager;
+                    // sử dụng userManager để check thông tin đăng nhập.d
+                    var account = await userManager.FindAsync(model.Username, model.Password);
+                    if (account == null)
                     {
-                        
-                        // đăng nhập  thành công thì dùng SignInManager để lưu lại thông tin vừa đăng nhập.
-                        signInManager = new SignInManager<Account, string>(userManager, Request.GetOwinContext().Authentication);
-                        await signInManager.SignInAsync(account, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Index", "Home");
+                        ModelState.AddModelError("", "Tài khoản không tồn tại.");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Mật khẩu không đúng.");
-                    }
-                }
+                        if (account.Status == false)
+                        {
+                            ModelState.AddModelError("", "Tài khoản đang bị khoá.");
+                        }
+                        else
+                        {
+                            if (account.Password == model.Password)
+                            {
 
-            }
-            return View(model);
-        }
+                                // đăng nhập  thành công thì dùng SignInManager để lưu lại thông tin vừa đăng nhập.
+                                signInManager = new SignInManager<Account, string>(userManager, Request.GetOwinContext().Authentication);
+                                await signInManager.SignInAsync(account, isPersistent: false, rememberBrowser: false);
+                                return RedirectToAction("Index", "Home");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Mật khẩu không đúng.");
+                            }
+                        }
+
+                    }
+                    return View(model);
+                }*/
         public ActionResult Logout()
         {
             Session[UserSession.USER_SESSION] = null;

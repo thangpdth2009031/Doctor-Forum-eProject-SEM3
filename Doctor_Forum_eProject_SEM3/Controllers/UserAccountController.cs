@@ -166,8 +166,8 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     Account account = new Account();                    
                     account.Avatar = accountModel.Avatar;
                     account.UserName = accountModel.UserName;
-                    /*account.PasswordHash = accountModel.Password;*/
-                    account.Password = Encryptor.MD5Hash(accountModel.Password);
+                    account.PasswordHash = accountModel.Password;
+                    /*account.Password = Encryptor.MD5Hash(accountModel.Password);*/
                     account.FullName = accountModel.FullName;
                     account.AddressDetail = accountModel.AddressDetail;
                     account.PhoneNumber = accountModel.Phone;
@@ -186,7 +186,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         account.DistrictId = int.Parse(accountModel.DistrictId);
                     }
                     string pk = account.Id;
-                    var result = await userManager.CreateAsync(account, account.Password);                                                 
+                    var result = await userManager.CreateAsync(account, account.PasswordHash);                                                 
                     Achievement achievement = new Achievement()
                     {
                         Year = accountModel.YearAchievement,
@@ -226,7 +226,8 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Position = accountModel.Position,
                         AccountId = pk,
                         Status = true,
-                        CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy")),
+                        /*CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy")),*/
+                        CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
                     };
                     db.Experiences.Add(experience);
@@ -267,61 +268,61 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         {
             return View();
         }
+        /*
+                [HttpPost]
+                public ActionResult Login(LoginModel model)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        var dao = new UserDao();
+                        var result = dao.Login(model.Username, Encryptor.MD5Hash(model.Password));
+                        if (result == 1)
+                        {
+                            var user = dao.GetById(model.Username);
+                            var userSession = new Account();
+                            userSession = user;
+                            Session.Add(UserSession.USER_SESSION, userSession);
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else if (result == 0)
+                        {
+                            ModelState.AddModelError("", "Tài khoản không tồn tại.");
+                        }
+                        else if (result == -1)
+                        {
+                            ModelState.AddModelError("", "Tài khoản đang bị khoá.");
+                        }
+                        else if (result == -2)
+                        {
+                            ModelState.AddModelError("", "Mật khẩu không đúng.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "đăng nhập không đúng.");
+                        }
+                    }
+
+                    return View(model);
+                }*/
 
         [HttpPost]
-        public ActionResult Login(LoginModel model)
+        public async Task<ActionResult> Login(LoginModel model)
         {
-            if (ModelState.IsValid)
+            SignInManager<Account, string> signInManager;
+            // sử dụng userManager để check thông tin đăng nhập.d
+            var account = await userManager.FindAsync(model.Username, model.Password);
+            if (account != null)
             {
-                var dao = new UserDao();
-                var result = dao.Login(model.Username, Encryptor.MD5Hash(model.Password));
-                if (result == 1)
-                {
-                    var user = dao.GetById(model.Username);
-                    var userSession = new Account();
-                    userSession = user;
-                    Session.Add(UserSession.USER_SESSION, userSession);
-                    return RedirectToAction("Index", "Home");
-                }
-                else if (result == 0)
-                {
-                    ModelState.AddModelError("", "Tài khoản không tồn tại.");
-                }
-                else if (result == -1)
-                {
-                    ModelState.AddModelError("", "Tài khoản đang bị khoá.");
-                }
-                else if (result == -2)
-                {
-                    ModelState.AddModelError("", "Mật khẩu không đúng.");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "đăng nhập không đúng.");
-                }
+                // đăng nhập  thành công thì dùng SignInManager để lưu lại thông tin vừa đăng nhập.
+                signInManager = new SignInManager<Account, string>(userManager, Request.GetOwinContext().Authentication);
+                await signInManager.SignInAsync(account, isPersistent: false, rememberBrowser: false);
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(model);
+            else
+            {
+                return View(model);
+            }
         }
-
-        /*        [HttpPost]
-                public async Task<ActionResult> Login(LoginModel model)
-                {
-                    SignInManager<Account, string> signInManager;
-                    // sử dụng userManager để check thông tin đăng nhập.d
-                    var account = await userManager.FindAsync(model.Username, model.Password);
-                    if (account != null)
-                    {
-                        // đăng nhập  thành công thì dùng SignInManager để lưu lại thông tin vừa đăng nhập.
-                        signInManager = new SignInManager<Account, string>(userManager, Request.GetOwinContext().Authentication);
-                        await signInManager.SignInAsync(account, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        return View(model);
-                    }
-                }*/
 
 
 

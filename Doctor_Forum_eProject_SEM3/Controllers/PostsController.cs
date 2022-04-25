@@ -19,7 +19,6 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-
             var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
             return View(posts.ToList());
         }
@@ -31,6 +30,11 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         public PartialViewResult TypePost()
         {
             var post = db.Posts.Where(x=>x.Type == 2).OrderByDescending(p=>p.Id).ToList();
+            return PartialView(post);
+        }
+        public PartialViewResult TypeKnowledge()
+        {
+            var post = db.Posts.Where(x => x.Type == 3).OrderByDescending(p => p.Id).FirstOrDefault();
             return PartialView(post);
         }
 
