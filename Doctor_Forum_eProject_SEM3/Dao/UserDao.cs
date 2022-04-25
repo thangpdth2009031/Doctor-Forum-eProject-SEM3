@@ -76,10 +76,10 @@ namespace Doctor_Forum_eProject_SEM3.Dao
             return db.Accounts.Count(x => x.UserName == userName) > 0;
         }
 
-        /*public bool CheckEmail(string email)
+        public bool CheckEmail(string email)
         {
             return db.Accounts.Count(x => x.Email == email) > 0;
-        }*/
+        }
 
     }
 }

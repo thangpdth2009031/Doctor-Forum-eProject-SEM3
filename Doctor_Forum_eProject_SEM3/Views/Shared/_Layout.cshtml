@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zxx">
 <head>
 
@@ -13,7 +12,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="author" content="Themefisher">
     <meta name="generator" content="Themefisher Medical HTML Template v1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <!-- ** Plugins Needed for the Project ** -->
     <!-- bootstrap -->
     <link href="~/Content/plugins/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -30,12 +38,12 @@
     <link href="~/Content/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
     <!-- timePicker -->
     <link href="~/Content/plugins/timePicker/timePicker.css" rel="stylesheet" />
-
+   
     <!-- Stylesheets -->
     <link href="~/Content/css/style.css" rel="stylesheet" />
 
     <!--Favicon-->
-    <link rel="icon" href="~/Content/~/Content/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="~/Content/images/favicon.png" type="image/x-icon">
     @RenderSection("head", required: false)
 </head>
 
@@ -58,7 +66,7 @@
         <!--=================================
         =            Page Slider            =
         ==================================-->
-        @Html.Partial("_PartialSlide")
+        @*@Html.Partial("_PartialSlide")*@
         @RenderBody()
         <!--footer-main-->
         @Html.Partial("_PartialFooter")
@@ -77,6 +85,7 @@
 
 
     <!-- jquery -->
+
     <script src="~/Content/plugins/jquery.min.js"></script>
     <!-- bootstrap -->
     <script src="~/Content/plugins/bootstrap/bootstrap.min.js"></script>
@@ -88,13 +97,13 @@
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
     <script src="~/Content/plugins/google-map/gmap.js" defer></script>
-    <script src="~/Content/js/plugins/ckfinder/ckfinder.js" charset="utf-8"></script>
-    <script src="~/Content/js/plugins/ckeditor/ckeditor.js" charset="utf-8"></script>
+
     <!-- jquery-ui -->
     <script src="~/Content/plugins/jquery-ui/jquery-ui.js" defer></script>
     <!-- timePicker -->
     <script src="~/Content/plugins/timePicker/timePicker.js" defer></script>
-
+    <script src="/Content/js/plugins/ckfinder/ckfinder.js"></script>
+    <script src="~/ckeditor5-build-classic/ckeditor.js"></script>
     <!-- script js -->
     <script src="~/Content/js/script.js"></script>
     @RenderSection("jsFooter", required: false)
