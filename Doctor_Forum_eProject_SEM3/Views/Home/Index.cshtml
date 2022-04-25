@@ -131,8 +131,8 @@
         <div class="row">
             <div class="col-9">
                 <div class="container">
-                    <div class="row">                        
-                        @{Html.RenderAction("NewestPost", "Posts");}
+                    <div class="row">
+                           @{Html.RenderAction("NewestPost", "Posts");}
                         <div class="col-4">
                             <img style="height: 163px; width: 100%;object-fit: cover; border-radius: 10px 10px 0 0; margin: 10px 0 0 0" src="images/blog/idol.jpg">
                             <div style="background-color: #f7f7fa">
@@ -145,33 +145,34 @@
                 </div>
                 <div class="container">
                     <div class="row" style="margin-top: 20px">
-                        <div class="col-4">
-                            <div>
-                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
-                            </div>
-                            <div style="padding: 7px">
-                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
-                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div>
-                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
-                            </div>
-                            <div style="padding: 7px">
-                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
-                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div>
-                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
-                            </div>
-                            <div style="padding: 7px">
-                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
-                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
-                            </div>
-                        </div>
+                        @{Html.RenderAction("TypePost", "Posts");}
+               @*         <div class="col-4">
+            <div>
+                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
+            </div>
+            <div style="padding: 7px">
+                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
+                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
+            </div>
+            <div style="padding: 7px">
+                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
+                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
+            </div>
+            <div style="padding: 7px">
+                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
+                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
+            </div>
+        </div>*@
                         <div class="col-lg-12 mt-5">
                             @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                             {
@@ -311,5 +312,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
 </section>
