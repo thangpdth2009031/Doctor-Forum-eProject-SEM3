@@ -123,6 +123,24 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll(string[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+            {
+                ModelState.AddModelError("", "No item selected to delete");
+                return View();
+            }
+            List<int> TaskIds = ids.Select(x => Int32.Parse(x)).ToList();
+            for (var i = 0; i < TaskIds.Count(); i++)
+            {
+                var todo = db.Accounts.Find(TaskIds[i]);
+                todo.Status = false;
+                db.Entry(todo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         *//*[HasCredential(RoleID = "EDIT_USER")]*//*
         public JsonResult ChangeStatus(long id)
         {

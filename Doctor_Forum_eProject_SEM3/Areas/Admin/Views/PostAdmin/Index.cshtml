@@ -21,7 +21,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Tables</h4>
+                <h4 class="page-title">List Post</h4>
                 <div class="ms-auto text-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -49,14 +49,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Danh sách khóa học</h5>
+                        
                         @using (Html.BeginForm("DeleteAll", "PostAdmin", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
 
                             <p>
-                                @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
-                                <input type="submit" value="Xóa bỏ" onclick="return confirm('Are you sure you wish to delete selected Students?');" class="btn btn-danger" />
+                                @Html.ActionLink("Create Post", "Create", null, new { @class = "btn btn-primary" })
+                                <input type="submit" value="Delete" onclick="return confirm('Are you sure you wish to delete selected?');" class="btn btn-danger" />
                             </p>
                             <div class="table-responsive">
                                 <table id="zero_config"
@@ -119,15 +119,14 @@
                                                     @Html.DisplayFor(modelItem => item.Tag)
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="btn-active" data-id="@item.Id">
-                                                        @Html.Raw(item.Status ? "<strong>Approved</strong>" : "<strong>Not approved yet</strong>")
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-
+                                                    <div class="d-flex">
+                                                        <a class="m-2" href="/Admin/PostAdmin/Edit/@item.Id">
+                                                            <h5><i class="fa-solid fa-pen icon-list"></i></h5>
+                                                        </a>
+                                                        <a class="m-2" href="/Admin/PostAdmin/Details/@item.Id">
+                                                            <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                                 @*<td>
                                                         <div class="d-flex">
