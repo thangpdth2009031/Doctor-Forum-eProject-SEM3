@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Linq;
+/*using System.Linq;
 
 namespace Doctor_Forum_eProject_SEM3.Models
 {
@@ -64,3 +64,4 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public System.Data.Entity.DbSet<Doctor_Forum_eProject_SEM3.Models.ViewModel.AccountModel> AccountModels { get; set; }
     }
 }
+*/

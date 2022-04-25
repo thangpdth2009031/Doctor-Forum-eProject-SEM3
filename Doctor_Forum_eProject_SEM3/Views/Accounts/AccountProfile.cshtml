@@ -1,8 +1,8 @@
-﻿@model Doctor_Forum_eProject_SEM3.Models.Account
+﻿@*@model Doctor_Forum_eProject_SEM3.Models.Account
 @{
     ViewBag.Title = "AccountProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+}*@
 <link href="~/Areas/Admin/assets/css/AccountProfile.css" rel="stylesheet" />
 <section class="blog-section style-four section">
     <div class="container">
@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-8">
                 <div class="doctors_detail_text">
-                    <h2 style="margin-left: 40px">@Html.DisplayFor(model=>model.FullName)</h2>
+                    @*<h2 style="margin-left: 40px">@Html.DisplayFor(model=>model.FullName)</h2>*@
                     <ul class="ul01">
                         <li class="row border-specialization">
                             <p class="p01 col-3"><b>Chuyên Khoa</b></p>
