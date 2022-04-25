@@ -1,26 +1,34 @@
-﻿@*@model Doctor_Forum_eProject_SEM3.Models.Account
-    @{
-        ViewBag.Title = "AccountProfile";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-    <link href="~/Areas/Admin/assets/css/AccountProfile.css" rel="stylesheet" />
-    <section class="blog-section style-four section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="avatar detail-avatar">
-                        <img src="https://www.victoriavn.com/images/Suong_-_Tim_bac_si/bs_thuy_anh.png" class="avatar" alt="">
-                    </div>
+﻿@*@model Doctor_Forum_eProject_SEM3.Models.Account*@
+@{
+    ViewBag.Title = "AccountProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Areas/Admin/assets/css/AccountProfile.css" rel="stylesheet" />
+<section class="blog-section style-four section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="avatar detail-avatar">
+                    <img src="https://www.victoriavn.com/images/Suong_-_Tim_bac_si/bs_thuy_anh.png" class="avatar" alt="">
                 </div>
-                <div class="col-md-8">
-                    <div class="doctors_detail_text">
-                        <h2 style="margin-left: 40px">ANH, LÊ ĐẠT</h2>
-                        <ul class="ul01">
-                            <li class="row border-specialization">
-                                <p class="p01 col-3"><b>Chuyên Khoa</b></p>
-                                <p class="p02 col-5" style="margin-left: 40px">Khoa Nội – Hô hấp</p>
-                            </li>
+            </div>
+            <div class="col-md-8">
+                <div class="doctors_detail_text">
+                    <h2 style="margin-left: 40px">ANH, LÊ ĐẠT</h2>
+                    <ul class="ul01">
+                        <li class="row border-specialization">
+                            <p class="p01 col-3"><b>Chuyên Khoa</b></p>
+                            <p class="p02 col-5" style="margin-left: 40px">Khoa Nội – Hô hấp</p>
+                        </li>
 
+                        <li class="row row border-specialization">
+                            <p class="p01 col-3"><b>Ngoại ngữ</b></p>
+                            <p class="p02 col-5" style="margin-left: 40px">Tiếng Việt, Tiếng Anh</p>
+                        </li>
+                    </ul>
+                    <button class="tablink" onclick="openPage('Home', this, '#48bdc5')" style="width : 25%; margin-left : 40px; border : none; " id="defaultOpen">Kinh Nghiệm</button>
+                    <button class="tablink" onclick="openPage('News', this, '#48bdc5')"style="width: 25%; border: none;" >Chuyên Khoa</button>
+                    <button class="tablink" onclick="openPage('Contact', this, '#48bdc5')" style="width: 25%; border: none; ">Giải Thưởng</button>
                             <li class="row row border-specialization">
                                 <p class="p01 col-3"><b>Ngoại ngữ</b></p>
                                 <p class="p02 col-5" style="margin-left: 40px">Tiếng Việt, Tiếng Anh</p>

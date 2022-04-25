@@ -43,9 +43,17 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         }
         public ActionResult AccountProfile()
         {
-            var userId = User.Identity.GetUserId(); // có thể query thêm thông tin trong db.
-            Account account = db.Users.FirstOrDefault(x => x.Id == userId);
-            return View(account);
+           /* if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Account account = db.Accounts.Find(id);
+            if (account == null)
+            {
+                return HttpNotFound();
+            }*/
+            return View();
+            }
         }
 
         // POST: AccountModels/Create
