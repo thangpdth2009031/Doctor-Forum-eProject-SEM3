@@ -1,4 +1,5 @@
 ﻿using Doctor_Forum_eProject_SEM3.Common;
+using Doctor_Forum_eProject_SEM3.Data;
 using Doctor_Forum_eProject_SEM3.Models;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,20 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 {
     public class PersonalPageController : Controller
     {
-        private DoctorForumDbContext db = new DoctorForumDbContext();
+        private MyIdentityDbContext db = new MyIdentityDbContext();
         // GET: PersonalPage
         public ActionResult Posts()
-        {            
+        {
             var account = (Account)Session[UserSession.USER_SESSION];
             if (account == null)
             {
-                return RedirectToAction("Login", "AccountModels");
-            } else
+                return RedirectToAction("Login", "UserAccount");
+            }
+            else
             {
-                var post = db.Posts.Where((x => x.Status == (true) && x.AccountId == (account.Id))).ToList();                
+                var post = db.Posts.Where((x => x.Status == (true) && x.AccountId == (account.Id))).ToList();
                 return View(post);
-            }            
+            }
         }
     }
 }

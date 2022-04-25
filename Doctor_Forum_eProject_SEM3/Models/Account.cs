@@ -1,17 +1,17 @@
 namespace Doctor_Forum_eProject_SEM3.Models
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Account
+    public partial class Account: IdentityUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
-            AccountDetails = new HashSet<AccountDetail>();
             Achievements = new HashSet<Achievement>();
             Experiences = new HashSet<Experience>();
             Posts = new HashSet<Post>();
@@ -20,23 +20,16 @@ namespace Doctor_Forum_eProject_SEM3.Models
             Replies = new HashSet<Reply>();
         }
 
-        public int Id { get; set; }
-
-        public int? RoleId { get; set; }
+     /*   public int? RoleId { get; set; }*/
 
         public string Avatar { get; set; }
 
-        [StringLength(250)]
-        public string UserName { get; set; }
 
         [StringLength(250)]        
         public string Password { get; set; }
 
         [StringLength(250)]
         public string FullName { get; set; }
-
-        [StringLength(250)]
-        public String Email { get; set; }
 
         public string AddressDetail { get; set; }
 
@@ -48,12 +41,11 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public DateTime? UpdatedAt { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         public int? SpecializationId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountDetail> AccountDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]        
 
         public virtual Specialization Specialization { get; set; }
 

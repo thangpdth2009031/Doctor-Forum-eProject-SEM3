@@ -22,13 +22,13 @@ namespace Doctor_Forum_eProject_SEM3.Models
         [Column(TypeName = "nvarchar(MAX)")]
         public string Content { get; set; }
 
-        public int? Type { get; set; }
+        public int Type { get; set; }
 
-        public int? SpecializationId { get; set; }
+        public int SpecializationId { get; set; }
 
         public string Image { get; set; }
 
-        public int? AccountId { get; set; }
+        public string AccountId { get; set; }
 
         public string Tag { get; set; }
 

@@ -131,11 +131,7 @@
         <div class="row">
             <div class="col-9">
                 <div class="container">
-<<<<<<< HEAD
                     <div class="row">
-=======
-                    <div class="row">                        
->>>>>>> master
                         @{Html.RenderAction("NewestPost", "Posts");}
                         <div class="col-4">
                             <img style="height: 163px; width: 100%;object-fit: cover; border-radius: 10px 10px 0 0; margin: 10px 0 0 0" src="images/blog/idol.jpg">
@@ -149,33 +145,7 @@
                 </div>
                 <div class="container">
                     <div class="row" style="margin-top: 20px">
-                        <div class="col-4">
-                            <div>
-                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
-                            </div>
-                            <div style="padding: 7px">
-                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
-                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div>
-                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
-                            </div>
-                            <div style="padding: 7px">
-                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
-                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div>
-                                <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="images/blog/ThắngLinh.jpg">
-                            </div>
-                            <div style="padding: 7px">
-                                <a style="color: #343434" href="#" class="d-block"><div class="click">Và đó là Phạm Đức Thắng!!!</div></a>
-                                <a style="color: #343434" href="#"><div class="click">Hi các bạn mình là Phạm Đức mình lên đây chỉ muốn nói là mình iêu bạn nữa trong ảnh rất nhiều hihi♥</div></a>
-                            </div>
-                        </div>
+                        @{Html.RenderAction("TypePost", "Posts");}
                         <div class="col-lg-12 mt-5">
                             @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                             {
@@ -312,7 +282,6 @@
                             <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
                         </div>
                     </div>
-<<<<<<< HEAD
                 </div>
             </div>
         </div>
@@ -659,187 +628,10 @@
                     </div>
                     <div id="ban-quan-tam" class="tab-pane fade">
                     </div>
-=======
->>>>>>> master
                 </div>
             </div>
             <div class="col-md-4">
-            </div>
-            <script>
-
-                var baseUrl = '/';
-                var IMAGE_MAX_SIZE = 5;
-                var IMAGE_MAX_COUNT = 10;
-                var IMAGE_EXT = '["jpg","png","jpeg","PNG","JPG","JPEG"]';
-                var upload_img_ext_error = 'Tập tin tải lên thất bại. Xin vui lòng thử lại với định dạng .jpg hoặc .png';
-                var upload_img_size_error = 'Hình ảnh vượt quá độ lớn cho phép. Xin vui lòng thử lại với tập tin không quá 5MB';
-                var upload_img_count_error = 'Số lượng ảnh vượt quá số lượng cho phép. Xin vui lòng tải lên không quá 10 ảnh';
-                var upload_img_fail_error = 'Hình ảnh chưa được tải lên. Xin vui lòng thử lại hoặc liên  với chúng tôi theo số điện thoại 04 7308 0333 để được trợ giúp';
-                var listFiles = eval($("#uploadImage").val()) || [];
-                var duplicate = [];
-
-                function saveQA() {
-                    var title = $("input[name='form_sendqa[title]']").val();
-                    var option = $("select[name='form_sendqa[option]']").val();
-                    var content = $("#content_qas").val();
-                    var qa = {};
-                    qa.title = title;
-                    qa.spe = option;
-                    qa.content = content;
-
-                    localStorage.setItem("lqa", JSON.stringify(qa));
-                }
-                function setLQA() {
-
-                    var qa = localStorage.getItem("lqa") ? JSON.parse(localStorage.getItem("lqa")) : undefined;
-                    qa && ($('#title').val(qa.title), $("select[name='form_sendqa[option]']").val(qa.spe), $('#content_qas').val(qa.content));
-                }
-                $(document).ready(function () {
-                    setLQA();
-                    $("#select_file").change(function () {
-                        if ($('#login_check').val() == '') {
-                            $('#file_qa').text("Vui lòng đăng nhập/đăng ký để đặt câu hỏi tại Ecomedic.vn").show();
-                        }
-                        $('#file_qa').hide();
-                        var fileChooser = document.getElementById('select_file');
-                        var file = fileChooser.files[0];
-                        var fileType = '';
-                        if (file) {
-                            var nameOfFile = file.name;
-                            for (var i = 0; i < duplicate.length; i++) {
-                                if (duplicate[i] == nameOfFile) {
-                                    dupmsg = "Bạn đã tải ảnh {0} lên. Xin vui lòng tải ảnh khác";
-                                    dupmsg = dupmsg.replace('{0}', nameOfFile);
-                                    $('#file_qa').text(dupmsg).show();
-                                    $('#select_file').val('');
-                                    return;
-                                }
-                            }
-                            var arrOfFile = file.name.split('.');
-                            var ext = arrOfFile.pop().toLowerCase();
-                            if (IMAGE_EXT.indexOf(ext) >= 0) {
-                                console.log(file.type);
-                                if (file.size > IMAGE_MAX_SIZE * 1024 * 1024) {
-                                    $('#file_qa').text(upload_img_size_error).show();
-                                    return;
-                                }
-                            } else {
-                                $('#file_qa').text(upload_img_ext_error).show();
-                                return;
-                            }
-                            if (listFiles.length > IMAGE_MAX_COUNT) {
-                                $('#file_qa').text(upload_img_count_error).show();
-                                return;
-                            }
-                            var form_data = new FormData();
-                            form_data.append('imgFile', file);
-                            $.ajax({
-                                url: '/ajax/ajaxupload',
-                                dataType: 'text',
-                                cache: false,
-                                contentType: false,
-                                processData: false,
-                                data: form_data,
-                                type: 'post',
-                                success: function (res) {
-                                    $('#select_file').val('');
-                                    if (!!res) {
-                                        json = JSON.parse(res);
-                                        if (json['error'] != '') {
-                                            $('#file_qa').text(json['error']).show();
-                                        } else {
-                                            listFiles.push(json['filename']);
-                                            $('#arealf').append('<span  style="position: relative;" id="' + json['filename'] + '" ><img class="img-thumbnail" src="' + baseUrl + 'upload/' + json['filename'] + '"   ><i class="icon-upload-remove-image" onclick="rmf(this);"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></i></span>');
-                                            $('#uploadImage').val(JSON.stringify(listFiles));
-                                            duplicate.push(nameOfFile);
-                                        }
-                                    } else {
-                                        $('#file_qa').text(upload_img_fail_error).show();
-                                    }
-                                    $("#select_file").val('');
-                                }
-                            });
-                        }
-                    });
-                    $("#addnewqa").submit(function (event) {
-                        $('#btn_sendqa').prop('disabled', true);
-                    });
-
-                    $('#btn_sendqa').click(function () {
-                        check = 0;
-                        var title = $("input[name='form_sendqa[title]']").val();
-                        var option = $("select[name='form_sendqa[option]']").val();
-                        var content = $("#content_qas").val();
-                        var check_login = $('#login_check').val();
-                        if (check_login == '') {
-                            var alertMsg = "Vui lòng đăng nhập/đăng ký để đặt câu hỏi tại Ecomedic.vn";
-                            showAlertNotLogin(alertMsg, 2000);
-                            saveQA();
-                            return false;
-                        }
-                        if (title == '') {
-                            check = 1;
-                            document.getElementById("validate_title").innerHTML = "Xin vui lòng nhập tiêu đề câu hỏi";
-                        } else {
-                            if (title.length > 256) {
-                                check = 1;
-                                document.getElementById("validate_title").innerHTML = "Tiêu đề của bạn quá dài";
-                            }
-                        }
-                        if (content == '') {
-                            check = 1;
-                            document.getElementById("content_qa").innerHTML = "Xin vui lòng nhập nội dung câu hỏi";
-                        }
-                        if (option == '') {
-                            check = 1;
-                            document.getElementById("validate_option_sp").innerHTML = "Xin vui lòng chọn chuyên mục câu hỏi";
-                        }
-                        if (check == 1) {
-                            return false;
-                        }
-
-                        localStorage.setItem("option", "newest");
-                        //if submit ok --> remove lqa
-                        localStorage.removeItem("lqa");
-                    });
-                    $('#title').keyup(function () {
-                        document.getElementById("validate_title").innerHTML = "";
-                    });
-                    $('#option_sp').change(function () {
-                        var title = $(this).val()
-                        if (title != '') {
-                            document.getElementById("validate_option_sp").innerHTML = "";
-                        }
-                    });
-                    $('#content_qas').keyup(function () {
-                        document.getElementById("content_qa").innerHTML = "";
-                    });
-                });
-
-
-                function rmf(obj) {
-                    var name = $(obj).parent().attr('id');
-                    $(obj).parent().remove();
-                    var newListF = [];
-                    for (var i = 0; i < listFiles.length; i++) {
-                        if (listFiles[i] != name) {
-                            newListF.push(listFiles[i]);
-                        } else {
-                            duplicate[i] = '';
-                        }
-                    }
-                    listFiles = newListF;
-                    $('#uploadImage').val(JSON.stringify(listFiles));
-                    $('#file_qa').hide();
-                    console.log($('#uploadImage').val());
-                }
-            </script>
+            </div>      
         </div>
-<<<<<<< HEAD
     </div>
-</div>
-
-=======
-
-</section>
->>>>>>> master
+  </div>

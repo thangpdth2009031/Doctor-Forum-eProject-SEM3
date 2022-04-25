@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace Doctor_Forum_eProject_SEM3.Models.ViewModel
         public int? SpecializationId { get; set; }
 
         [StringLength(250)]
-        [Required(ErrorMessage = "Please enter your full name")]
+        [Required(ErrorMessage = "Please enter your email")]
         public string Email { get; set; }
 
         [StringLength(15)]

@@ -1,4 +1,5 @@
-﻿using Doctor_Forum_eProject_SEM3.Models;
+﻿using Doctor_Forum_eProject_SEM3.Data;
+using Doctor_Forum_eProject_SEM3.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -9,14 +10,14 @@ namespace Doctor_Forum_eProject_SEM3.Dao
 {
     public class UserDao
     {
-        private DoctorForumDbContext db = null;
+        private MyIdentityDbContext db = null;
 
         public UserDao()
         {
-            db = new DoctorForumDbContext();
+            db = new MyIdentityDbContext();
         }
 
-        public long Insert(Account user)
+        /*public string Insert(Account user)
         {
             try
             {
@@ -35,10 +36,10 @@ namespace Doctor_Forum_eProject_SEM3.Dao
             }
 
             return user.Id;
-        }
+        }*/
         public int Login(string userName, string passWord)
         {
-            var result = db.Accounts.FirstOrDefault(x => x.UserName == userName);
+            var result = db.Users.FirstOrDefault(x => x.UserName == userName);
             if (result == null)
             {
                 return 0;
@@ -68,17 +69,31 @@ namespace Doctor_Forum_eProject_SEM3.Dao
         }
         public Account GetById(string userName)
         {
-            return db.Accounts.SingleOrDefault(x => x.UserName == userName);
+            return db.Users.SingleOrDefault(x => x.UserName == userName);
         }
 
         public bool CheckUserName(string userName)
         {
-            return db.Accounts.Count(x => x.UserName == userName) > 0;
+            return db.Users.Count(x => x.UserName == userName) > 0;
         }
 
         public bool CheckEmail(string email)
         {
-            return db.Accounts.Count(x => x.Email == email) > 0;
+            return db.Users.Count(x => x.Email == email) > 0;
+        }
+        public bool ChangeStatus(long id)
+        {
+            var user = db.Users.Find(id);
+            user.Status = !user.Status;
+            db.SaveChanges();
+            return user.Status;
+        }
+        public bool ChangeStatusPost(long id)
+        {
+            var post = db.Posts.Find(id);
+            post.Status = !post.Status;
+            db.SaveChanges();
+            return post.Status;
         }
 
     }
