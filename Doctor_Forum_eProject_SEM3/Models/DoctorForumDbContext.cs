@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-/*using System.Linq;
+using System.Linq;
 
 namespace Doctor_Forum_eProject_SEM3.Models
 {
@@ -12,7 +12,6 @@ namespace Doctor_Forum_eProject_SEM3.Models
         {
         }
 
-        public virtual DbSet<AccountDetail> AccountDetails { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Achievement> Achievements { get; set; }
         public virtual DbSet<Attachment> Attachments { get; set; }
@@ -26,11 +25,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AccountDetail>()
-                .Property(e => e.Email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AccountDetail>()
+            modelBuilder.Entity<Account>()
                 .Property(e => e.Phone)
                 .IsUnicode(false);
 
@@ -41,10 +36,6 @@ namespace Doctor_Forum_eProject_SEM3.Models
             modelBuilder.Entity<Experience>()
                 .Property(e => e.EndYear)
                 .IsFixedLength();
-
-            modelBuilder.Entity<Post>()
-                .Property(e => e.Content)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Qualification>()
                 .Property(e => e.Year)
@@ -64,4 +55,3 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public System.Data.Entity.DbSet<Doctor_Forum_eProject_SEM3.Models.ViewModel.AccountModel> AccountModels { get; set; }
     }
 }
-*/

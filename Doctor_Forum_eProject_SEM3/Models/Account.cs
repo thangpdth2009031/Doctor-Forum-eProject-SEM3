@@ -1,17 +1,18 @@
 namespace Doctor_Forum_eProject_SEM3.Models
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
 
-    public partial class Account: IdentityUser
+    public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
-        {
+        {            
             Achievements = new HashSet<Achievement>();
             Experiences = new HashSet<Experience>();
             Posts = new HashSet<Post>();
@@ -20,16 +21,25 @@ namespace Doctor_Forum_eProject_SEM3.Models
             Replies = new HashSet<Reply>();
         }
 
-     /*   public int? RoleId { get; set; }*/
+        public int Id { get; set; }
+
+        public int? RoleId { get; set; }
 
         public string Avatar { get; set; }
 
+        [StringLength(250)]
+        public string UserName { get; set; }
 
-        [StringLength(250)]        
+        [StringLength(250)]
         public string Password { get; set; }
 
         [StringLength(250)]
         public string FullName { get; set; }
+
+        [StringLength(250)]
+        public string Email { get; set; }
+        public int Gender { get; set; }
+        public string Phone { get; set; }
 
         public string AddressDetail { get; set; }
 
