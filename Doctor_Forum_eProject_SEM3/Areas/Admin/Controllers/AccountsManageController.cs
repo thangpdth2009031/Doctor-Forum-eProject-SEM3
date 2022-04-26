@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Doctor_Forum_eProject_SEM3.Dao;
-using Doctor_Forum_eProject_SEM3.Data;
 using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
@@ -50,10 +49,14 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RoleId,Avatar,UserName,Password,FullName,AddressDetail,DistrictId,ProvinceId,CreatedAt,UpdatedAt,Status,SpecializationId")] Account account)
+        public ActionResult Create(Account account)
         {
             if (ModelState.IsValid)
             {
+                account.Status = false;                
+                account.CreatedAt = DateTime.Now;                
+                account.UpdatedAt = DateTime.Now;                
+                account.Status = false;                
                 db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -141,15 +144,16 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
-        *//*[HasCredential(RoleID = "EDIT_USER")]*//*
-        public JsonResult ChangeStatus(long id)
-        {
-            var result = new UserDao().ChangeStatus(id);
-            return Json(new
-            {
-                status = result
-            });
         }
+            /*[HasCredential(RoleID = "EDIT_USER")]*/
+            public JsonResult ChangeStatus(long id)
+            {
+                var result = new UserDao().ChangeStatus(id);
+                return Json(new
+                {
+                    status = result
+                });
+            }
 
         protected override void Dispose(bool disposing)
         {
@@ -161,4 +165,3 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         }
     }
 }
-*/
