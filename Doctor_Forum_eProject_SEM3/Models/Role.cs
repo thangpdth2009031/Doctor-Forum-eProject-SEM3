@@ -1,14 +1,22 @@
 namespace Doctor_Forum_eProject_SEM3.Models
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Role: IdentityRole
+    public partial class Role
     {
+        public int Id { get; set; }
+
+        [StringLength(50)]
+        public string Name { get; set; }
+
         public bool Status { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
     }
 }

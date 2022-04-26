@@ -11,9 +11,9 @@ namespace Doctor_Forum_eProject_SEM3.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public int RepId { get; set; }
+        public int? RepId { get; set; }
 
-        public int Type { get; set; }
+        public int? Type { get; set; }
 
         public string Link { get; set; }
 

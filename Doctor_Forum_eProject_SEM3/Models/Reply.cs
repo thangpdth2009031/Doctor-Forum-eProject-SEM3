@@ -18,19 +18,19 @@ namespace Doctor_Forum_eProject_SEM3.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public int ParenId { get; set; }
+        public int? ParenId { get; set; }
 
-        public int PostId { get; set; }
+        public int? PostId { get; set; }
 
-        public string AccountId { get; set; }
+        public int? AccountId { get; set; }
 
         public string Message { get; set; }
 
         public bool Status { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public virtual Account Account { get; set; }
 

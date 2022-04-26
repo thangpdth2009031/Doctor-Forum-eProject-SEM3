@@ -6,14 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Doctor_Forum_eProject_SEM3.Data;
 using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
     public class SpecializationsController : Controller
     {
-        private MyIdentityDbContext db = new MyIdentityDbContext();
+        private DoctorForumDbContext db = new DoctorForumDbContext();
 
         // GET: Admin/Specializations
         public ActionResult Index()

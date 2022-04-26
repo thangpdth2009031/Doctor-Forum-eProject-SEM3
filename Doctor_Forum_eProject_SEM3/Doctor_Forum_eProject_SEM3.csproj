@@ -58,18 +58,9 @@
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
@@ -161,25 +152,24 @@
     <Compile Include="App_Start\BundleConfig3.cs" />
     <Compile Include="App_Start\BundleConfig4.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountsManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostAdminController.cs" />
-    <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SpecializationsController.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserSession.cs" />
     <Compile Include="Common\VariableExtension.cs" />
     <Compile Include="Controllers\AccountModelsController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonalPageController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\SearchPostController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dao\UserDao.cs" />
-    <Compile Include="Data\MyIdentityDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1209,7 +1199,6 @@
     <Content Include="Content\plugins\slick\slick.min.js" />
     <Content Include="Content\plugins\timePicker\timePicker.css" />
     <Content Include="Content\plugins\timePicker\timePicker.js" />
-    <Content Include="Data\script5.sql" />
     <Content Include="favicon.ico" />
     <Content Include="FileUploads\images\2can_bai_nvp.jpg" />
     <Content Include="FileUploads\_thumbs\Images\2can_bai_nvp.jpg" />
@@ -1621,14 +1610,17 @@
     <Content Include="Views\Posts\NewestPost.cshtml" />
     <Content Include="Views\Posts\TypePost.cshtml" />
     <Content Include="Views\Posts\TypeKnowledge.cshtml" />
+    <Content Include="Views\SearchPost\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Roles\" />
     <Folder Include="bin\roslyn\" />
+    <Folder Include="Data\" />
     <Folder Include="FileUploads\files\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\Manage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

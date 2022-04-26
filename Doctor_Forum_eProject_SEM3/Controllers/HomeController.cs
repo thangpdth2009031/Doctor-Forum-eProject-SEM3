@@ -1,5 +1,4 @@
-﻿using Doctor_Forum_eProject_SEM3.Data;
-using Doctor_Forum_eProject_SEM3.Models;
+﻿using Doctor_Forum_eProject_SEM3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 {
     public class HomeController : Controller
     {
-        private MyIdentityDbContext db = new MyIdentityDbContext();
+        private DoctorForumDbContext db = new DoctorForumDbContext();
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {

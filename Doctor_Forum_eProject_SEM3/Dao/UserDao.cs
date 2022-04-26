@@ -1,5 +1,4 @@
-﻿using Doctor_Forum_eProject_SEM3.Data;
-using Doctor_Forum_eProject_SEM3.Models;
+﻿using Doctor_Forum_eProject_SEM3.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -10,14 +9,14 @@ namespace Doctor_Forum_eProject_SEM3.Dao
 {
     public class UserDao
     {
-        private MyIdentityDbContext db = null;
+        private DoctorForumDbContext db = null;
 
         public UserDao()
         {
-            db = new MyIdentityDbContext();
+            db = new DoctorForumDbContext();
         }
 
-        /*public string Insert(Account user)
+        public int Insert(Account user)
         {
             try
             {
@@ -36,10 +35,10 @@ namespace Doctor_Forum_eProject_SEM3.Dao
             }
 
             return user.Id;
-        }*/
+        }
         public int Login(string userName, string passWord)
         {
-            var result = db.Users.FirstOrDefault(x => x.UserName == userName);
+            var result = db.Accounts.FirstOrDefault(x => x.UserName == userName);
             if (result == null)
             {
                 return 0;
@@ -69,21 +68,21 @@ namespace Doctor_Forum_eProject_SEM3.Dao
         }
         public Account GetById(string userName)
         {
-            return db.Users.SingleOrDefault(x => x.UserName == userName);
+            return db.Accounts.SingleOrDefault(x => x.UserName == userName);
         }
 
         public bool CheckUserName(string userName)
         {
-            return db.Users.Count(x => x.UserName == userName) > 0;
+            return db.Accounts.Count(x => x.UserName == userName) > 0;
         }
 
         public bool CheckEmail(string email)
         {
-            return db.Users.Count(x => x.Email == email) > 0;
+            return db.Accounts.Count(x => x.Email == email) > 0;
         }
         public bool ChangeStatus(long id)
         {
-            var user = db.Users.Find(id);
+            var user = db.Accounts.Find(id);
             user.Status = !user.Status;
             db.SaveChanges();
             return user.Status;

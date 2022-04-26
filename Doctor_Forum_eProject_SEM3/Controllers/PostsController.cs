@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Doctor_Forum_eProject_SEM3.Common;
-using Doctor_Forum_eProject_SEM3.Data;
 using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Controllers
@@ -15,7 +14,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
     public class PostsController : Controller
     {
         DateTime dateTimeNow = DateTime.Now;
-        private MyIdentityDbContext db = new MyIdentityDbContext();
+        private DoctorForumDbContext db = new DoctorForumDbContext();
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
@@ -56,7 +55,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // GET: Admin/PostAdmin/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.Users, "Id", "Avatar");
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
             return View();
         }
@@ -80,7 +79,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 return RedirectToAction("Posts", "PersonalPage");
             }
 
-            ViewBag.AccountId = new SelectList(db.Users, "Id", "Avatar", post.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
@@ -97,7 +96,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.Users, "Id", "Avatar", post.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             /*ViewBag.SpecializationId = new SelectList(Accountsdb.Specializations, "Id", "Name", post.SpecializationId);*/
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
@@ -120,7 +119,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.Users, "Id", "Avatar", post.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
@@ -161,7 +160,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            ViewBag.AccountId = new SelectList(db.Users, "Id", "Avatar", post.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
