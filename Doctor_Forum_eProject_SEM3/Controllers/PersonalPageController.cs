@@ -25,5 +25,9 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 return View(post);
             }
         }
+        public ActionResult PersonalPage()
+        {
+            return View();
+        }
     }
 }
