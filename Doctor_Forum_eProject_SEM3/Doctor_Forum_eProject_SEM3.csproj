@@ -173,7 +173,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonalPageController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
-    <Compile Include="Controllers\SearchPostController.cs" />
+    <Compile Include="Controllers\SearchDoctorController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dao\UserDao.cs" />
@@ -1666,7 +1666,8 @@
     <Content Include="Views\Posts\NewestPost.cshtml" />
     <Content Include="Views\Posts\TypePost.cshtml" />
     <Content Include="Views\Posts\TypeKnowledge.cshtml" />
-    <Content Include="Views\SearchPost\Search.cshtml" />
+    <Content Include="Views\SearchDoctor\SearchDoctor.cshtml" />
+    <Content Include="Views\SearchDoctor\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

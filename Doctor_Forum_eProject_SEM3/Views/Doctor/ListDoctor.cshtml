@@ -462,7 +462,7 @@
                 <br>natus nobis deleniti doloremque minima odit voluptatibus ipsam animi?
             </p>
         </div>
-        <div class="row justify-content-center">
+        <div class="row">
             @foreach (var item in Model)
             {
                 <div class="col-lg-4 col-md-6">
@@ -471,13 +471,10 @@
                         <div class="contents text-center">
                             @foreach (var child in item.Professionals)
                             {
-                                <h4>@child.ProfessionalName @item.FullName</h4>
+                                <h4>@child.ProfessionalName - @item.FullName</h4>
                             }
-                            @foreach (var child1 in item.Experiences)
-                            {
-                                <p>@child1.Workplace-@child1.Position</p>
-                            }
-                            <a href="/Account/Profile/@item.Id" class="btn btn-main">Book Appointment</a>
+                            <p>@item.AddressDetail</p>
+                            <a href="/Account/Profile/@item.Id" class="btn btn-main">Watch information</a>
                         </div>
                     </div>
                 </div>
@@ -487,28 +484,4 @@
     </div>
 </section>
 
-<!--End team section-->
-<!-- jquery -->
-<script src="plugins/jquery.min.js"></script>
-<!-- bootstrap -->
-<script src="plugins/bootstrap/bootstrap.min.js"></script>
-<!-- Slick Slider -->
-<script src="plugins/slick/slick.min.js"></script>
-<script src="plugins/slick/slick-animation.min.js"></script>
-<!-- FancyBox -->
-<script src="plugins/fancybox/jquery.fancybox.min.js" defer></script>
-<!-- Google Map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
-<script src="plugins/google-map/gmap.js" defer></script>
-
-<!-- jquery-ui -->
-<script src="plugins/jquery-ui/jquery-ui.js" defer></script>
-<!-- timePicker -->
-<script src="plugins/timePicker/timePicker.js" defer></script>
-
-<!-- script js -->
-<script src="js/script.js"></script>
-</body>
-
-</html>
 

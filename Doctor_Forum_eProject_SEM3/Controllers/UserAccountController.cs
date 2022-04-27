@@ -120,6 +120,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     {
                         ViewBag.Success = "Đăng ký thành công";
                         accountModel = new AccountModel();
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
@@ -132,7 +133,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 return View(accountModel);
             }
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return RedirectToAction("Index", "Posts");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Login()
@@ -175,32 +176,11 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 
             return View(model);
         }
-
-   /*     [HttpPost]
-        public async Task<ActionResult> Login(LoginModel model)
+        public ActionResult Logout()
         {
-            SignInManager<Account, string> signInManager;
-            // sử dụng userManager để check thông tin đăng nhập.d
-            var account = await userManager.FindAsync(model.Username, model.Password);
-            if (account != null)
-            {
-                // đăng nhập  thành công thì dùng SignInManager để lưu lại thông tin vừa đăng nhập.
-                signInManager = new SignInManager<Account, string>(userManager, Request.GetOwinContext().Authentication);
-                await signInManager.SignInAsync(account, isPersistent: false, rememberBrowser: false);
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return View(model);
-            }
-        }*/
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }        
+            Session[UserSession.USER_SESSION] = null;
+            return Redirect("/");
+        }           
 
         public JsonResult LoadProvince()
         {
@@ -246,6 +226,10 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 data = list,
                 status = true
             });
+        }
+        public ActionResult UserProfile()
+        {
+            return View();
         }
     }
 }
