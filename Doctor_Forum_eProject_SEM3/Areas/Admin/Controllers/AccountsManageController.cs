@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Doctor_Forum_eProject_SEM3.Dao;
 using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
@@ -48,10 +49,14 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RoleId,Avatar,UserName,Password,FullName,AddressDetail,DistrictId,ProvinceId,CreatedAt,UpdatedAt,Status,SpecializationId")] Account account)
+        public ActionResult Create(Account account)
         {
             if (ModelState.IsValid)
             {
+                account.Status = false;                
+                account.CreatedAt = DateTime.Now;                
+                account.UpdatedAt = DateTime.Now;                
+                account.Status = false;                
                 db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -119,6 +124,36 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll(string[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+            {
+                ModelState.AddModelError("", "No item selected to delete");
+                return View();
+            }
+            List<int> TaskIds = ids.Select(x => Int32.Parse(x)).ToList();
+            for (var i = 0; i < TaskIds.Count(); i++)
+            {
+                var todo = db.Accounts.Find(TaskIds[i]);
+                todo.Status = false;
+                db.Entry(todo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+            /*[HasCredential(RoleID = "EDIT_USER")]*/
+            public JsonResult ChangeStatus(long id)
+            {
+                var result = new UserDao().ChangeStatus(id);
+                return Json(new
+                {
+                    status = result
+                });
+            }
 
         protected override void Dispose(bool disposing)
         {

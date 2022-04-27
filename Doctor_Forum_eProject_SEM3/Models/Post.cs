@@ -18,8 +18,8 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public int Id { get; set; }
 
         public string Title { get; set; }
+
         [AllowHtml]
-        [Column(TypeName = "nvarchar(MAX)")]
         public string Content { get; set; }
 
         public int? Type { get; set; }
@@ -33,11 +33,10 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public string Tag { get; set; }
 
         public bool Status { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime? CreatedAt { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime? UpdatedAt { get; set; }
 
+        public DateTime? CreatedAt { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
         public virtual Account Account { get; set; }
 
         public virtual Specialization Specialization { get; set; }

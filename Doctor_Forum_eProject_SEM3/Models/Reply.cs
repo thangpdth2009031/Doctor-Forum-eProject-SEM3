@@ -26,7 +26,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public string Message { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

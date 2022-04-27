@@ -55,7 +55,25 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -137,27 +155,42 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountsManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AchievementsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ExperiencesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QualificationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SpecializationsController.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserSession.cs" />
     <Compile Include="Common\VariableExtension.cs" />
     <Compile Include="Controllers\AccountModelsController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonalPageController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\SearchDoctorController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204230817098_init-db.cs" />
+    <Compile Include="Migrations\202204230817098_init-db.Designer.cs">
+      <DependentUpon>202204230817098_init-db.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204241217242_update-account-model.cs" />
+    <Compile Include="Migrations\202204241217242_update-account-model.Designer.cs">
+      <DependentUpon>202204241217242_update-account-model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204242001376_drop-table-account-detail.cs" />
+    <Compile Include="Migrations\202204242001376_drop-table-account-detail.Designer.cs">
+      <DependentUpon>202204242001376_drop-table-account-detail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\AccountDetail.cs" />
     <Compile Include="Models\Achievement.cs" />
     <Compile Include="Models\Attachment.cs" />
-    <Compile Include="Models\BigViewModel.cs" />
     <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\DoctorForumDbContext.cs" />
     <Compile Include="Models\Experience.cs" />
@@ -980,72 +1013,28 @@
     <Content Include="Areas\Admin\ContentAdmin\dist\js\sidebarmenu.js" />
     <Content Include="Areas\Admin\ContentAdmin\dist\js\waves.js" />
     <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\CKFinder.dll" />
-    <Content Include="bin\Doctor_Forum_eProject_SEM3.dll" />
-    <Content Include="bin\Doctor_Forum_eProject_SEM3.pdb" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.Owin.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
-    <Content Include="bin\roslyn\csc.exe" />
-    <Content Include="bin\roslyn\csi.exe" />
-    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
-    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
-    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
-    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
-    <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
-    <Content Include="bin\roslyn\System.AppContext.dll" />
-    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
-    <Content Include="bin\roslyn\System.Console.dll" />
-    <Content Include="bin\roslyn\System.Diagnostics.DiagnosticSource.dll" />
-    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
-    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
-    <Content Include="bin\roslyn\System.Globalization.Calendars.dll" />
-    <Content Include="bin\roslyn\System.IO.Compression.dll" />
-    <Content Include="bin\roslyn\System.IO.Compression.ZipFile.dll" />
-    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
-    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
-    <Content Include="bin\roslyn\System.Net.Http.dll" />
-    <Content Include="bin\roslyn\System.Net.Sockets.dll" />
-    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
-    <Content Include="bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll" />
-    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
-    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
-    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
-    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
-    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
-    <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
-    <Content Include="bin\roslyn\System.ValueTuple.dll" />
-    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
-    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
-    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
-    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
-    <Content Include="bin\roslyn\vbc.exe" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\Owin.dll" />
     <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
     <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
     <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="ckeditor5-build-classic\ckeditor.js" />
     <Content Include="ckeditor5-build-classic\index.html" />
@@ -1180,8 +1169,10 @@
     <Content Include="Content\images\testimonials\1.png" />
     <Content Include="Content\images\testimonials\2.png" />
     <Content Include="Content\images\testimonials\3.png" />
+    <Content Include="Content\js\admin\postsController.js" />
     <Content Include="Content\js\script.js" />
-    <Content Include="Content\js\userRegister.js" />
+    <Content Include="Content\js\admin\userController.js" />
+    <Content Include="Content\js\client\userRegister.js" />
     <Content Include="Content\plugins\animation\animate.min.css" />
     <Content Include="Content\plugins\bootstrap\bootstrap.min.css" />
     <Content Include="Content\plugins\bootstrap\bootstrap.min.js" />
@@ -1211,7 +1202,6 @@
     <Content Include="Content\plugins\slick\slick.min.js" />
     <Content Include="Content\plugins\timePicker\timePicker.css" />
     <Content Include="Content\plugins\timePicker\timePicker.js" />
-    <Content Include="Data\script5.sql" />
     <Content Include="favicon.ico" />
     <Content Include="FileUploads\images\2can_bai_nvp.jpg" />
     <Content Include="FileUploads\_thumbs\Images\2can_bai_nvp.jpg" />
@@ -1230,17 +1220,6 @@
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\Doctor_Forum_eProject_SEM3.csproj.AssemblyReference.cache" />
     <Content Include="obj\Debug\Doctor_Forum_eProject_SEM3.csproj.CoreCompileInputs.cache" />
-    <Content Include="bin\Doctor_Forum_eProject_SEM3.dll.config" />
-    <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
-    <Content Include="bin\roslyn\csi.exe.config" />
-    <Content Include="bin\roslyn\csi.rsp" />
-    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\roslyn\vbc.rsp" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
@@ -1584,6 +1563,21 @@
     <Content Include="Areas\Admin\Views\AccountsManage\Details.cshtml" />
     <Content Include="Areas\Admin\Views\AccountsManage\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AccountsManage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Achievements\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Achievements\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Achievements\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Achievements\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Achievements\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Experiences\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Experiences\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Experiences\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Experiences\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Experiences\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Qualifications\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Qualifications\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Qualifications\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Qualifications\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Qualifications\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1632,12 +1626,20 @@
     <Content Include="Views\Home\PostDetail.cshtml" />
     <Content Include="Views\AccountModels\ListAccount.cshtml" />
     <Content Include="Views\Posts\NewestPost.cshtml" />
+    <Content Include="Views\Posts\TypePost.cshtml" />
+    <Content Include="Views\Posts\TypeKnowledge.cshtml" />
+    <Content Include="Views\SearchDoctor\SearchDoctor.cshtml" />
+    <Content Include="Views\SearchDoctor\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Roles\" />
+    <Folder Include="bin\roslyn\" />
+    <Folder Include="Data\" />
     <Folder Include="FileUploads\files\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\Manage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
@@ -1650,6 +1652,17 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202204230817098_init-db.resx">
+      <DependentUpon>202204230817098_init-db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204241217242_update-account-model.resx">
+      <DependentUpon>202204241217242_update-account-model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204242001376_drop-table-account-detail.resx">
+      <DependentUpon>202204242001376_drop-table-account-detail.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

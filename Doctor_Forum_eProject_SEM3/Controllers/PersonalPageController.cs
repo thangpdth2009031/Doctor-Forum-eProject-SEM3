@@ -13,16 +13,17 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         private DoctorForumDbContext db = new DoctorForumDbContext();
         // GET: PersonalPage
         public ActionResult Posts()
-        {            
+        {
             var account = (Account)Session[UserSession.USER_SESSION];
             if (account == null)
             {
-                return RedirectToAction("Login", "AccountModels");
-            } else
+                return RedirectToAction("Login", "UserAccount");
+            }
+            else
             {
-                var post = db.Posts.Where((x => x.Status == (true) && x.AccountId == (account.Id))).ToList();                
+                var post = db.Posts.Where((x => x.Status == (true) && x.AccountId == (account.Id))).ToList();
                 return View(post);
-            }            
+            }
         }
         public ActionResult PersonalPage()
         {

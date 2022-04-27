@@ -1,0 +1,94 @@
+﻿@model Doctor_Forum_eProject_SEM3.Models.Achievement
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Account Profile</h4>
+                <div class="ms-auto text-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Details
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <h4>Achievement</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Account.Avatar)
+                                </dt>
+
+                                <dd>
+                                    <img src=" @Html.DisplayFor(model => model.Account.Avatar)" style="width: 250px; height: 250px; object-fit: cover;" />
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Year)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Year)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Description)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Status)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.CreatedAt)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.CreatedAt)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.UpatedAt)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.UpatedAt)
+                                </dd>
+
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

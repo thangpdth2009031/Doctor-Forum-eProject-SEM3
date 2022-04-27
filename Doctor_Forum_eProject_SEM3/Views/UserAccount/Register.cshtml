@@ -37,7 +37,7 @@
 
         .form-select {
             background-color: #eceff1;
-            font-family: montserrat;
+          
             border-radius: 0;
         }
 
@@ -80,8 +80,7 @@
             margin-bottom: 10px;
             margin-top: 2px;
             width: 100%;
-            box-sizing: border-box;
-            font-family: montserrat;
+            box-sizing: border-box;           
             color: #2C3E50;
             /*  background-color: #ECEFF1;*/
             background-color: #ffff;
@@ -186,32 +185,32 @@
             }
 
             #progressbar #account:before {
-                font-family: FontAwesome;
+
                 content: "1"
             }
 
             #progressbar #personal:before {
-                font-family: FontAwesome;
+       
                 content: "2"
             }
 
             #progressbar #payment:before {
-                font-family: FontAwesome;
+        
                 content: "3"
             }
 
             #progressbar #confirm:before {
-                font-family: FontAwesome;
+              
                 content: "4"
             }
 
             #progressbar #experiences:before {
-                font-family: FontAwesome;
+             
                 content: "5"
             }
 
             #progressbar #success:before {
-                font-family: FontAwesome;
+             
                 content: "\f00c"
             }
 
@@ -259,8 +258,6 @@
     </style>
 </head>
 <body>
-
-
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11 col-sm-10 col-md-12 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -293,7 +290,7 @@
                                         <h2 class="steps">Step 1 - 5</h2>
                                     </div>
                                 </div>
-
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -795,7 +792,7 @@
             })
 
         })
-    </script>
-    <script src="~/Content/js/userRegister.js"></script>
+    </script>    
+    <script src="~/Content/js/client/userRegister.js"></script>
 </body>
 </html>

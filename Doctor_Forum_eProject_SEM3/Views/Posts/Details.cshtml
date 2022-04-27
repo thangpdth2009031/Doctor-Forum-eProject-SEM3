@@ -34,10 +34,14 @@
             <div class="col-lg-9">
                 <div class="left-side">
                     <div class="item-holder">                        
-                        <div class="content-text pt-0">                                                       
+                        <div class="content-text pt-0">
+                           
+                                @String.Format("{0:ddd, dd MMMM yyyy }", Model.CreatedAt).ToString()
+                        
+                       
                             <p>
                                 @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Content))
-                            </p>                
+                            </p>
                         </div>
                     </div>
                 </div>

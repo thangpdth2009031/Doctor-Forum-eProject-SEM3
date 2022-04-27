@@ -16,7 +16,7 @@ namespace Doctor_Forum_eProject_SEM3.Dao
             db = new DoctorForumDbContext();
         }
 
-        public long Insert(Account user)
+        public int Insert(Account user)
         {
             try
             {
@@ -79,6 +79,20 @@ namespace Doctor_Forum_eProject_SEM3.Dao
         public bool CheckEmail(string email)
         {
             return db.Accounts.Count(x => x.Email == email) > 0;
+        }
+        public bool ChangeStatus(long id)
+        {
+            var user = db.Accounts.Find(id);
+            user.Status = !user.Status;
+            db.SaveChanges();
+            return user.Status;
+        }
+        public bool ChangeStatusPost(long id)
+        {
+            var post = db.Posts.Find(id);
+            post.Status = !post.Status;
+            db.SaveChanges();
+            return post.Status;
         }
 
     }

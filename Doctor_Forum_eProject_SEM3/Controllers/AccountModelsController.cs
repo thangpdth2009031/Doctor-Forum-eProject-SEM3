@@ -18,33 +18,34 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 {
     public class AccountModelsController : Controller
     {
-        /*private DoctorForumDbContext db = new DoctorForumDbContext();*/
+        private DoctorForumDbContext db;
+        public AccountModelsController()
+        {
+            db = new DoctorForumDbContext();
+        }
 
-        // GET: AccountModels
-        DoctorForumDbContext db = new DoctorForumDbContext();
-
-        public ActionResult ListAccount()
+        /*public ActionResult ListAccount()
         {
             return View(db.Accounts.ToList());
-        }
+        }*/
 
         public ActionResult Create()
         {
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
             return View();
         }
-        public ActionResult AccountProfile(int? id)
+        public ActionResult AccountProfile()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Account account = db.Accounts.Find(id);
-            if (account == null)
-            {
-                return HttpNotFound();
-            }
-            return View(account);
+            /* if (id == null)
+             {
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }
+             Account account = db.Accounts.Find(id);
+             if (account == null)
+             {
+                 return HttpNotFound();
+             }*/
+            return View();
         }
 
         // POST: AccountModels/Create
@@ -88,18 +89,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         account.DistrictId = int.Parse(accountModel.DistrictId);
                     }
                     db.Accounts.Add(account);
-                    int pk = account.Id;
-                    AccountDetail accountDetail = new AccountDetail()
-                    {
-                        Email = accountModel.Email,
-                        Phone = accountModel.Phone,
-                        Gender = accountModel.Gender,
-                        Status = true,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        AccountId = pk
-                    };
-                    db.AccountDetails.Add(accountDetail);
+                    var pk = account.Id;                  
                     Achievement achievement = new Achievement()
                     {
                         Year = accountModel.YearAchievement,
@@ -144,7 +134,8 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     };
                     Debug.WriteLine(accountModel.FullName);
                     var result = dao.Insert(account);
-                    if (result > 0)
+                    db.SaveChanges();
+                    if (result != null)
                     {
                         ViewBag.Success = "Đăng ký thành công";
                         accountModel = new AccountModel();
@@ -160,6 +151,107 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             }
             return View();
         }
+
+        /*     [HttpPost]
+             [ValidateAntiForgeryToken]
+             public async Task<ActionResult> Create(AccountModel accountModel)
+             {
+                 DateTime dateTimeNow = DateTime.Now;
+                 if (ModelState.IsValid)
+                 {
+                     var dao = new UserDao();
+                     if (dao.CheckUserName(accountModel.UserName))
+                     {
+                         ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
+                     }
+                     else if (dao.CheckEmail(accountModel.Email))
+                     {
+                         ModelState.AddModelError("", "Email đã tồn tại");
+                     }
+                     else
+                     {
+                         Account account = new Account();
+                         account.Avatar = accountModel.Avatar;
+                         account.UserName = accountModel.UserName;
+                         account.PasswordHash = accountModel.Password;
+                         account.FullName = accountModel.FullName;
+                         account.PhoneNumber = accountModel.Phone;
+                         account.Email = accountModel.Email;
+                         account.AddressDetail = accountModel.AddressDetail;
+                         account.SpecializationId = accountModel.SpecializationId;
+                         account.CreatedAt = dateTimeNow;
+                         account.UpdatedAt = dateTimeNow;
+                         account.Status = false;
+                         if (!string.IsNullOrEmpty(accountModel.ProvinceId))
+                         {
+                             account.ProvinceId = int.Parse(accountModel.ProvinceId);
+                         }
+
+                         if (!string.IsNullOrEmpty(accountModel.ProvinceId))
+                         {
+                             account.DistrictId = int.Parse(accountModel.DistrictId);
+                         }
+                         string pk = account.Id;
+                         var result = await userManager.CreateAsync(account, account.PasswordHash);
+                         Achievement achievement = new Achievement()
+                         {
+                             Year = accountModel.YearAchievement,
+                             Description = accountModel.Description,
+                             AccountId = pk,
+                             Status = true,
+                             CreatedAt = DateTime.Now,
+                             UpatedAt = DateTime.Now
+                         };
+                         db.Achievements.Add(achievement);
+                         Professional professional = new Professional()
+                         {
+                             ProfessionalName = accountModel.ProfessionalName,
+                             AccountId = pk,
+                             Status = true,
+                             CreatedAt = DateTime.Now,
+                             UpdatedAt = DateTime.Now
+                         };
+                         db.Professionals.Add(professional);
+                         Qualification qualification = new Qualification()
+                         {
+                             Year = accountModel.Year,
+                             Description = accountModel.Description,
+                             School = accountModel.School,
+                             AccountId = pk,
+                             Status = true,
+                             CreatedAt = DateTime.Now,
+                             UpdatedAt = DateTime.Now,
+                         };
+                         db.Qualifications.Add(qualification);
+                         Experience experience = new Experience()
+                         {
+                             StartYear = accountModel.StartYear,
+                             EndYear = accountModel.EndYear,
+                             Description = accountModel.DescriptionExperiences,
+                             Workplace = accountModel.Workplace,
+                             Position = accountModel.Position,
+                             AccountId = pk,
+                             Status = true,
+                             CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy")),
+                             UpdatedAt = DateTime.Now
+                         };
+                         db.Experiences.Add(experience);
+                         db.SaveChanges();
+                         if (result.Succeeded)
+                         {
+                             ViewBag.Success = "Đăng ký thành công";
+                             return RedirectToAction("Index", "Home");
+                         }
+                         else
+                         {
+                             ModelState.AddModelError("", "Đăng ký không thành công.");
+                         }
+                     }
+                     ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
+                     return View(accountModel);
+                 }
+                 return View();
+             }*/
 
         public ActionResult Login()
         {
@@ -200,6 +292,41 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 
             return View(model);
         }
+        /*        [HttpPost]
+                public async Task<ActionResult> Login(LoginModel model)
+                {
+                    SignInManager<Account, string> signInManager;
+                    // sử dụng userManager để check thông tin đăng nhập.d
+                    var account = await userManager.FindAsync(model.Username, model.Password);
+                    if (account == null)
+                    {
+                        ModelState.AddModelError("", "Tài khoản không tồn tại.");
+                    }
+                    else
+                    {
+                        if (account.Status == false)
+                        {
+                            ModelState.AddModelError("", "Tài khoản đang bị khoá.");
+                        }
+                        else
+                        {
+                            if (account.Password == model.Password)
+                            {
+
+                                // đăng nhập  thành công thì dùng SignInManager để lưu lại thông tin vừa đăng nhập.
+                                signInManager = new SignInManager<Account, string>(userManager, Request.GetOwinContext().Authentication);
+                                await signInManager.SignInAsync(account, isPersistent: false, rememberBrowser: false);
+                                return RedirectToAction("Index", "Home");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Mật khẩu không đúng.");
+                            }
+                        }
+
+                    }
+                    return View(model);
+                }*/
         public ActionResult Logout()
         {
             Session[UserSession.USER_SESSION] = null;

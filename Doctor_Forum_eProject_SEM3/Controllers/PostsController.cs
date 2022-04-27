@@ -13,17 +13,27 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 {
     public class PostsController : Controller
     {
+        DateTime dateTimeNow = DateTime.Now;
         private DoctorForumDbContext db = new DoctorForumDbContext();
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-
             var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
             return View(posts.ToList());
         }
         public PartialViewResult NewestPost()
-        {            
+        {
             var post = db.Posts.OrderByDescending(p => p.Id).FirstOrDefault();
+            return PartialView(post);
+        }
+        public PartialViewResult TypePost()
+        {
+            var post = db.Posts.Where(x=>x.Type == 2).OrderByDescending(p=>p.Id).ToList();
+            return PartialView(post);
+        }
+        public PartialViewResult TypeKnowledge()
+        {
+            var post = db.Posts.Where(x => x.Type == 3).OrderByDescending(p => p.Id).FirstOrDefault();
             return PartialView(post);
         }
 
@@ -45,7 +55,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // GET: Admin/PostAdmin/Create
         public ActionResult Create()
         {
-            /* ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");*/
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
             return View();
         }
@@ -62,14 +72,14 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 var account = (Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
                 post.Status = true;
-                post.CreatedAt = DateTime.Now;
+                post.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));
                 post.UpdatedAt = DateTime.Now;
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Posts", "PersonalPage");
             }
-            /*
-                        ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);*/
+
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
@@ -87,6 +97,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 return HttpNotFound();
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
+            /*ViewBag.SpecializationId = new SelectList(Accountsdb.Specializations, "Id", "Name", post.SpecializationId);*/
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
@@ -147,13 +158,13 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     db.Entry(post).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
-                }                
+                }
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
-       
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

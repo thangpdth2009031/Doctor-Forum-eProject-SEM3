@@ -13,7 +13,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

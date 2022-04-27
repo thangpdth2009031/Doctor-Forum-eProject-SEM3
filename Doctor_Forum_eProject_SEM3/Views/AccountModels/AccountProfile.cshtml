@@ -1,4 +1,4 @@
-﻿@model Doctor_Forum_eProject_SEM3.Models.Account
+﻿@*@model Doctor_Forum_eProject_SEM3.Models.Account*@
 @{
     ViewBag.Title = "AccountProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,6 +21,15 @@
                             <p class="p02 col-5" style="margin-left: 40px">Khoa Nội – Hô hấp</p>
                         </li>
 
+                        <li class="row row border-specialization">
+                            <p class="p01 col-3"><b>Ngoại ngữ</b></p>
+                            <p class="p02 col-5" style="margin-left: 40px">Tiếng Việt, Tiếng Anh</p>
+                        </li>
+                    </ul>
+                    <button class="tablink" onclick="openPage('Home', this, '#48bdc5')" style="width : 25%; margin-left : 40px; border : none; " id="defaultOpen">Kinh Nghiệm</button>
+                    <button class="tablink" onclick="openPage('News', this, '#48bdc5')" style="width: 25%; border: none;">Chuyên Khoa</button>
+                    <button class="tablink" onclick="openPage('Contact', this, '#48bdc5')" style="width: 25%; border: none; ">Giải Thưởng</button>
+                    <ul>
                         <li class="row row border-specialization">
                             <p class="p01 col-3"><b>Ngoại ngữ</b></p>
                             <p class="p02 col-5" style="margin-left: 40px">Tiếng Việt, Tiếng Anh</p>

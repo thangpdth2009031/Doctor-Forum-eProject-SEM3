@@ -17,7 +17,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public string Link { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         public virtual Reply Reply { get; set; }
     }

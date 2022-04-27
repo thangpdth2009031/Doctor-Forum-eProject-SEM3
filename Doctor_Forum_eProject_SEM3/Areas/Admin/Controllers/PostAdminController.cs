@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Doctor_Forum_eProject_SEM3.Common;
+using Doctor_Forum_eProject_SEM3.Dao;
 using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
@@ -19,7 +20,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);            
+            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
             return View(posts.ToList());
         }
 
@@ -41,7 +42,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // GET: Admin/PostAdmin/Create
         public ActionResult Create()
         {
-            /* ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");*/
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
             return View();
         }
@@ -64,8 +65,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            /*
-                        ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);*/
+
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
         }
@@ -98,8 +99,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             {
                 var account = (Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
-                post.Status = true;                
-                post.UpdatedAt = DateTime.Now;               
+                post.Status = true;
+                post.UpdatedAt = DateTime.Now;
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -165,6 +166,14 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public JsonResult ChangeStatus(long id)
+        {
+            var result = new UserDao().ChangeStatusPost(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
