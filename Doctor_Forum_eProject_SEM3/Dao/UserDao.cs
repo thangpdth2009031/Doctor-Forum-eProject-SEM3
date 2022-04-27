@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
+using Doctor_Forum_eProject_SEM3.Common;
 
 namespace Doctor_Forum_eProject_SEM3.Dao
 {
@@ -36,7 +37,8 @@ namespace Doctor_Forum_eProject_SEM3.Dao
 
             return user.Id;
         }
-        public int Login(string userName, string passWord)
+       
+        public int Login(string userName, string passWord, bool isLoginAdmin = false)
         {
             var result = db.Accounts.FirstOrDefault(x => x.UserName == userName);
             if (result == null)
@@ -45,26 +47,42 @@ namespace Doctor_Forum_eProject_SEM3.Dao
             }
             else
             {
-                if (result.Status == false)
+                if (isLoginAdmin == true)
                 {
-                    return -1;
-
+                    if (result.GroupId == CommonConstans.ADMIN_GROUP || result.GroupId == CommonConstans.MOD_GROUP)
+                    {
+                        if (result.Status == false)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            if (result.Password == passWord)
+                                return 1;
+                            else
+                                return -2;
+                        }
+                    }
+                    else
+                    {
+                        return -3;
+                    }
                 }
                 else
                 {
-                    if (result.Password == passWord)
-
-                        return 1;
-
+                    if (result.Status == false)
+                    {
+                        return -1;
+                    }
                     else
-
-                        return -2;
-
+                    {
+                        if (result.Password == passWord)
+                            return 1;
+                        else
+                            return -2;
+                    }
                 }
-
             }
-
-
         }
         public Account GetById(string userName)
         {

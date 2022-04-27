@@ -82,7 +82,7 @@
                     <div class="row" style="margin-top: 20px">
                         @{Html.RenderAction("TypePost", "Posts");}
                         <div class="col-lg-12 mt-5">
-                            @foreach (var item in Model.Where(x => x.Status == true))
+                            @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                             {
                                 <div class="item-holder row">
                                     <div class="image-box col-4">
@@ -581,3 +581,4 @@
         </div>
     </div>
 </div>
+
