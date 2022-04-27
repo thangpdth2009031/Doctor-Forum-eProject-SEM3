@@ -5,7 +5,6 @@ namespace Doctor_Forum_eProject_SEM3.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Web.Mvc;
 
     public partial class Post
     {
@@ -36,7 +35,6 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
-        public virtual Account Account { get; set; }
 
         public virtual Specialization Specialization { get; set; }
 

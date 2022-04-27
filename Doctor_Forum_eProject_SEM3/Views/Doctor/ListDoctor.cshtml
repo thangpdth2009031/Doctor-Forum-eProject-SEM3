@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Doctor_Forum_eProject_SEM3.Models.Account>
 @{
     ViewBag.Title = "ListDoctor";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -463,75 +463,31 @@
             </p>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6">
-                <div class="team-member">
-                    <img loading="lazy" src="~/Content/images/list-doctor/doctor-2.jpg" alt="doctor" class="img-fluid">
-                    <div class="contents text-center">
-                        <h4>Dr. Robert Barrethion</h4>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, aspernatur.</p>
-                        <a href="appointment.html" class="btn btn-main">Book Appointment</a>
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-member">
+                        <img loading="lazy" src="@item.Avatar" alt="doctor" style="height: 350px;width:100%;object-fit:cover" class="img-fluid">
+                        <div class="contents text-center">
+                            @foreach (var child in item.Professionals)
+                            {
+                                <h4>@child.ProfessionalName @item.FullName</h4>
+                            }
+                            @foreach (var child1 in item.Experiences)
+                            {
+                                <p>@child1.Workplace-@child1.Position</p>
+                            }
+                            <a href="/Account/Profile/@item.Id" class="btn btn-main">Book Appointment</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="team-member">
-                    <img loading="lazy" src="~/Content/images/list-doctor/doctor-lab-3.jpg" alt="doctor" class="img-fluid">
-                    <div class="contents text-center">
-                        <h4>Dr. Marry Lou</h4>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, aspernatur.</p>
-                        <a href="appointment.html" class="btn btn-main">Book Appointment</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="team-member">
-                    <img loading="lazy" src="~/Content/images/list-doctor/event-2.jpg" alt="doctor" class="img-fluid">
-                    <div class="contents text-center">
-                        <h4>Dr. Sansa Stark</h4>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, aspernatur.</p>
-                        <a href="appointment.html" class="btn btn-main">Book Appointment</a>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6">
-                <div class="team-member">
-                    <img loading="lazy" src="~/Content/images/list-doctor/doctor-2.jpg" alt="doctor" class="img-fluid">
-                    <div class="contents text-center">
-                        <h4>Dr. Robert Barrethion</h4>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, aspernatur.</p>
-                        <a href="appointment.html" class="btn btn-main">Book Appointment</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="team-member">
-                    <img loading="lazy" src="~/Content/images/list-doctor/doctor-lab-3.jpg" alt="doctor" class="img-fluid">
-                    <div class="contents text-center">
-                        <h4>Dr. Marry Lou</h4>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, aspernatur.</p>
-                        <a href="appointment.html" class="btn btn-main">Book Appointment</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="team-member">
-                    <img loading="lazy" src="~/Content/images/list-doctor/event-2.jpg" alt="doctor" class="img-fluid">
-                    <div class="contents text-center">
-                        <h4>Dr. Sansa Stark</h4>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, aspernatur.</p>
-                        <a href="appointment.html" class="btn btn-main">Book Appointment</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </section>
 
 <!--End team section-->
-
-
 <!-- jquery -->
 <script src="plugins/jquery.min.js"></script>
 <!-- bootstrap -->

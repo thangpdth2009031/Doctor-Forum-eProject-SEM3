@@ -6,10 +6,11 @@ namespace Doctor_Forum_eProject_SEM3.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial  class Role
+    [Table("AccountGroup")]
+    public partial class AccountGroup
     {
         [Key]
-        [StringLength(50)]
+        [StringLength(20)]
         public string Id { get; set; }
 
         [StringLength(50)]

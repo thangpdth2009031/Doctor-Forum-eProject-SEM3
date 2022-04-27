@@ -13,7 +13,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public string ProfessionalName { get; set; }
 
-        public int AccountId { get; set; }
+        public int? AccountId { get; set; }
 
         public bool Status { get; set; }
 

@@ -158,10 +158,14 @@
     <Compile Include="Areas\Admin\Controllers\AchievementsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExperiencesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\QualificationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SpecializationsController.cs" />
+    <Compile Include="Common\CommonConstans.cs" />
     <Compile Include="Common\Encryptor.cs" />
+    <Compile Include="Common\HasCredentialAttribute.cs" />
+    <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Common\UserSession.cs" />
     <Compile Include="Common\VariableExtension.cs" />
     <Compile Include="Controllers\AccountModelsController.cs" />
@@ -189,8 +193,10 @@
       <DependentUpon>202204242001376_drop-table-account-detail.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountGroup.cs" />
     <Compile Include="Models\Achievement.cs" />
     <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\Credential.cs" />
     <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\DoctorForumDbContext.cs" />
     <Compile Include="Models\Experience.cs" />
@@ -1014,6 +1020,8 @@
     <Content Include="Areas\Admin\ContentAdmin\dist\js\waves.js" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\CKFinder.dll" />
+    <Content Include="bin\Doctor_Forum_eProject_SEM3.dll" />
+    <Content Include="bin\Doctor_Forum_eProject_SEM3.pdb" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
     <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
@@ -1112,6 +1120,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\Login.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\data\Provinces_Data.xml" />
     <Content Include="Content\images\about\1.jpg" />
@@ -1142,6 +1151,32 @@
     <Content Include="Content\images\gallery\video-thumb-04.jpg" />
     <Content Include="Content\images\icons\icon-select.png" />
     <Content Include="Content\images\icons\preloader.gif" />
+    <Content Include="Content\images\list-doctor\1.jpg" />
+    <Content Include="Content\images\list-doctor\1.png" />
+    <Content Include="Content\images\list-doctor\2.png" />
+    <Content Include="Content\images\list-doctor\3.png" />
+    <Content Include="Content\images\list-doctor\5.jpg" />
+    <Content Include="Content\images\list-doctor\6.jpg" />
+    <Content Include="Content\images\list-doctor\7.jpg" />
+    <Content Include="Content\images\list-doctor\8.jpg" />
+    <Content Include="Content\images\list-doctor\doctor-1.jpg" />
+    <Content Include="Content\images\list-doctor\doctor-2.jpg" />
+    <Content Include="Content\images\list-doctor\doctor-3.jpg" />
+    <Content Include="Content\images\list-doctor\doctor-lab-1.jpg" />
+    <Content Include="Content\images\list-doctor\doctor-lab-2.jpg" />
+    <Content Include="Content\images\list-doctor\doctor-lab-3.jpg" />
+    <Content Include="Content\images\list-doctor\event-1.jpg" />
+    <Content Include="Content\images\list-doctor\event-2.jpg" />
+    <Content Include="Content\images\list-doctor\event-3.jpg" />
+    <Content Include="Content\images\list-doctor\favicon.png" />
+    <Content Include="Content\images\list-doctor\logo-2.png" />
+    <Content Include="Content\images\list-doctor\logo.png" />
+    <Content Include="Content\images\list-doctor\post-thumb-small.jpg" />
+    <Content Include="Content\images\Login\1.jpg" />
+    <Content Include="Content\images\Login\admin.png" />
+    <Content Include="Content\images\Login\banner1.jpg" />
+    <Content Include="Content\images\Login\bg.jpg" />
+    <Content Include="Content\images\Login\p.png" />
     <Content Include="Content\images\logo-2.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\resource\1.png" />
@@ -1578,6 +1613,9 @@
     <Content Include="Areas\Admin\Views\Qualifications\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Qualifications\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Qualifications\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Login.cshtml" />
+    <Content Include="bin\Doctor_Forum_eProject_SEM3.dll.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

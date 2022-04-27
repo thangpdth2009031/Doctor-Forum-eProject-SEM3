@@ -31,13 +31,13 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-top: 10px;
+     
     }
 </style>
 <div class="col-4">
     <img style="height: 163px; width: 100%;object-fit: cover; border-bottom:  #b2b2b7 1px solid; border-radius: 10px 10px 0 0; margin: 10px 0 0 0" src="@Model.Image">
-    <div style="background-color: #f7f7fa">
-        <span style="margin-left: 15px">@Model.Account.FullName</span>
+    <div style="background-color: #f7f7fa; padding: 0 10px">
+        <span>@Model.Account.FullName</span>
         <h6>
             <a style="color: #343434" href="">
                 <div class="click-knowledge">@Model.Title</div>
