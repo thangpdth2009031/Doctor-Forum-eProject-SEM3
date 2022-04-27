@@ -19,6 +19,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public string Title { get; set; }
 
+        [AllowHtml]
         public string Content { get; set; }
 
         public int? Type { get; set; }
