@@ -228,7 +228,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             });
         }
         public ActionResult UserProfile()
-        {
+        {           
             return View();
         }
     }

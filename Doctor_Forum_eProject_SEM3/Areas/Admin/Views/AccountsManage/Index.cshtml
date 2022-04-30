@@ -57,9 +57,9 @@
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Specialization.Name)
                                             </th>
-                                            <th>
+                                            @*<th>
                                                 @Html.DisplayNameFor(model => model.RoleId)
-                                            </th>
+                                            </th>*@
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Avatar)
                                             </th>
@@ -88,45 +88,48 @@
 
                                         @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                                         {
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox" name="ids" value="@item.Id" />
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Specialization.Name)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.RoleId)
-                                                </td>
-                                                <td>
-                                                    <img src="@Html.DisplayFor(modelItem => item.Avatar)" style="width: 90px; height: 80px; object-fit: cover;" />
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.UserName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.FullName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AddressDetail)
-                                                </td>
-                                                   <td>
-                                                    @Html.DisplayFor(modelItem => item.DistrictId)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.ProvinceId)
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <a class="m-2" href="/Admin/AccountsManage/Edit/@item.Id">
-                                                            <h5><i class="fa-solid fa-pen icon-list"></i></h5>
-                                                        </a>
-                                                        <a class="m-2" href="/Admin/AccountsManage/Details/@item.Id">
-                                                            <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="ids" value="@item.Id" />
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Specialization.Name)
+                                            </td>
+                                            @*<td>
+                                                @Html.DisplayFor(modelItem => item.RoleId)
+                                            </td>*@
+                                            <td>
+                                                <img src="@Html.DisplayFor(modelItem => item.Avatar)" style="width: 90px; height: 80px; object-fit: cover;" />
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FullName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AddressDetail)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DistrictId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ProvinceId)
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a class="m-1" href="/Admin/AccountsManage/Edit/@item.Id">
+                                                        <h5><i class="fa-solid fa-pen icon-list"></i></h5>
+                                                    </a>
+                                                    <a class="m-1" href="/Admin/AccountsManage/Details/@item.Id">
+                                                        <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
+                                                    </a>
+                                                    <a class="m-1" href="/Admin/AccountsManage/Delete/@item.Id">
+                                                        <h5><i class="fa-solid fa-trash-can icon-list"></i></h5>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>

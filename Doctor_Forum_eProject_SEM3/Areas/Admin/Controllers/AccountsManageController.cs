@@ -8,6 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using Doctor_Forum_eProject_SEM3.Dao;
 using Doctor_Forum_eProject_SEM3.Models;
+using System.Configuration;
+
+using CloudinaryDotNet.Actions;
+using System.Text.RegularExpressions;
+using System.Drawing;
+using CloudinaryDotNet;
+using Account = Doctor_Forum_eProject_SEM3.Models.Account;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
@@ -52,20 +59,74 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         public ActionResult Create(Account account)
         {
             if (ModelState.IsValid)
-            {
-                account.Status = false;                
+            {                 
                 account.CreatedAt = DateTime.Now;                
                 account.UpdatedAt = DateTime.Now;                
-                account.Status = false;                
+                account.Status = true;                
                 db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", account.SpecializationId);
             return View(account);
         }
-
+        [HttpPost]
+        public bool SaveImageToServer()
+        {
+            try
+            {
+                HttpFileCollectionBase files = Request.Files;
+                HttpPostedFileBase file = files[0];
+                string _apiKey = ConfigurationManager.AppSettings["CloudinaryAPIKey"];
+                string _apiSecret = ConfigurationManager.AppSettings["CloudinarySecretKey"];
+                string _cloud = ConfigurationManager.AppSettings["CloudinaryAccount"];
+                string uploadedImageUrl = string.Empty;
+                string fname = string.Empty;
+                var myAccount = new CloudinaryDotNet.Account { ApiKey = _apiKey, ApiSecret = _apiSecret, Cloud = _cloud };
+                Cloudinary _cloudinary = new Cloudinary(myAccount);
+                // Checking for Internet Explorer  
+                if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                {
+                    string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                    fname = testfiles[testfiles.Length - 1];
+                }
+                else
+                {
+                    fname = Regex.Replace(file.FileName.Trim(), @"[^0-9a-zA-Z.]+", "_");
+                }
+                using (Image img = Image.FromStream(file.InputStream))
+                {
+                    int imageHeight = 0;
+                    int imageWidth = 0;
+                    if (img.Height > 320)
+                    {
+                        var ratio = (double)img.Height / 320;
+                        imageHeight = (int)(img.Height / ratio);
+                        imageWidth = (int)(img.Width / ratio);
+                    }
+                    else
+                    {
+                        imageHeight = img.Height;
+                        imageWidth = img.Width;
+                    }
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(file.FileName, file.InputStream),
+                        Folder = "MyImages",
+                        Transformation = new Transformation().Width(imageWidth).Height(imageHeight).Crop("thumb").Gravity("face")
+                    };
+                    var uploadResult = _cloudinary.UploadLarge(uploadParams);
+                    uploadedImageUrl = uploadResult?.SecureUri?.AbsoluteUri;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         // GET: Admin/AccountsManage/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -162,6 +223,6 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }      
     }
 }
