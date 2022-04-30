@@ -42,21 +42,12 @@
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
     <div class="container-fluid">
-        <!-- ============================================================== -->
-        <!-- Start Page Content -->
-        <!-- ============================================================== -->
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        
+
                         @using (Html.BeginForm("DeleteAll", "PostAdmin", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
@@ -121,6 +112,9 @@
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Tag)
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn-active" data-id="@item.Id">@Html.Raw(item.Status ? "Approved" : "Not approved yet")</a>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">

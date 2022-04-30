@@ -14,8 +14,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
             Attachments = new HashSet<Attachment>();
             Replies1 = new HashSet<Reply>();
         }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        /*[DatabaseGenerated(DatabaseGeneratedOption.None)]*/
         public int Id { get; set; }
 
         public int? ParenId { get; set; }
