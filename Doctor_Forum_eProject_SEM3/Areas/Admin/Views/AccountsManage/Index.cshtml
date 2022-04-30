@@ -57,9 +57,9 @@
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Specialization.Name)
                                             </th>
-                                            <th>
+                                            @*<th>
                                                 @Html.DisplayNameFor(model => model.RoleId)
-                                            </th>
+                                            </th>*@
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Avatar)
                                             </th>
@@ -95,9 +95,9 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Specialization.Name)
                                             </td>
-                                            <td>
+                                            @*<td>
                                                 @Html.DisplayFor(modelItem => item.RoleId)
-                                            </td>
+                                            </td>*@
                                             <td>
                                                 <img src="@Html.DisplayFor(modelItem => item.Avatar)" style="width: 90px; height: 80px; object-fit: cover;" />
                                             </td>
@@ -118,11 +118,14 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a class="m-2" href="/Admin/AccountsManage/Edit/@item.Id">
+                                                    <a class="m-1" href="/Admin/AccountsManage/Edit/@item.Id">
                                                         <h5><i class="fa-solid fa-pen icon-list"></i></h5>
                                                     </a>
-                                                    <a class="m-2" href="/Admin/AccountsManage/Details/@item.Id">
+                                                    <a class="m-1" href="/Admin/AccountsManage/Details/@item.Id">
                                                         <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
+                                                    </a>
+                                                    <a class="m-1" href="/Admin/AccountsManage/Delete/@item.Id">
+                                                        <h5><i class="fa-solid fa-trash-can icon-list"></i></h5>
                                                     </a>
                                                 </div>
                                             </td>

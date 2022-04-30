@@ -20,7 +20,10 @@
         background-color: #ECEFF1;
         font-size: 16px;
         letter-spacing: 1px;
-    } 
+    }
+    .ck-editor__editable {
+        height: 150px
+    }
 </style>
 
 <div class="page-wrapper">
@@ -88,27 +91,41 @@
                                             @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    <span class="input-group-addon" onclick="ChooseImg()">
-                                        <i class="fa fa-upload fa-lg"></i>
-                                    </span>
-                                    <div class="row">
-                                        <img class="img ml-3" id="Img" src="~/Content/img/5f660a6763af6a0025a73587.jpg" style="height:125px; width:200px;object-fit:cover;" />
-                                    </div>
+                                    @*<span class="input-group-addon" onclick="ChooseImg()">
+            <i class="fa fa-upload fa-lg"></i>
+        </span>
+        <div class="row">
+            <img class="img ml-3" id="Img" src="~/Content/img/5f660a6763af6a0025a73587.jpg" style="height:125px; width:200px;object-fit:cover;" />
+        </div>*@
 
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-12 p-0">
-                                            @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, id = "txtContent" })
-                                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                    <div class="col-md-12">
+                                        <div class="table">
+                                            <div class="table-cell">
+                                                <div class="">
+                                                    <div id="profile">
+                                                        <div class="dashes">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <input type="file" id="mediaFile" class="d-none filePhoto" />
                                     </div>
-                                    <div class="row justify-content-start mt-4">
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary p-2 mt-4" style="width:100%">Submit</button>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-12 p-0">
+                                                @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, id = "txtContent" })
+                                                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-start mt-4">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary p-2 mt-4" style="width:100%;">Submit</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         }
                         <div>
                             @Html.ActionLink("Back to List", "Index")
@@ -142,6 +159,93 @@
             .catch(err => {
                 console.error(err.stack);
             });
+
+        $(function () {
+
+            $('#profile').addClass('dragging').removeClass('dragging');
+        });
+
+        $('#profile').on('dragover', function () {
+            $('#profile').addClass('dragging')
+        }).on('dragleave', function () {
+            $('#profile').removeClass('dragging')
+        }).on('drop', function (e) {
+            $('#profile').removeClass('dragging hasImage');
+
+            if (e.originalEvent) {
+                var file = e.originalEvent.dataTransfer.files[0];
+                console.log(file);
+
+                var reader = new FileReader();
+
+                //attach event handlers here...
+
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    console.log(reader.result);
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+
+                }
+
+            }
+        })
+        $('#profile').on('click', function (e) {
+            console.log('clicked')
+            $('#mediaFile').click();
+        });
+        window.addEventListener("dragover", function (e) {
+            e = e || event;
+            e.preventDefault();
+        }, false);
+        window.addEventListener("drop", function (e) {
+            e = e || event;
+            e.preventDefault();
+        }, false);
+        $('#mediaFile').change(function (e) {
+
+            var input = e.target;
+            if (input.files && input.files[0]) {
+                var file = input.files[0];
+
+                var reader = new FileReader();
+
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    console.log(reader.result);
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                }
+            }
+        })
+
+        $("#btnSubmit").click(function () {
+            var fileUpload = $(".filePhoto").get(0);
+            var files = fileUpload.files;
+            // Create FormData object
+            var fileData = new FormData();
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+            var geturl = "/Admin/AccountsManage/SaveImageToServer";
+            $.ajax({
+                url: geturl,
+                type: "POST",
+                data: fileData,
+                async: false,
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                success: function (IsImageUploaded) {
+                    if (IsImageUploaded == "True") {
+                        $(".filePhoto").val('');
+                        $("#ShowMsg").text("Image Uploaded Successfully...!").css("color", "green")
+                    }
+                    else {
+                        $(".filePhoto").val('');
+                        $("#ShowMsg").text("Image Not Uploaded...!").css("color", "red")
+                    }
+                }
+            });
+        })
 
     </script>
 }

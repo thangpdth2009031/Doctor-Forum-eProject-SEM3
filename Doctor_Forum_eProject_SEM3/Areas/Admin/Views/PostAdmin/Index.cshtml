@@ -13,6 +13,13 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .icon-list {
+        background-color: blue;
+        color: white;
+        padding: 5px;
+    }
+
 </style>
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -83,10 +90,7 @@
                                             </th>
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Tag)
-                                            </th>
-                                            <th>
-                                                Status
-                                            </th>
+                                            </th>                                           
                                             <th>
                                                 Action
                                             </th>
@@ -120,11 +124,14 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a class="m-2" href="/Admin/PostAdmin/Edit/@item.Id">
+                                                        <a class="m-1" href="/Admin/PostAdmin/Edit/@item.Id">
                                                             <h5><i class="fa-solid fa-pen icon-list"></i></h5>
                                                         </a>
-                                                        <a class="m-2" href="/Admin/PostAdmin/Details/@item.Id">
+                                                        <a class="m-1" href="/Admin/PostAdmin/Details/@item.Id">
                                                             <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
+                                                        </a>
+                                                        <a class="m-1" href="/Admin/PostAdmin/Delete/@item.Id">
+                                                            <h5><i class="fa-solid fa-trash-can icon-list"></i></h5>
                                                         </a>
                                                     </div>
                                                 </td>
