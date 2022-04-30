@@ -18,7 +18,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
+            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization).Where(p=>p.Status == true);
             return View(posts.ToList());
         }
         public PartialViewResult NewestPost()
@@ -49,8 +49,10 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(post);
         }
+        
 
         // GET: Admin/PostAdmin/Create
         public ActionResult Create()
@@ -176,6 +178,34 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         public ActionResult PostDetail()
         {
             return View();
+        }
+
+        public PartialViewResult Comment(int? id)
+        {
+            var comments = db.Replies.Where(x => x.PostId == id && x.Status == true);
+            return PartialView(comments.ToList());
+        }
+        public PartialViewResult PostComment()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult PostComment(Reply reply)
+        {
+            if (ModelState.IsValid)
+            {
+                var account = (Account)Session[UserSession.USER_SESSION];
+                reply.AccountId = account.Id;
+                reply.Status = true;
+                /*reply.Post = */
+                /*reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));*/
+                reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));
+                reply.UpdatedAt = DateTime.Now;
+                db.Replies.Add(reply);
+                db.SaveChanges();
+                return View(reply);
+            }          
+            return View(reply);
         }
     }
 }

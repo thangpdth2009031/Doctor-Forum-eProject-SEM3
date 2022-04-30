@@ -1,7 +1,8 @@
-﻿@using Doctor_Forum_eProject_SEM3.Common
+﻿
+@using Doctor_Forum_eProject_SEM3.Common
 
 @{
-    ViewBag.Title = "Search";  
+    ViewBag.Title = "Search";
 }
 
 <div class="section-searchbar" id="search-bar">
@@ -17,13 +18,13 @@
                         <div class="search-input-col text-center" style="width: 38%">
                             <input type="text" value="" maxlength="255" id="search_top_content" name="keyword" placeholder="Tìm kiếm phòng khám, bệnh viện, bác sỹ, nhà thuốc từ A - Z và hơn thế nữa." class="form-control">
                         </div>
-                        <div class="location-col text-center" id="select_city" style="margin-left: 15px; width: 15%">                     
-                            @Html.DropDownList("ProvinceId", new SelectList(new string[] { }), new { @class = "form-control py-0", @id = "ddlProvince"})
+                        <div class="location-col text-center" id="select_city" style="margin-left: 15px; width: 15%">
+                            @Html.DropDownList("ProvinceId", new SelectList(new string[] { }), new { @class = "form-control py-0", @id = "ddlProvince" })
                         </div>
-                        <div class="location-col text-center" style="margin-left: 15px; width: 15%">                        
-                            @Html.DropDownList("DistrictId", new SelectList(new string[] { }), new { @class = "form-control py-0", @id = "ddlDistrict"})
+                        <div class="location-col text-center" style="margin-left: 15px; width: 15%">
+                            @Html.DropDownList("DistrictId", new SelectList(new string[] { }), new { @class = "form-control py-0", @id = "ddlDistrict" })
                         </div>
-                        <div class="department-col" style="margin-left: 15px ; width: 15%">                            
+                        <div class="department-col" style="margin-left: 15px ; width: 15%">
                             @Html.DropDownList("Specialization", (IEnumerable<SelectListItem>)ViewBag.Specialization, "Specialization", new { @class = "form-control py-0" })
                         </div>
                         <div class="search-submit-col" style="margin-left: 15px; background-color: hotpink; width: 11%">

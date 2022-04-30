@@ -147,10 +147,6 @@
 <!--@section head {
     <link rel="stylesheet" href="~/Areas/Admin/assets/css/color_skins.css">
 }
-
-
-
-
 <h1 class="text-center py-5">List Doctor</h1>
 <div class="container-fluid d-flex" style="padding:0 100px">
     <div class="">
@@ -450,31 +446,48 @@
         });
     }
 </script>-->
+
+@{Html.RenderAction("SearchDoctor", "Home");}
 <section class="team-section section">
     <div class="container">
+
         <div class="section-title text-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" id="txtSearch" class="form-control" name="txtSearch" placeholder="Enter name.." value="" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.DropDownList("ProvinceId", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlProvince", @style = "padding: 0 15px;" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.DropDownList("DistrictId", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlDistrict", @style = "padding: 0 15px;" })
+                    </div>
+                </div>
+            </div>
             <h3>
                 Our Expert
                 <span>Doctors</span>
             </h3>
-            <p class="mb-0">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem illo, rerum
-                <br>natus nobis deleniti doloremque minima odit voluptatibus ipsam animi?
-            </p>
+     
         </div>
-        <div class="row">
-            @foreach (var item in Model)
+        <div class="row table-list-doctor">
+            @foreach (var item1 in Model)
             {
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 tr-list-doctor">
                     <div class="team-member">
-                        <img loading="lazy" src="@item.Avatar" alt="doctor" style="height: 350px;width:100%;object-fit:cover" class="img-fluid">
+                        <img loading="lazy" src="@item1.Avatar" alt="doctor" style="height: 350px;width:100%;object-fit:cover" class="img-fluid">
                         <div class="contents text-center">
-                            @foreach (var child in item.Professionals)
+                            @foreach (var child in item1.Professionals)
                             {
-                                <h4>@child.ProfessionalName - @item.FullName</h4>
+                                <h4>@child.ProfessionalName - @item1.FullName</h4>
                             }
-                            <p>@item.AddressDetail</p>
-                            <a href="/Account/Profile/@item.Id" class="btn btn-main">Watch information</a>
+                            <p>@item1.AddressDetail</p>
+                            <a href="/Account/Profile/@item1.Id" class="btn btn-main">Watch information</a>
                         </div>
                     </div>
                 </div>
@@ -482,6 +495,49 @@
         </div>
 
     </div>
+
 </section>
-
-
+<script>
+    $("#txtSearch").on("keyup", function () {
+        var txtEnter = $(this).val();
+        $(".table-list-doctor .tr-list-doctor").each(function (results) {
+            if (results !== 0) {
+                var id = $(this).find("h4").text();
+                if (id.indexOf(txtEnter) !== 0 && id.toLowerCase().indexOf(txtEnter.toLowerCase()) < 0) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        })
+    })
+</script>
+<script>
+    $("#ddlProvince").change(function () {
+        alert(1)
+        $.ajax({
+            type: 'GET',
+            url: '/UserAccount/LoadProvince',
+            datatype: 'JSON',
+            data: { 'province': $(this).val() },
+            success: function (data) {
+                $('.table-list-doctor .tr-list-doctor').empty();
+                $.each(data, function (i, item) {
+                    var rows =
+                        "<div class=" + team - member + ">" +
+                        "<img loading=" + lazy + " src=" + item.Avatar + " alt=" + doctor + " style=" + height: 350 + px +; width: 100 %; object - fit: cover + " class=" + img - fluid + ">" +
+                            "<div class=" + contents + text + -center + ">" +
+                            "<h4>" + item.FullName + "</h4>" +
+                            "<p>" + item.AddressDetail + "</p>" +
+                            "<a href=" + /Account/Profile / +item.Id + "class=" + btn + btn + -main + ">Watch information</a>" +
+                            "</div>" +
+                            "</div>";
+                    $('.table-list-doctor .tr-list-doctor').append(rows);
+                });
+            },
+            error: function (data) { alert(data.responseText); }
+        });
+    });
+</script>
+<script src="~/Content/js/client/userRegister.js"></script>

@@ -55,11 +55,8 @@
                                                 <input type="checkbox" id="checkBoxAll" class="custom-checkbox" />
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Specialization.Name)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.RoleId)
-                                            </th>
+                                                Specialization
+                                            </th>                                            
                                             <th>
                                                 @Html.DisplayNameFor(model => model.Avatar)
                                             </th>
@@ -70,13 +67,13 @@
                                                 @Html.DisplayNameFor(model => model.FullName)
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.AddressDetail)
-                                            </th>
-                                            <th>
                                                 @Html.DisplayNameFor(model => model.DistrictId)
                                             </th>
                                             <th>
                                                 @Html.DisplayNameFor(model => model.ProvinceId)
+                                            </th>
+                                            <th>
+                                                Status
                                             </th>
                                             <th>
                                                 Action
@@ -94,10 +91,7 @@
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Specialization.Name)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.RoleId)
-                                                </td>
+                                                </td>                                             
                                                 <td>
                                                     <img src="@Html.DisplayFor(modelItem => item.Avatar)" style="width: 90px; height: 80px; object-fit: cover;" />
                                                 </td>
@@ -108,13 +102,13 @@
                                                     @Html.DisplayFor(modelItem => item.FullName)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.AddressDetail)
-                                                </td>
-                                                   <td>
                                                     @Html.DisplayFor(modelItem => item.DistrictId)
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.ProvinceId)
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn-active" data-id="@item.Id">@Html.Raw(item.Status ? "Approved" : "Not approved yet")</a>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
@@ -139,6 +133,7 @@
     </div>
 </div>
 @section Scripts {
+    <script src="~/Content/js/admin/userController.js"></script>
     <script>
         $("#checkBoxAll").click(function () {
             $('input:checkbox').not(this).prop('checked', this.checked);
