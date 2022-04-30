@@ -3,31 +3,25 @@
     ViewBag.Title = "Search";
     ViewBag.Genders = new SelectList(GenderKey.GetDic(), "Key", "Value");
 }
-@section jsFooter{
-    <script src="~/Content/js/client/userRegister.js"></script>
-}
+
 <div class="section-searchbar" id="search-bar">
     <div class="container">
         <div class="row" style="height: 120px; padding: 20px; background-color: #2FBBB0">
             <div class="col-md-12 ">
                 <span style="color: white; font-size: 20px;padding-bottom: 3px">Bạn muốn tìm gì ?</span>
                 <!-- BEGIN Search Bar -->
-                <form action="/tim-kiem" method="get" id="srchfrm">
+
+                @using (Html.BeginForm("Search", "SearchDoctor", FormMethod.Post, new { id = "srchfrm" }))
+                {
                     <div class="search-bar clearfix form-group-lg row" style="margin-left: 1px">
                         <div class="search-input-col text-center" style="width: 38%">
-                            <input type="text" value="" maxlength="255" id="search_top_content" name="q" placeholder="Tìm kiếm phòng khám, bệnh viện, bác sỹ, nhà thuốc từ A - Z và hơn thế nữa." class="form-control">
+                            <input type="text" value="" maxlength="255" id="search_top_content" name="keyword" placeholder="Tìm kiếm phòng khám, bệnh viện, bác sỹ, nhà thuốc từ A - Z và hơn thế nữa." class="form-control">
                         </div>
-                        <div class="location-col text-center" id="select_city" style="margin-left: 15px; width: 15%">
-                          @*  <select class="form-control py-0" name="c">
-                                <option>Thành Phố</option>
-                            </select>*@
-                            @Html.DropDownList("ProvinceId", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlProvince", @style = "padding: 0 15px;" })
+                        <div class="location-col text-center" id="select_city" style="margin-left: 15px; width: 15%">                     
+                            @Html.DropDownList("ProvinceId", new SelectList(new string[] { }), new { @class = "form-control py-0", @id = "ddlProvince"})
                         </div>
-                        <div class="location-col text-center" style="margin-left: 15px; width: 15%">
-                            <select class="form-control py-0" name="c">
-                                <option>Quận Huyện</option>
-                            </select>
-
+                        <div class="location-col text-center" style="margin-left: 15px; width: 15%">                        
+                            @Html.DropDownList("DistrictId", new SelectList(new string[] { }), new { @class = "form-control py-0", @id = "ddlDistrict"})
                         </div>
                         <div class="department-col" style="margin-left: 15px ; width: 15%">
                             <select class="form-control py-0" name="s" id="chuyen-khoa">
@@ -74,11 +68,13 @@
                             </select>
                         </div>
                         <div class="search-submit-col" style="margin-left: 15px; background-color: hotpink; width: 11%">
-                            <a href="#" id="btn-search-top" class="btn btn-block btn-lg btn-search" ; style="font-size: 14px"><i class="icon-magnifier icons"></i> Tìm kiếm</a>
+                            <button type="submit" href="#" id="btn-search-top" class="btn btn-block btn-lg btn-search" ; style="font-size: 14px"><i class="icon-magnifier icons"></i> Tìm kiếm</button>
                         </div>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>
 </div>
+<script src="~/Content/js/client/userRegister.js"></script>
+

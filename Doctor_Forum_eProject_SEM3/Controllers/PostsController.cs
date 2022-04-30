@@ -18,7 +18,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
+            var posts = db.Posts.Include(p => p.AccountId).Include(p => p.Specialization);
             return View(posts.ToList());
         }
         public PartialViewResult NewestPost()

@@ -5,17 +5,14 @@ namespace Doctor_Forum_eProject_SEM3.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
 
     public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
-        {            
+        {
             Achievements = new HashSet<Achievement>();
             Experiences = new HashSet<Experience>();
-            Posts = new HashSet<Post>();
             Professionals = new HashSet<Professional>();
             Qualifications = new HashSet<Qualification>();
             Replies = new HashSet<Reply>();
@@ -33,13 +30,11 @@ namespace Doctor_Forum_eProject_SEM3.Models
         [StringLength(250)]
         public string Password { get; set; }
 
-        [StringLength(250)]
-        public string FullName { get; set; }
+        [StringLength(20)] 
+        public string GroupId { get; set; }
 
         [StringLength(250)]
-        public string Email { get; set; }
-        public int Gender { get; set; }
-        public string Phone { get; set; }
+        public string FullName { get; set; }
 
         public string AddressDetail { get; set; }
 
@@ -55,7 +50,13 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public int? SpecializationId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]        
+        [StringLength(250)]
+        public string Email { get; set; }
+
+        [StringLength(15)]
+        public string Phone { get; set; }
+
+        public int? Gender { get; set; }
 
         public virtual Specialization Specialization { get; set; }
 
@@ -64,9 +65,6 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Experience> Experiences { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Post> Posts { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Professional> Professionals { get; set; }

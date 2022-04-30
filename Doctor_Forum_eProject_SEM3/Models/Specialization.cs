@@ -1,6 +1,5 @@
 namespace Doctor_Forum_eProject_SEM3.Models
 {
-    using Doctor_Forum_eProject_SEM3.Models.ViewModel;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -37,6 +36,5 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<AccountModel> accountModels { get; set; }
     }
 }

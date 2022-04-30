@@ -6,13 +6,18 @@ namespace Doctor_Forum_eProject_SEM3.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial  class Role
+    [Table("Credential")]
+    [Serializable]
+    public partial class Credential
     {
         [Key]
-        [StringLength(50)]
-        public string Id { get; set; }
+        [Column(Order = 0)]
+        [MaxLength(20)]
+        public byte[] AccountGroupId { get; set; }
 
+        [Key]
+        [Column(Order = 1)]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string RoleId { get; set; }
     }
 }

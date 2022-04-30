@@ -134,6 +134,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     };
                     Debug.WriteLine(accountModel.FullName);
                     var result = dao.Insert(account);
+                    db.SaveChanges();
                     if (result != null)
                     {
                         ViewBag.Success = "Đăng ký thành công";
@@ -375,6 +376,9 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 data = list,
                 status = true
             });
+
         }
+
+        
     }
 }
