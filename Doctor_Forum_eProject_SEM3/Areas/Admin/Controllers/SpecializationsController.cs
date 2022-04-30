@@ -50,6 +50,9 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                specialization.Status = true;
+                specialization.CreatedAt = DateTime.Now;
+                specialization.UpdatedAt = DateTime.Now;
                 db.Specializations.Add(specialization);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,6 +85,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                specialization.UpdatedAt = DateTime.Now;
                 db.Entry(specialization).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

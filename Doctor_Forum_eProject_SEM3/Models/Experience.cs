@@ -10,7 +10,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
     {
         public int Id { get; set; }
 
-        public int AccountId { get; set; }
+        public int? AccountId { get; set; }
 
         [StringLength(50)]
         public string StartYear { get; set; }

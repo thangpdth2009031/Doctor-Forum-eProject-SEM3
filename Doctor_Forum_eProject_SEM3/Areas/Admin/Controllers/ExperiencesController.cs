@@ -40,7 +40,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // GET: Admin/Experiences/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName");
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 return RedirectToAction("Index");              
             }
 
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", experience.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName", experience.AccountId);
             return View(experience);
         }
 
@@ -76,7 +76,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", experience.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName", experience.AccountId);
             return View(experience);
         }
 
@@ -85,16 +85,38 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AccountId,StartYear,EndYear,Description,Status,CreatedAt,UpdatedAt,Workplace,Position")] Experience experience)
+        public ActionResult Edit(Experience experience)
         {
             if (ModelState.IsValid)
             {
+                experience.UpdatedAt = DateTime.Now;
                 db.Entry(experience).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", experience.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName", experience.AccountId);
             return View(experience);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll(string[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+            {
+                ModelState.AddModelError("", "No item selected to delete");
+                return View();
+            }
+            List<int> TaskIds = ids.Select(x => Int32.Parse(x)).ToList();
+            for (var i = 0; i < TaskIds.Count(); i++)
+            {
+                var todo = db.Experiences.Find(TaskIds[i]);
+                todo.Status = false;
+                db.Entry(todo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: Admin/Experiences/Delete/5

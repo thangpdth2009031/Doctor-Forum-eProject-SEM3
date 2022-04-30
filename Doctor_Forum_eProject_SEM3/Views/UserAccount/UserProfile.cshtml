@@ -1,0 +1,359 @@
+
+﻿
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/UserProfile.css" rel="stylesheet" />
+<div style="background-color: #f4f6f9;">
+    <div class="container mt-5" style="">
+        <div class="row">
+            <div class="col-4">
+                <div class="card profile-header">
+                    <div class="body text-center m-2" style="text-align: center">
+                        <div class="profile-image mb-4"> <img class="avatar-doctor" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt=""> </div>
+                        <div>
+                            <h4 class="m-b-0"><strong>Dr. Charlotte</strong> Deo</h4>
+                            <span class="job_post">Neurologist</span>
+                            <p class="mt-2">795 Folsom Ave, Suite 600<br> San Francisco, CADGE 94107</p>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-primary btn-round">Follow</button>
+                            <button class="btn btn-primary btn-round btn-simple">Message</button>
+                        </div>
+                        <p class="social-icon mt-3">
+                            <a title="Twitter" href=""><i class="fa-brands fa-twitter"></i></a>
+                            <a title="Facebook" href=""><i class="fa-brands fa-facebook"></i></a>
+                            <a title="Google-plus" href=""><i class="fa-brands fa-instagram-square"></i></a>
+                            <a title="Behance" href=""><i class="fa-brands fa-behance-square"></i></a>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="card mt-3">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link show active" data-toggle="tab" href="#Followers">Followers</a></li>
+                        <li class="nav-item"><a class="nav-link show" data-toggle="tab" href="#friends">Friends</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane body show active" id="Followers">
+                            <ul class="right_chat list-unstyled">
+                                <li class="online">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Chris Fox</span>
+                                                <span class="message">Designer, Blogger</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="online">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Joge Lucky</span>
+                                                <span class="message">Java Developer</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="offline">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Isabella</span>
+                                                <span class="message">CEO, Thememakker</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="offline">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Folisise Chosielie</span>
+                                                <span class="message">Art director, Movie Cut</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="online">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Alexander</span>
+                                                <span class="message">Writter, Mag Editor</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane body show" id="friends">
+                            <ul class="new_friend_list list-unstyled row" style="text-align: center">
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Jackson</h6>
+                                        <small class="join_date">Today</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Aubrey</h6>
+                                        <small class="join_date">Yesterday</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Oliver</h6>
+                                        <small class="join_date">08 Nov</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Isabella</h6>
+                                        <small class="join_date">12 Dec</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Jacob</h6>
+                                        <small class="join_date">12 Dec</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Matthew</h6>
+                                        <small class="join_date">17 Dec</small>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link show active" data-toggle="tab" href="#about">Account</a></li>
+                        <li class="nav-item"><a class="nav-link show" data-toggle="tab" href="#Account">Posts</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane body show active" id="about">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Full Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary"> Kenneth Valdez</div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary"> fip@jukmuh.al</div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary"> (239) 816-9029</div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Mobile</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary"> (320) 380-4539</div>
+                                </div><hr><div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Address</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary"> Bay Area, San Francisco, CA</div>
+                                </div>
+                                <hr>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane body show" id="Account">
+                            <div class="tab-content">
+                                <div class="post">
+                                    <div class="wrap-ut pull-left">
+                                        <div class="userinfo pull-left">
+                                            <div class="avatar">
+                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+
+                                            </div>
+
+                                            <div class="icons">
+                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="posttext pull-left">
+                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
+                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="postinfo pull-left">
+                                        <div class="comments">
+                                            <div class="commentbg">
+                                                560
+                                                <div class="mark"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="post">
+                                    <div class="wrap-ut pull-left">
+                                        <div class="userinfo pull-left">
+                                            <div class="avatar">
+                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+
+                                            </div>
+
+                                            <div class="icons">
+                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="posttext pull-left">
+                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
+                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="postinfo pull-left">
+                                        <div class="comments">
+                                            <div class="commentbg">
+                                                560
+                                                <div class="mark"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="post">
+                                    <div class="wrap-ut pull-left">
+                                        <div class="userinfo pull-left">
+                                            <div class="avatar">
+                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+
+                                            </div>
+
+                                            <div class="icons">
+                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="posttext pull-left">
+                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
+                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="postinfo pull-left">
+                                        <div class="comments">
+                                            <div class="commentbg">
+                                                560
+                                                <div class="mark"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="post">
+                                    <div class="wrap-ut pull-left">
+                                        <div class="userinfo pull-left">
+                                            <div class="avatar">
+                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+
+                                            </div>
+
+                                            <div class="icons">
+                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="posttext pull-left">
+                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
+                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="postinfo pull-left">
+                                        <div class="comments">
+                                            <div class="commentbg">
+                                                560
+                                                <div class="mark"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+    });
+</script>
+

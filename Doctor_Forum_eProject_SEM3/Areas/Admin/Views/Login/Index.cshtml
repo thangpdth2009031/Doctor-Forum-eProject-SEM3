@@ -1,0 +1,68 @@
+﻿@model Doctor_Forum_eProject_SEM3.Models.ViewModel.LoginModel
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!DOCTYPE html>
+<html lang="zxx">
+
+<!-- Head -->
+
+<head>
+
+    <title>Universe Signin Form Flat Responsive Widget Template :: W3layouts</title>
+
+    <!-- Meta-Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- style CSS -->
+    <link rel="stylesheet" href="/Content/css/Login.css" type="text/css" media="all">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<!-- //Head -->
+<!-- Body -->
+
+<body>
+
+    <section class="main">
+        <div class="logo text-center">
+            <h1> <a href="index.html"> Admin Doctor Forum</a></h1>
+        </div>
+        <div class="content-w3ls text-center">
+
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                <img src="/Content/images/Login/admin.png" alt="" class="img-responsive">
+
+                <div class="wthree-field">
+                    @Html.TextBoxFor(model => model.Username, new { @class = "text", @autofocus = "autofocus" })
+                </div>
+                <div class="wthree-field">
+                    @Html.PasswordFor(model => model.Password, new { @class = "password" })
+                </div>
+                <div class="wthree-field">
+                    <button type="submit" class="btn">Sign In</button>
+                </div>
+                <div class="login-bottom">
+                    <a href="#url" class="">Create An Account</a>
+                </div>
+
+            }
+
+        </div>
+        <div class="copyright">
+            <p>
+                © 2020 Universe Signin Form. Made with love | Designed by <a href="https://w3layouts.com" target="_blank">W3layouts</a>
+            </p>
+        </div>
+    </section>
+
+</body>
+<!-- //Body -->
+
+</html>
