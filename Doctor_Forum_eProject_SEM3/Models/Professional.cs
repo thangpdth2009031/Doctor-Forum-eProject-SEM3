@@ -10,7 +10,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
     public partial class Professional
     {
         public int Id { get; set; }
-
+        [Required(ErrorMessage = "Please enter your professional name")]
         public string ProfessionalName { get; set; }
 
         public int? AccountId { get; set; }
