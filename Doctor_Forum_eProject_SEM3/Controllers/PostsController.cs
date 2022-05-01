@@ -192,12 +192,13 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         [HttpPost]
         public ActionResult PostComment(Reply reply)
         {
+            
             if (ModelState.IsValid)
             {
                 var account = (Account)Session[UserSession.USER_SESSION];
                 reply.AccountId = account.Id;
                 reply.Status = true;
-                /*reply.Post = */
+                ViewBag.Message = reply.Message;
                 /*reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));*/
                 reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));
                 reply.UpdatedAt = DateTime.Now;
