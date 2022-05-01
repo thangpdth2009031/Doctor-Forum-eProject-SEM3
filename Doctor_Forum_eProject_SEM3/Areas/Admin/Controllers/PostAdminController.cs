@@ -25,7 +25,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.AccountId).Include(p => p.Specialization);
+            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
             return View(posts.ToList());
         }
 
@@ -61,7 +61,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Account)Session[UserSession.USER_SESSION];
+                var account = (Models.Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
                 post.Status = true;
                 post.CreatedAt = DateTime.Now;
@@ -102,7 +102,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Account)Session[UserSession.USER_SESSION];
+                var account = (Models.Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
                 post.Status = true;
                 post.UpdatedAt = DateTime.Now;
@@ -136,7 +136,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Account)Session[UserSession.USER_SESSION];
+                var account = (Models.Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
                 post.Status = false;
                 post.UpdatedAt = DateTime.Now;
