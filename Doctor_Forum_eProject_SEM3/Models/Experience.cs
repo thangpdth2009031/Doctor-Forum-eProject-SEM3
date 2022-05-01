@@ -11,13 +11,11 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public int Id { get; set; }
 
         public int? AccountId { get; set; }
-
-        [StringLength(50)]
+        [Required(ErrorMessage = "Please enter your start year")]
         public string StartYear { get; set; }
-
-        [StringLength(50)]
+        [Required(ErrorMessage = "Please enter your end year")]
         public string EndYear { get; set; }
-
+        [Required(ErrorMessage = "Please enter your description")]
         public string Description { get; set; }
 
         public bool Status { get; set; }

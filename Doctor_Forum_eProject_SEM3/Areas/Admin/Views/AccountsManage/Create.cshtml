@@ -26,9 +26,10 @@
         background-position: center center;
         cursor: pointer;
     }
+
         #profile:before {
-            content: "\208A";         
-            position: absolute;          
+            content: "\208A";
+            position: absolute;
             text-align: center;
             top: 7px;
             left: 84px;
@@ -59,7 +60,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        @using (Html.BeginForm())
+                        @using (Html.BeginForm("Create", "AccountsManage", FormMethod.Post, new {enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
 
@@ -67,7 +68,7 @@
                                 <h4>Create</h4>
                                 <hr />
                                 <div class="">
-                                             
+
                                     <div class="row">
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                         <div class="col-12">
@@ -85,8 +86,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <input type="file" id="mediaFile" class="d-none filePhoto" />
-                                                    @*@Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", id = "mediaFile" }, id = "mediaFile" })*@
+                                                   
+                                                    <input type="file" id="mediaFile" name="AvatarFile" class="d-none" />
+                                                    @*@Html.EditorFor(model => model.AvatarFile, new { htmlAttributes = new { @class = "form-control d-none", id = "mediaFile", @type = "file" } })*@      
                                                     @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
@@ -109,6 +111,27 @@
                                                 <div class="col-md-12">
                                                     @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
                                                     @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                         </div>
@@ -278,35 +301,5 @@
                 $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
             }
         }
-    })
-
-    $("#btnSubmit").click(function () {
-        var fileUpload = $(".filePhoto").get(0);
-        var files = fileUpload.files;
-        // Create FormData object
-        var fileData = new FormData();
-        // Looping over all files and add it to FormData object
-        for (var i = 0; i < files.length; i++) {
-            fileData.append(files[i].name, files[i]);
-        }
-        var geturl = "/Admin/AccountsManage/SaveImageToServer";
-        $.ajax({
-            url: geturl,
-            type: "POST",
-            data: fileData,
-            async: false,
-            contentType: false, // Not to set any content header
-            processData: false, // Not to process data
-            success: function (IsImageUploaded) {
-                if (IsImageUploaded == "True") {
-                    $(".filePhoto").val('');
-                    $("#ShowMsg").text("Image Uploaded Successfully...!").css("color", "green")
-                }
-                else {
-                    $(".filePhoto").val('');
-                    $("#ShowMsg").text("Image Not Uploaded...!").css("color", "red")
-                }
-            }
-        });
     })
 </script>
