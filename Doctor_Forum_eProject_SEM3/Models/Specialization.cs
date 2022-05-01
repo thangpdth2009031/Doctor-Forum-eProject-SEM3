@@ -18,11 +18,11 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
-
+        [Required(ErrorMessage = "Please enter your title")]       
         public string Title { get; set; }
-
+        [Required(ErrorMessage = "Please enter your description")]       
         public string Description { get; set; }
-
+        [Required(ErrorMessage = "Please enter your image")]
         public string Image { get; set; }
 
         public bool Status { get; set; }

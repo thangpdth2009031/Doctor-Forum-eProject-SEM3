@@ -67,10 +67,10 @@
                                                 @Html.DisplayNameFor(model => model.FullName)
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.DistrictId)
+                                                @Html.DisplayNameFor(model => model.Phone)
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.ProvinceId)
+                                                @Html.DisplayNameFor(model => model.Email)
                                             </th>
                                             <th>
                                                 Status
@@ -93,6 +93,7 @@
                                                 </td>                                             
                                                 <td>
                                                     <img src="@Html.DisplayFor(modelItem => item.Avatar)" style="width: 90px; height: 80px; object-fit: cover;" />
+                                                  
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.UserName)
@@ -101,10 +102,10 @@
                                                     @Html.DisplayFor(modelItem => item.FullName)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.DistrictId)
+                                                    @Html.DisplayFor(modelItem => item.Phone)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.ProvinceId)
+                                                    @Html.DisplayFor(modelItem => item.Email)
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn-active" data-id="@item.Id">@Html.Raw(item.Status ? "Approved" : "Not approved yet")</a>
