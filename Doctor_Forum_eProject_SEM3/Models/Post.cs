@@ -39,6 +39,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public DateTime? UpdatedAt { get; set; }
 
         public virtual Specialization Specialization { get; set; }
+        public virtual Account Account { get; set; }
 
         public virtual Account Account { get; set; }
 

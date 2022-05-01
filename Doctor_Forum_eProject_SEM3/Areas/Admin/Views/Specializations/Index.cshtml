@@ -10,7 +10,7 @@
         color: white;
         padding: 5px;
     }
-</style>    
+</style>
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
@@ -71,38 +71,38 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach (var item in Model.Where(x => x.Status == true).Reverse())
+                                        @foreach (var item in Model.Where(x => x.Status == false).Reverse())
                                         {
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="ids" value="@item.Id" />
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Title)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </td>
-                                            <td>
-                                                <img src="@Html.DisplayFor(modelItem => item.Image)" style="width:90px; height: 80px" />
-                                            </td>
-                                            <td>
-                                                <div class="d-flex">
-                                                    <a class="m-1" href="/Admin/Specializations/Edit/@item.Id">
-                                                        <h5><i class="fa-solid fa-pen icon-list"></i></h5>
-                                                    </a>
-                                                    <a class="m-1" href="/Admin/Specializations/Details/@item.Id">
-                                                        <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
-                                                    </a>
-                                                    <a class="m-1" href="/Admin/Specializations/Delete/@item.Id">
-                                                        <h5><i class="fa-solid fa-trash-can icon-list"></i></h5>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="ids" value="@item.Id" />
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Title)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Description)
+                                                </td>
+                                                <td>
+                                                    <img src="@Html.DisplayFor(modelItem => item.Image)" style="width:90px; height: 80px" />
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a class="m-1" href="/Admin/Specializations/Edit/@item.Id">
+                                                            <h5><i class="fa-solid fa-pen icon-list"></i></h5>
+                                                        </a>
+                                                        <a class="m-1" href="/Admin/Specializations/Details/@item.Id">
+                                                            <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
+                                                        </a>
+                                                        <a class="m-1" href="/Admin/Specializations/Delete/@item.Id">
+                                                            <h5><i class="fa-solid fa-trash-can icon-list"></i></h5>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
