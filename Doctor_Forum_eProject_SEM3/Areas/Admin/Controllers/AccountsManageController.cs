@@ -9,11 +9,8 @@ using System.Web.Mvc;
 using Doctor_Forum_eProject_SEM3.Dao;
 using Doctor_Forum_eProject_SEM3.Models;
 using System.Configuration;
-
-using CloudinaryDotNet.Actions;
 using System.Text.RegularExpressions;
 using System.Drawing;
-using CloudinaryDotNet;
 using Account = Doctor_Forum_eProject_SEM3.Models.Account;
 using System.IO;
 

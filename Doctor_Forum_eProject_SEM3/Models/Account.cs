@@ -5,6 +5,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web;
 
     public partial class Account
     {
@@ -23,19 +24,21 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public int? RoleId { get; set; }
 
         public string Avatar { get; set; }
-
+        [NotMapped]
+        public HttpPostedFileBase AvatarFile { get; set; }
         [StringLength(250)]
+        [Required(ErrorMessage = "Please enter your user name")]
         public string UserName { get; set; }
-
+        [Required(ErrorMessage = "Please enter your password")]
         [StringLength(250)]
         public string Password { get; set; }
 
         [StringLength(20)] 
         public string GroupId { get; set; }
-
+        [Required(ErrorMessage = "Please enter your full name")]
         [StringLength(250)]
         public string FullName { get; set; }
-
+        [Required(ErrorMessage = "Please enter your address detail")]
         public string AddressDetail { get; set; }
 
         public int? DistrictId { get; set; }
@@ -49,10 +52,10 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public bool Status { get; set; }
 
         public int? SpecializationId { get; set; }
-
+        [Required(ErrorMessage = "Please enter your email")]
         [StringLength(250)]
         public string Email { get; set; }
-
+        [Required(ErrorMessage = "Please enter your phone")]
         [StringLength(15)]
         public string Phone { get; set; }
 
