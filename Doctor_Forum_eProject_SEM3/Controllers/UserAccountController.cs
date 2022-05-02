@@ -49,9 +49,10 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 {
                     Account account = new Account();
                     account.RoleId = 1;
+                    account.GroupId = "MEMBER";
                     account.Avatar = accountModel.Avatar;
                     account.UserName = accountModel.UserName;
-                    account.Password = Encryptor.MD5Hash(accountModel.UserName);
+                    account.Password = Encryptor.MD5Hash(accountModel.Password);
                     account.FullName = accountModel.FullName;
                     account.AddressDetail = accountModel.AddressDetail;
                     account.Email = accountModel.Email;
@@ -113,16 +114,27 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
                     };
-                    db.Experiences.Add(experience);                                                         
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Home");         
+                    Debug.WriteLine(account.FullName);
+                    var result = dao.Insert(account);
+                    if (result > 0)
+                    {
+                        ViewBag.Success = "Đăng ký thành công";
+                        accountModel = new AccountModel();
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Đăng ký không thành công.");
+                    }
+                    return View(accountModel);
+                   
                 }
                 ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
                 return View(accountModel);
-            }       
+            }
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return RedirectToAction("Index", "Posts");
-        }     
+            return RedirectToAction("Index", "Home");
+        }
 
         public ActionResult Login()
         {
@@ -216,7 +228,11 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             });
         }
         public ActionResult UserProfile()
-        {
+        {           
+            return View();
+        }
+        public ActionResult AccountProfile()
+        {           
             return View();
         }
     }

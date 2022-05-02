@@ -14,8 +14,14 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-            var posts = db.Posts.ToList();
-            return View(posts.ToList());
+            var posts = db.Posts.Where(x=>x.Status == true).ToList();
+            return View(posts);
+        }
+        [ChildActionOnly]
+        public PartialViewResult SearchDoctor()
+        {
+            ViewBag.Specialization = new SelectList(db.Specializations.Where(x => x.Status == true), "Id", "Name");
+            return PartialView();
         }
         public ActionResult PostDetail(int? id)
         {

@@ -1,6 +1,5 @@
 namespace Doctor_Forum_eProject_SEM3.Models
 {
-    using Doctor_Forum_eProject_SEM3.Models.ViewModel;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -17,13 +16,12 @@ namespace Doctor_Forum_eProject_SEM3.Models
         }
 
         public int Id { get; set; }
-
+        [Required(ErrorMessage = "Please enter your name")]
         public string Name { get; set; }
-
+        [Required(ErrorMessage = "Please enter your title")]       
         public string Title { get; set; }
-
+        [Required(ErrorMessage = "Please enter your description")]       
         public string Description { get; set; }
-
         public string Image { get; set; }
 
         public bool Status { get; set; }
@@ -37,6 +35,5 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<AccountModel> accountModels { get; set; }
     }
 }

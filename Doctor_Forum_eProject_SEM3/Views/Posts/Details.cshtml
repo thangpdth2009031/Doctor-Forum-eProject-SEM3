@@ -1,8 +1,9 @@
 ﻿@model Doctor_Forum_eProject_SEM3.Models.Post
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "PostDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.PostId = Model.Id;
 }
 <style>
     .content-text p {
@@ -15,30 +16,22 @@
         width: 100%;
         height: auto;
     }
+    #txtContent:focus {
+        border: 1px solid #51c0c7  ;
+    }
+    .form-group .ck-rounded-corners:focus {
+        border-color: #51c0c7 !important;
+    }
 </style>
 <section class="blog-section style-four style-five mt-4">
-    <div class="container bg-white mb-4">
-        <div class="d-flex right-side">
-            <div style="width: 66px">
-                <img style="width: 50px; height: 50px;object-fit:cover;margin: 15px 0;" src="@Html.DisplayFor(model=>model.Account.Avatar)" alt="@Html.DisplayFor(model=>model.Account.FullName)" />
-            </div>
-            <div class="justify-content-center align-items-center d-flex tag-list">               
-                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @style = "margin: 0 5px" })                
-                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @style = "margin: 0 5px" })                
-                @Html.ActionLink("Back to List", "Index", null, new { @style = "margin: 0 5px" })
-            </div>
-        </div>
-    </div>
     <div class="container bg-white">
         <div class="row" style="padding-top:30px">
             <div class="col-lg-9">
                 <div class="left-side">
-                    <div class="item-holder">                        
+                    <div class="item-holder">
                         <div class="content-text pt-0">
-                           
-                                @String.Format("{0:ddd, dd MMMM yyyy }", Model.CreatedAt).ToString()
-                        
-                       
+                            <h4>@Html.DisplayFor(model => model.Title)</h4>
+                            <div class="mb-3">By @Html.DisplayFor(model => model.Account.FullName) / @String.Format("{0:ddd, dd MMMM yyyy }", Model.CreatedAt).ToString()</div>
                             <p>
                                 @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Content))
                             </p>
@@ -55,148 +48,32 @@
                         <a href="https://tinhte.vn/tag/a53-5g/" class="jsx-3147581474">a53 5g</a>
                     </div>
                 </div>
-                <div class="comments-area">
-                    <div class="sec-title">
-                        <h6>Comments (3)</h6>
-                    </div>
-                    <div class="comment">
-                        <div class="image-holder">
-                            <figure>
-                                <img loading="lazy" src="https://pbs.twimg.com/media/EDhSh3aUwAEB5iS.jpg" style="width: 60px" alt="">
-                            </figure>
-                        </div>
-                        <div class="image-text">
-                            <h6>Dung Nguyen<span>April 06, 2020</span></h6>
-                            <h5>
-                                <div onclick="myFunction()" class="comment-back" style="cursor: pointer">
-                                    <i class="fa fa-reply-all" aria-hidden="true"></i>Comment Back
-                                </div>
-                            </h5>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sequi praesentium,
-                                veritatis nulla
-                                quam at exercitationem? Nesciunt molestiae neque modi.
-                            </p>
-                            <div id="myDIV" style="margin-left: 49px;">
-                                <div class="d-flex">
-                                    <div class="image-holder">
-                                        <figure>
-                                            <img loading="lazy" src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/anh-dai-dien-anime-nam-24-30-15-34-56.jpg" style="width: 60px" height="60px" alt="">
-                                        </figure>
-                                    </div>
-                                    <div style="width: 100%">
-                                        <div class="col-lg-12">
-                                            <textarea name="form_message" class="form-control textarea"
-                                                      placeholder="Your Comment" required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment reply-comment">
-                        <div class="image-holder">
-                            <figure>
-                                <img loading="lazy" src="~/Areas/Admin/assets/images/doctors/1.png" style="width: 60px" alt="">
-                            </figure>
-                        </div>
-                        <div class="image-text">
-                            <h6>Robben Oti<span>April 07, 2020</span></h6>
-                            <h5>
-                                <div onclick="myFunction1()" class="comment-back1" style="cursor : pointer">
-                                    <i class="fa fa-reply-all" aria-hidden="true"></i>Comment Back
-                                </div>
-                            </h5>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, a! Lorem ipsum
-                                dolor, sit amet
-                                consectetur adipisicing elit. Excepturi, obcaecati!
-                            </p>
-                            <div id="myDIV1">
-                                <div class="d-flex">
-                                    <div class="image-holder">
-                                        <figure>
-                                            <img loading="lazy" src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/anh-dai-dien-anime-nam-24-30-15-34-56.jpg" style="width: 60px" height="60px" alt="">
-                                        </figure>
-                                    </div>
-                                    <div style="width: 100%">
-                                        <div class="col-lg-12">
-                                            <textarea name="form_message" class="form-control textarea"
-                                                      placeholder="Your Comment" required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <div class="image-holder">
-                            <figure>
-                                <img loading="lazy" src="~/Areas/Admin/assets/images/doctors/2.png" style="width: 60px" alt="">
-                            </figure>
-                        </div>
-                        <div class="image-text">
-                            <h6>Chang Lingma<span>May 12, 2020</span></h6>
-                            <h5>
-                                <div onclick="myFunction2()" class="comment-back2" style="cursor : pointer">
-                                    <i class="fa fa-reply-all" aria-hidden="true"></i>Comment Back
-                                </div>
-                            </h5>
-                            <p>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae possimus suscipit
-                                esse quia
-                                sapiente obcaecati consequuntur dolor sequi adipisci unde!
-                            </p>
-                            <div id="myDIV2" style="margin-left: 49px;">
-                                <div class="d-flex">
-                                    <div class="image-holder">
-                                        <figure>
-                                            <img loading="lazy" src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/anh-dai-dien-anime-nam-24-30-15-34-56.jpg" style="width: 60px" height="60px" alt="">
-                                        </figure>
-                                    </div>
-                                    <div style="width: 100%">
-                                        <div class="col-lg-12">
-                                            <textarea name="form_message" class="form-control textarea"
-                                                      placeholder="Your Comment" required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @{Html.RenderAction("Comment", "Posts");}
+            <div class="form-area">
+                <div class="sec-title">
+                    <h6>Leave A Comment</h6>
                 </div>
-                <div class="form-area">
-                    <div class="sec-title">
-                        <h6>Leave A Comment</h6>
-                    </div>
-                    <form id="contact_form" name="contact_form" class="default-form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <textarea name="form_message" class="form-control textarea"
-                                              placeholder="Your Review" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" name="form_name" class="form-control" placeholder="Your Name"
-                                           required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="email" name="form_email" class="form-control email"
-                                           placeholder="Your Email" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group form-bottom">
-                                    <button class="btn-style-one" type="submit">Comment</button>
-                                </div>
+                @using (Html.BeginForm("PostComment", "Posts", FormMethod.Post, new { @class = "default-form", id = "formComment" }))
+                {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <textarea value="@ViewBag.Message" name="Message" class="form-control textarea" placeholder="Your Review" , id="txtContent"></textarea>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input value="@ViewBag.PostId" type="hidden" name="PostId" class="form-control d-none" />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group form-bottom">
+                                <button class="btn-style-one" id="btnsubmit" type="submit">Comment</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
             </div>
             <div class="col-lg-3">
                 <div class="right-side mt-0">
@@ -243,44 +120,75 @@
 
 @section jsFooter {
     <script>
-
-        $(".comment-back").click(function (event) {
-            event.preventDefault()
+        $(document).ready(function () {
+            $("#btnsubmit").click(function (e) {
+                //Serialize the form datas.
+                var valdata = $("#formComment").serialize();
+                //to get alert popup
+                alert(valdata);
+                $.ajax({
+                    url: "/PostComment/Posts",
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata
+                });
+            });
         });
-
-        function myFunction() {
-            var x = document.getElementById("myDIV");
-            if
-                (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-        $(".comment-back1").click(function (event) {
-            event.preventDefault()
-        });
-        function myFunction1() {
-            var x = document.getElementById("myDIV1");
-            if
-                (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-        $(".comment-back2").click(function (event) {
-            event.preventDefault()
-        });
-        function myFunction2() {
-            var x = document.getElementById("myDIV2");
-            if
-                (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
     </script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#txtContent'), {
+                toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+
+    </script>
+    @*    <script>
+
+            $(".comment-back").click(function (event) {
+                event.preventDefault()
+            });
+
+            function myFunction() {
+                var x = document.getElementById("myDIV");
+                if
+                    (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            $(".comment-back1").click(function (event) {
+                event.preventDefault()
+            });
+            function myFunction1() {
+                var x = document.getElementById("myDIV1");
+                if
+                    (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            $(".comment-back2").click(function (event) {
+                event.preventDefault()
+            });
+            function myFunction2() {
+                var x = document.getElementById("myDIV2");
+                if
+                    (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>*@
 
 }
+

@@ -8,6 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using Doctor_Forum_eProject_SEM3.Dao;
 using Doctor_Forum_eProject_SEM3.Models;
+using System.Configuration;
+using System.Text.RegularExpressions;
+using System.Drawing;
+using Account = Doctor_Forum_eProject_SEM3.Models.Account;
+using System.IO;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
@@ -51,21 +56,26 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Account account)
         {
+            
             if (ModelState.IsValid)
             {
-                account.Status = false;                
+                string fileName = Path.GetFileNameWithoutExtension(account.AvatarFile.FileName);
+                string extension = Path.GetExtension(account.AvatarFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                account.Avatar = "/Areas/Admin/ContentAdmin/Image/" + fileName;
+                account.AvatarFile.SaveAs(Path.Combine(Server.MapPath("/Areas/Admin/ContentAdmin/Image/"), fileName));                              
                 account.CreatedAt = DateTime.Now;                
                 account.UpdatedAt = DateTime.Now;                
-                account.Status = false;                
+                account.Status = true;                
                 db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", account.SpecializationId);
             return View(account);
-        }
-
+        }           
         // GET: Admin/AccountsManage/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -87,10 +97,17 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,RoleId,Avatar,UserName,Password,FullName,AddressDetail,DistrictId,ProvinceId,CreatedAt,UpdatedAt,Status,SpecializationId")] Account account)
+        public ActionResult Edit(Account account)
         {
             if (ModelState.IsValid)
             {
+                string fileName = Path.GetFileNameWithoutExtension(account.AvatarFile.FileName);
+                string extension = Path.GetExtension(account.AvatarFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                account.Avatar = "/Areas/Admin/ContentAdmin/Image/" + fileName;
+                account.AvatarFile.SaveAs(Path.Combine(Server.MapPath("/Areas/Admin/ContentAdmin/Image/"), fileName));
+                account.UpdatedAt = DateTime.Now;
+                account.Status = true;
                 db.Entry(account).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -126,7 +143,6 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteAll(string[] ids)
         {
             if (ids == null || ids.Length == 0)
@@ -162,6 +178,6 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }      
     }
 }

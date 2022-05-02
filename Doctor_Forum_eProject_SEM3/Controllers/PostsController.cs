@@ -18,19 +18,22 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // GET: Admin/PostAdmin
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
+            var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization).Where(p=>p.Status == true);
             return View(posts.ToList());
         }
+        [ChildActionOnly]
         public PartialViewResult NewestPost()
         {
             var post = db.Posts.OrderByDescending(p => p.Id).FirstOrDefault();
             return PartialView(post);
         }
+        [ChildActionOnly]
         public PartialViewResult TypePost()
         {
             var post = db.Posts.Where(x=>x.Type == 2).OrderByDescending(p=>p.Id).ToList();
             return PartialView(post);
         }
+        [ChildActionOnly]
         public PartialViewResult TypeKnowledge()
         {
             var post = db.Posts.Where(x => x.Type == 3).OrderByDescending(p => p.Id).FirstOrDefault();
@@ -49,8 +52,10 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(post);
         }
+        
 
         // GET: Admin/PostAdmin/Create
         public ActionResult Create()
@@ -176,6 +181,31 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         public ActionResult PostDetail()
         {
             return View();
+        }
+        [ChildActionOnly]
+        public PartialViewResult Comment()
+        {
+            var comments = db.Replies.Where(x =>x.Status == true).ToList();
+            return PartialView(comments);
+        }      
+        [HttpPost]
+        public ActionResult PostComment(Reply reply)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var account = (Account)Session[UserSession.USER_SESSION];
+                reply.AccountId = account.Id;
+                reply.Status = true;
+                ViewBag.Message = reply.Message;
+                /*reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));*/
+                reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));
+                reply.UpdatedAt = DateTime.Now;
+                db.Replies.Add(reply);
+                db.SaveChanges();
+                return View();
+            }          
+            return View(reply);
         }
     }
 }

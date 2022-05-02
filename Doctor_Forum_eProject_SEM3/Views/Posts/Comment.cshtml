@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Doctor_Forum_eProject_SEM3.Models.Reply>
+<style>
+    .image-text p {
+        margin-bottom: 0;
+    }
+    .image-text {
+        width: 100%;
+        background-color: #edeef2;
+        border-radius: 6px;   
+        padding-left: 10px!important;
+        padding: 5px 10px 0 10px;
+    }
+    .image-text img {
+        width: 100%;
+    }
+</style>
+<div class="comments-area">
+    <div class="sec-title">
+        <h6>Comments (3)</h6>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="comment mb-3">
+            <div class="d-flex">
+                <div class="image-holder">
+                    <figure style="width: 50px; margin-right: 15px;">
+                        <img loading="lazy" src="@item.Account.Avatar" style="width: 100%; height: 50px; object-fit: cover" alt="">
+                    </figure>
+                </div>
+                <div class="image-text position-static">
+                    <h6 class="p-0">@item.Account.FullName<span>@String.Format("{0:ddd, dd MMMM yyyy }", item.CreatedAt).ToString()</span></h6>
+                    <h5>
+                        <div onclick="myFunction()" class="comment-back" style="cursor: pointer">
+                            <i class="fa fa-reply-all" aria-hidden="true"></i>Comment Back
+                        </div>
+                    </h5>
+                    <p>
+                        @MvcHtmlString.Create(HttpUtility.HtmlDecode(item.Message))
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

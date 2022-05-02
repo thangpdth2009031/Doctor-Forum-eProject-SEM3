@@ -1,349 +1,330 @@
-﻿<div class="container">
-    <div class="row flex-lg-nowrap">
-        <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
-            <div class="card p-3">
-                <div class="e-navlist e-navlist--active-bg">
-                    <ul class="nav">
-                        <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
-                        <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-crud-users" target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
-                        <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+
+﻿
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/UserProfile.css" rel="stylesheet" />
+<div style="background-color: #f4f6f9;">
+    <div class="container mt-5" style="">
+        <div class="row">
+            <div class="col-4">
+                <div class="card profile-header">
+                    <div class="body text-center m-2" style="text-align: center">
+                        <div class="profile-image mb-4"> <img class="avatar-doctor" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt=""> </div>
+                        <div>
+                            <h4 class="m-b-0"><strong>Dr. Charlotte</strong> Deo</h4>
+                            <span class="job_post">Neurologist</span>
+                            <p class="mt-2">795 Folsom Ave, Suite 600<br> San Francisco, CADGE 94107</p>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-primary btn-round">Follow</button>
+                            <button class="btn btn-primary btn-round btn-simple">Message</button>
+                        </div>
+                        <p class="social-icon mt-3">
+                            <a title="Twitter" href=""><i class="fa-brands fa-twitter"></i></a>
+                            <a title="Facebook" href=""><i class="fa-brands fa-facebook"></i></a>
+                            <a title="Google-plus" href=""><i class="fa-brands fa-instagram-square"></i></a>
+                            <a title="Behance" href=""><i class="fa-brands fa-behance-square"></i></a>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="card mt-3">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link show active" data-toggle="tab" href="#Followers">Followers</a></li>
+                        <li class="nav-item"><a class="nav-link show" data-toggle="tab" href="#friends">Friends</a></li>
                     </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane body show active" id="Followers">
+                            <ul class="right_chat list-unstyled">
+                                <li class="online">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Chris Fox</span>
+                                                <span class="message">Designer, Blogger</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="online">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Joge Lucky</span>
+                                                <span class="message">Java Developer</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="offline">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Isabella</span>
+                                                <span class="message">CEO, Thememakker</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="offline">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Folisise Chosielie</span>
+                                                <span class="message">Art director, Movie Cut</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="online">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzzjHeyn76LSsqxqwCZvJBgg5sQfe0EAIhRg&usqp=CAU" alt="">
+                                            <div class="media-body">
+                                                <span class="name">Alexander</span>
+                                                <span class="message">Writter, Mag Editor</span>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane body show" id="friends">
+                            <ul class="new_friend_list list-unstyled row" style="text-align: center">
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Jackson</h6>
+                                        <small class="join_date">Today</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Aubrey</h6>
+                                        <small class="join_date">Yesterday</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Oliver</h6>
+                                        <small class="join_date">08 Nov</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Isabella</h6>
+                                        <small class="join_date">12 Dec</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Jacob</h6>
+                                        <small class="join_date">12 Dec</small>
+                                    </a>
+                                </li>
+                                <li class="col-lg-4 col-md-2 col-sm-6 col-4 mb-3">
+                                    <a href="">
+                                        <img src="https://thumbs.dreamstime.com/z/doctor-medical-icon-cdr-187019168.jpg" class="img-thumbnail" alt="User Image">
+                                        <h6 class="users_name">Matthew</h6>
+                                        <small class="join_date">17 Dec</small>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col">
-            <div class="row">
-                <div class="col mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="e-profile">
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link show active" data-toggle="tab" href="#about">Account</a></li>
+                        <li class="nav-item"><a class="nav-link show" data-toggle="tab" href="#Account">Posts</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane body show active" id="about">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-12 col-sm-auto mb-3">
-                                        <div class="mx-auto" style="width: 140px;">
-                                            <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
-                                            </div>
-                                        </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Full Name</h6>
                                     </div>
-                                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                                        <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                            @* <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                                                <p class="mb-0">@johnny.s</p>
-                                                <div class="text-muted"><small>Last seen 2 hours ago</small></div>*@
-                                            <div class="mt-2">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fa fa-fw fa-camera"></i>
-                                                    <span>Change Photo</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="text-center text-sm-right">
-                                            <span class="badge badge-secondary">administrator</span>
-                                            <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
-                                        </div>
-                                    </div>
+                                    <div class="col-sm-9 text-secondary"> Kenneth Valdez</div>
                                 </div>
-                                <div class="col-sm-9">
-                                    <ul class="nav nav-tabs">
-                                        <li><a data-toggle="tab" href="#home">Home</a></li>
-                                        <li class="active"><a data-toggle="tab" href="#messages">Menu 1</a></li>
-                                        <li><a data-toggle="tab" href="#settings">Menu 2</a></li>
-                                    </ul>
-                                    <div class="tab-content pt-3">
-                                        <div class="tab-pane active" id="home">
-                                            <form class="form" novalidate="">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Full Name</label>
-                                                                    <input class="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Username</label>
-                                                                    <input class="form-control" type="text" name="username" placeholder="johnny.s" value="johnny.s">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Email</label>
-                                                                    <input class="form-control" type="text" placeholder="user@example.com">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col mb-3">
-                                                                <div class="form-group">
-                                                                    <label>About</label>
-                                                                    <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12 col-sm-6 mb-3">
-                                                        <div class="mb-2"><b>Change Password</b></div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Current Password</label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>New Password</label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                                                        <div class="mb-2"><b>Keeping in Touch</b></div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label>Email Notifications</label>
-                                                                <div class="custom-controls-stacked px-2">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
-                                                                        <label class="custom-control-label" for="notifications-blog">Blog posts</label>
-                                                                    </div>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
-                                                                        <label class="custom-control-label" for="notifications-news">Newsletter</label>
-                                                                    </div>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
-                                                                        <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-xs-12">
-                                                        <br>
-                                                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                                        <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
                                     </div>
-                                    <div class="tab-content pt-3">
-                                        <div class="tab-pane active" id="messages">
-                                            <form class="form" novalidate="">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Thắng</label>
-                                                                    <input class="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Username</label>
-                                                                    <input class="form-control" type="text" name="username" placeholder="johnny.s" value="johnny.s">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Email</label>
-                                                                    <input class="form-control" type="text" placeholder="user@example.com">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col mb-3">
-                                                                <div class="form-group">
-                                                                    <label>About</label>
-                                                                    <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12 col-sm-6 mb-3">
-                                                        <div class="mb-2"><b>Change Password</b></div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Current Password</label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>New Password</label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                                                        <div class="mb-2"><b>Keeping in Touch</b></div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label>Email Notifications</label>
-                                                                <div class="custom-controls-stacked px-2">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
-                                                                        <label class="custom-control-label" for="notifications-blog">Blog posts</label>
-                                                                    </div>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
-                                                                        <label class="custom-control-label" for="notifications-news">Newsletter</label>
-                                                                    </div>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
-                                                                        <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-xs-12">
-                                                        <br>
-                                                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                                        <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                    <div class="col-sm-9 text-secondary"> fip@jukmuh.al</div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone</h6>
                                     </div>
-                                    <div class="tab-content pt-3">
-                                        <div class="tab-pane active" id="settings">
-                                            <form class="form" novalidate="">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Ngu</label>
-                                                                    <input class="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Username</label>
-                                                                    <input class="form-control" type="text" name="username" placeholder="johnny.s" value="johnny.s">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Email</label>
-                                                                    <input class="form-control" type="text" placeholder="user@example.com">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col mb-3">
-                                                                <div class="form-group">
-                                                                    <label>About</label>
-                                                                    <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12 col-sm-6 mb-3">
-                                                        <div class="mb-2"><b>Change Password</b></div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Current Password</label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>New Password</label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                                                        <div class="mb-2"><b>Keeping in Touch</b></div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label>Email Notifications</label>
-                                                                <div class="custom-controls-stacked px-2">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
-                                                                        <label class="custom-control-label" for="notifications-blog">Blog posts</label>
-                                                                    </div>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
-                                                                        <label class="custom-control-label" for="notifications-news">Newsletter</label>
-                                                                    </div>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
-                                                                        <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-xs-12">
-                                                        <br>
-                                                        <button class="btn btn-lg btn-success pull-right" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                                        <!--<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>-->
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                    <div class="col-sm-9 text-secondary"> (239) 816-9029</div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Mobile</h6>
                                     </div>
+                                    <div class="col-sm-9 text-secondary"> (320) 380-4539</div>
+                                </div><hr><div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Address</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary"> Bay Area, San Francisco, CA</div>
+                                </div>
+                                <hr>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane body show" id="Account">
+                            <div class="tab-content">
+                                <div class="post">
+                                    <div class="wrap-ut pull-left">
+                                        <div class="userinfo pull-left">
+                                            <div class="avatar">
+                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+
+                                            </div>
+
+                                            <div class="icons">
+                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="posttext pull-left">
+                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
+                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="postinfo pull-left">
+                                        <div class="comments">
+                                            <div class="commentbg">
+                                                560
+                                                <div class="mark"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="post">
+                                    <div class="wrap-ut pull-left">
+                                        <div class="userinfo pull-left">
+                                            <div class="avatar">
+                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+
+                                            </div>
+
+                                            <div class="icons">
+                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="posttext pull-left">
+                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
+                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="postinfo pull-left">
+                                        <div class="comments">
+                                            <div class="commentbg">
+                                                560
+                                                <div class="mark"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="post">
+                                    <div class="wrap-ut pull-left">
+                                        <div class="userinfo pull-left">
+                                            <div class="avatar">
+                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+
+                                            </div>
+
+                                            <div class="icons">
+                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="posttext pull-left">
+                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
+                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="postinfo pull-left">
+                                        <div class="comments">
+                                            <div class="commentbg">
+                                                560
+                                                <div class="mark"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="post">
+                                    <div class="wrap-ut pull-left">
+                                        <div class="userinfo pull-left">
+                                            <div class="avatar">
+                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+
+                                            </div>
+
+                                            <div class="icons">
+                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="posttext pull-left">
+                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
+                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="postinfo pull-left">
+                                        <div class="comments">
+                                            <div class="commentbg">
+                                                560
+                                                <div class="mark"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
@@ -354,25 +335,4 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
 
-
-        var readURL = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('.avatar').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-
-        $(".file-upload").on('change', function () {
-            readURL(this);
-        });
-    });
-</script>

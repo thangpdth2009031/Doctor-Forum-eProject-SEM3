@@ -39,7 +39,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // GET: Admin/Achievements/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName");
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", achievement.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName", achievement.AccountId);
             return View(achievement);
         }
 
@@ -76,7 +76,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", achievement.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName", achievement.AccountId);
             return View(achievement);
         }
 
@@ -85,15 +85,17 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Year,Description,AccountId,Status,CreatedAt,UpatedAt")] Achievement achievement)
+        public ActionResult Edit(Achievement achievement)
         {
             if (ModelState.IsValid)
             {
+
+                achievement.UpatedAt = DateTime.Now;
                 db.Entry(achievement).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", achievement.AccountId);
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName", achievement.AccountId);
             return View(achievement);
         }
 
@@ -110,6 +112,27 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             return View(achievement);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll(string[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+            {
+                ModelState.AddModelError("", "No item selected to delete");
+                return View();
+            }
+            List<int> TaskIds = ids.Select(x => Int32.Parse(x)).ToList();
+            for (var i = 0; i < TaskIds.Count(); i++)
+            {
+                var todo = db.Achievements.Find(TaskIds[i]);
+                todo.Status = false;
+                db.Entry(todo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
 
         // POST: Admin/Achievements/Delete/5

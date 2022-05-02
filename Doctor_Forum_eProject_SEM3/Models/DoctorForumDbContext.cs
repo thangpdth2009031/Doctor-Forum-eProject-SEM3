@@ -12,9 +12,11 @@ namespace Doctor_Forum_eProject_SEM3.Models
         {
         }
 
+        public virtual DbSet<AccountGroup> AccountGroups { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Achievement> Achievements { get; set; }
         public virtual DbSet<Attachment> Attachments { get; set; }
+        public virtual DbSet<Credential> Credentials { get; set; }
         public virtual DbSet<Experience> Experiences { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Professional> Professionals { get; set; }
@@ -25,8 +27,16 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AccountGroup>()
+                .Property(e => e.Id)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Account>()
                 .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Credential>()
+                .Property(e => e.RoleId)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Experience>()
@@ -50,8 +60,10 @@ namespace Doctor_Forum_eProject_SEM3.Models
                 .HasMany(e => e.Replies1)
                 .WithOptional(e => e.Reply1)
                 .HasForeignKey(e => e.ParenId);
-        }
 
-        public System.Data.Entity.DbSet<Doctor_Forum_eProject_SEM3.Models.ViewModel.AccountModel> AccountModels { get; set; }
+            modelBuilder.Entity<Role>()
+                .Property(e => e.Id)
+                .IsUnicode(false);
+        }
     }
 }

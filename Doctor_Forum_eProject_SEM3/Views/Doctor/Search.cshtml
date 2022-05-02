@@ -1,44 +1,43 @@
 ﻿@model IEnumerable<Doctor_Forum_eProject_SEM3.Models.Account>
-@{
+    @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<style>
-    .professional-name::before {
-        background-color: #5dbfce!important;
     }
-</style>
-<section class="team-section section">
-    <div class="container">
-        <div class="section-title text-center">
-            <h3>
-                Our Expert
-                <span>Doctors</span>
-            </h3>
-            <p class="mb-0">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem illo, rerum
-                <br>natus nobis deleniti doloremque minima odit voluptatibus ipsam animi?
-            </p>
-        </div>
-        <div class="row">
-            @foreach (var item in Model)
-            {
+    <style>
+        .professional-name::before {
+            background-color: #5dbfce !important;
+        }
+    </style>
+    <section class="team-section section">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3>
+                    Our Expert
+                    <span>Doctors</span>
+                </h3>
+            </div>
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
                 <div class="col-lg-4 col-md-6">
                     <div class="team-member">
                         <img loading="lazy" src="@item.Avatar" alt="doctor" style="height: 350px;width:100%;object-fit:cover" class="img-fluid">
                         <div class="contents text-center">
                             @foreach (var child in item.Professionals)
                             {
-                                <h4 class="professional-name">@child.ProfessionalName @item.FullName</h4>
+                            <h4 class="professional-name">@child.ProfessionalName @item.FullName</h4>
                             }
                             <p>@item.AddressDetail</p>
                             <a href="/Account/Profile/@item.Id" class="btn btn-main">Watch information</a>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+                }
+            </div>
 
-    </div>
-</section>
+        </div>
+    </section>
+
+
 

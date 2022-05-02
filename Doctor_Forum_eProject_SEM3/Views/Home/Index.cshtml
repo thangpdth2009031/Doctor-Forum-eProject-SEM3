@@ -158,22 +158,34 @@
     
     
 </style>
-@{Html.RenderAction("SearchDoctor", "SearchDoctor");}
+@{Html.RenderAction("SearchDoctor", "Home");}
 <section class="blog-section style-four section">
     <div class="container">
         <div class="row">
             <div class="col-9">
                 <div class="container">
                     <div class="row">
-                        @{Html.RenderAction("NewestPost", "Posts");}
-                        @{Html.RenderAction("TypeKnowledge", "Posts");}
+                        @if (Model.ToList().Count > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                if (item.Type.Value == 3)
+                                {
+                                    { Html.RenderAction("TypeKnowledge", "Posts"); }
+                                }
+                                else
+                                {
+                                    { Html.RenderAction("NewestPost", "Posts"); }
+                                }
+                            }
+                        }
                     </div>
                 </div>
                 <div class="container">
                     <div class="row" style="margin-top: 20px">
                         @{Html.RenderAction("TypePost", "Posts");}
                         <div class="col-lg-12 mt-5">
-                            @foreach (var item in Model.Where(x => x.Status == true))
+                            @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                             {
                                 <div class="item-holder row">
                                     <div class="image-box col-4">
@@ -182,13 +194,13 @@
                                         </figure>
                                     </div>
                                     <div class="content-text col-8 pt-0">
-                                        @Html.ActionLink(item.Title, "PostDetail", "Home", new { id = item.Id }, new { @class = "title-post", id = item.Id })
+                                        @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
                                         <div class="an py-0 mb-1 an">
                                             @Html.Raw(item.Content)
                                         </div>
                                         <div>
                                             <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="@item.Account.Avatar">
-                                            <span class="mr-1">@Html.ActionLink(item.Account.FullName, "AccountProfile", "AccountModels", new { id = item.Id }, new { @class = "link-profile" })</span>-<span class="ml-1">@item.Specialization.Name</span>
+                                            <span class="mr-1">@Html.ActionLink(item.Account.FullName, "AccountProfile", "AccountModels", new { id = item.Id }, new { @class = "link-profile" })</span>-<span class="ml-1">@*@item.Specialization.Name*@</span>
                                         </div>
                                     </div>
                                 </div>
@@ -679,3 +691,4 @@
         </div>
     </div>
 </div>
+

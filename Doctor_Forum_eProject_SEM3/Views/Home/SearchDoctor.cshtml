@@ -1,0 +1,115 @@
+﻿
+@using Doctor_Forum_eProject_SEM3.Common
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="section-searchbar" id="search-bar">
+    <div class="container">
+        <div class="row" style="height: 120px; padding: 20px; background-color: #2FBBB0">
+            <div class="col-md-12 ">
+                <span style="color: white; font-size: 20px;padding-bottom: 3px">Bạn muốn tìm gì ?</span>
+                <!-- BEGIN Search Bar -->
+
+                @using (Html.BeginForm("ListDoctor", "Doctor", FormMethod.Post, new { id = "srchfrm" }))
+                {
+                    <div class="search-bar clearfix form-group-lg row" style="margin-left: 1px">
+                        <div class="search-input-col text-center" style="width: 38%">
+                            <input type="text" value="" maxlength="255" id="search_top_content" name="keyword" placeholder="Tìm kiếm phòng khám, bệnh viện, bác sỹ, nhà thuốc từ A - Z và hơn thế nữa." class="form-control">
+                        </div>
+                        <div class="location-col text-center" id="select_city" style="margin-left: 15px; width: 15%">
+                            @Html.DropDownList("ProvinceId", new SelectList(new string[] { }), new { @class = "form-control py-0", @id = "ddlProvince" })
+                        </div>
+                        <div class="location-col text-center" style="margin-left: 15px; width: 15%">
+                            @Html.DropDownList("DistrictId", new SelectList(new string[] { }), new { @class = "form-control py-0", @id = "ddlDistrict" })
+                        </div>
+                        <div class="department-col" style="margin-left: 15px ; width: 15%">
+                            @Html.DropDownList("Specialization", (IEnumerable<SelectListItem>)ViewBag.Specialization, "Specialization", new { @class = "form-control py-0" })
+                        </div>
+                        <div class="search-submit-col" style="margin-left: 15px; background-color: hotpink; width: 11%">
+                            <button type="submit" href="#" id="btn-search-top" class="btn btn-block btn-lg btn-search" ; style="font-size: 14px"><i class="icon-magnifier icons"></i> Tìm kiếm</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/client/userRegister.js"></script>
+<script>
+    productFilter = {
+        catId: $('#catId').val(),
+        subcatId: $('#catSubId').val(),
+        markaId: null,
+
+    }
+    $(".filter-button").click(function () {
+        let filterPrice = $(this).val()
+        let maxPrice = $("input[name='maxProPrice']").val();
+        let minPrice = $("input[name='minProPrice']").val();
+        updateAllData(filterPrice, productFilter.markaId, minPrice, maxPrice, productFilter.subcatId,
+            productFilter.catId)
+    })
+    $(".btnRangePrice").click(function () {
+
+        let maxPrice = $("input[name='maxProPrice']").val();
+        let minPrice = $("input[name='minProPrice']").val();
+        updateAllData(productFilter.markaId, minPrice, maxPrice, productFilter.subcatId, productFilter
+            .catId)
+
+    })
+    $("#markaId").click(() => {
+        $('input[name="marka"]').change(function () {
+            if ($(this).prop('checked')) {
+                productFilter.markaId = $(this).val()
+            }
+        })
+    })
+
+    function updateAllData(markaId, minPrice, maxPrice, subcatId, catId) {
+
+        $.ajax({
+            url: "/api/getpromarka",
+            type: "Get",
+            data: {
+                'catId': catId,
+                'subCatId': subcatId,
+                'markaId': markaId,
+                'minPrice': minPrice,
+                'maxPrice': maxPrice,
+                //'price':filtprice
+
+            },
+            success: function (res) {
+                $("#prdcFor").empty();
+                res.forEach(resf => {
+                    document.querySelector("#prdcFor").insertAdjacentHTML('beforeend',
+                        `
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+                        <div
+                            class="shopImg mb-3" style="height:400px;">
+                            <div class="ImgDiv" style="height:200px">
+                                <img class="shop-img pro_image" style="height:100%; width:100%" src="${resf.Image}" alt="">
+                            </div>
+                            <div class="img-text mt-3">
+                                <span class="pro_name">${resf.Name}</span>
+
+                            </div>
+                            <p class="pro_price">${resf.Price} AZN</p>
+                            <input class="hidePId" type="hidden" value="${resf.Id}" />
+
+                            <div class="">
+                                <button type="button" data-action="Add_To_Cart" class="btn btn-warning mb-5  add-to-cart">Səbətə Əlavə Et</button>
+                            </div>
+                            </div>
+                            </div>
+
+                            `)
+                })
+            }
+
+        })
+    }
+</script>
+

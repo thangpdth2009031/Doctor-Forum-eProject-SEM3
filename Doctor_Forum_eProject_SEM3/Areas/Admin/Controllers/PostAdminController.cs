@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Doctor_Forum_eProject_SEM3.Common;
@@ -56,7 +59,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Account)Session[UserSession.USER_SESSION];
+                var account = (Models.Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
                 post.Status = true;
                 post.CreatedAt = DateTime.Now;
@@ -97,7 +100,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Account)Session[UserSession.USER_SESSION];
+                var account = (Models.Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
                 post.Status = true;
                 post.UpdatedAt = DateTime.Now;
@@ -131,7 +134,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Account)Session[UserSession.USER_SESSION];
+                var account = (Models.Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
                 post.Status = false;
                 post.UpdatedAt = DateTime.Now;
@@ -181,6 +184,6 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }            
     }
 }

@@ -5,6 +5,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     public partial class Reply
     {
@@ -14,8 +15,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
             Attachments = new HashSet<Attachment>();
             Replies1 = new HashSet<Reply>();
         }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        /*[DatabaseGenerated(DatabaseGeneratedOption.None)]*/
         public int Id { get; set; }
 
         public int? ParenId { get; set; }
@@ -24,6 +24,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public int? AccountId { get; set; }
 
+        [AllowHtml]
         public string Message { get; set; }
 
         public bool Status { get; set; }

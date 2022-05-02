@@ -9,10 +9,10 @@ namespace Doctor_Forum_eProject_SEM3.Models
     public partial class Achievement
     {
         public int Id { get; set; }
-
+        [Required(ErrorMessage = "Please enter your year")]
         [StringLength(50)]
         public string Year { get; set; }
-
+        [Required(ErrorMessage = "Please enter your description")]
         public string Description { get; set; }
 
         public int? AccountId { get; set; }
