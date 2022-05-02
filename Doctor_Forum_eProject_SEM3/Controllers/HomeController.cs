@@ -17,9 +17,10 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             var posts = db.Posts.Where(x=>x.Status == true).ToList();
             return View(posts);
         }
+        [ChildActionOnly]
         public PartialViewResult SearchDoctor()
         {
-            ViewBag.Specialization = new SelectList(db.Specializations.Where(x => x.Status == true));
+            ViewBag.Specialization = new SelectList(db.Specializations.Where(x => x.Status == true), "Id", "Name");
             return PartialView();
         }
         public ActionResult PostDetail(int? id)

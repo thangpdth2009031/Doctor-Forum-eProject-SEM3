@@ -41,8 +41,6 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public virtual Specialization Specialization { get; set; }
         public virtual Account Account { get; set; }
 
-        public virtual Account Account { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reply> Replies { get; set; }
     }
