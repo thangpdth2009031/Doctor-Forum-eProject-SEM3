@@ -21,16 +21,19 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization).Where(p=>p.Status == true);
             return View(posts.ToList());
         }
+        [ChildActionOnly]
         public PartialViewResult NewestPost()
         {
             var post = db.Posts.OrderByDescending(p => p.Id).FirstOrDefault();
             return PartialView(post);
         }
+        [ChildActionOnly]
         public PartialViewResult TypePost()
         {
             var post = db.Posts.Where(x=>x.Type == 2).OrderByDescending(p=>p.Id).ToList();
             return PartialView(post);
         }
+        [ChildActionOnly]
         public PartialViewResult TypeKnowledge()
         {
             var post = db.Posts.Where(x => x.Type == 3).OrderByDescending(p => p.Id).FirstOrDefault();
@@ -179,16 +182,12 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         {
             return View();
         }
-
-        public PartialViewResult Comment(int? id)
+        [ChildActionOnly]
+        public PartialViewResult Comment()
         {
-            var comments = db.Replies.Where(x => x.PostId == id && x.Status == true);
-            return PartialView(comments.ToList());
-        }
-        public PartialViewResult PostComment()
-        {
-            return PartialView();
-        }
+            var comments = db.Replies.Where(x =>x.Status == true).ToList();
+            return PartialView(comments);
+        }      
         [HttpPost]
         public ActionResult PostComment(Reply reply)
         {
@@ -204,7 +203,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 reply.UpdatedAt = DateTime.Now;
                 db.Replies.Add(reply);
                 db.SaveChanges();
-                return View(reply);
+                return View();
             }          
             return View(reply);
         }

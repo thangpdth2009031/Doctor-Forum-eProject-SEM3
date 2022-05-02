@@ -25,7 +25,7 @@
                     <div class="item-holder">
                         <div class="content-text pt-0">
                             <h4>@Html.DisplayFor(model => model.Title)</h4>
-                            <div class="mb-3">By @Html.DisplayFor(model => model.Account.FullName) / @Html.DisplayFor(m => m.CreatedAt, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", @type = "date" } })</div>
+                            <div class="mb-3">By @Html.DisplayFor(model => model.Account.FullName) / @String.Format("{0:ddd, dd MMMM yyyy }", Model.CreatedAt).ToString()</div>
                             <p>
                                 @MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Content))
                             </p>
@@ -43,7 +43,6 @@
                     </div>
                 </div>
                 @{Html.RenderAction("Comment", "Posts");}
-                @*@{Html.RenderAction("PostComment", "Posts");}*@
                 <div class="form-area">
                     <div class="sec-title">
                         <h6>Leave A Comment</h6>
@@ -56,7 +55,7 @@
                                     @* <textarea name="form_message" class="form-control textarea"
                                         placeholder="Your Review" required></textarea>*@
                                     @*   @Html.TextAreaFor(model=>model.Messa, new { htmlAttributes = new { @class = "form-control textarea", placeholder = "Your Review" }, id = "txtContent" })*@
-                                    <textarea value="@ViewBag.Message" name="Message" class="form-control textarea" placeholder="Your Review" , id="txtContent"></textarea>
+                                    <textarea value="@ViewBag.Message" name="Message" class="form-control" placeholder="Your Review" , id="txtContent"></textarea>
                                     <input value="@ViewBag.PostId" name="PostId" class="form-control textarea" placeholder="Your Review" , id="txtContent" />
                                 </div>
                             </div>
@@ -130,46 +129,59 @@
             });
         });
     </script>
-@*    <script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#txtContent'), {
+                //toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
 
-        $(".comment-back").click(function (event) {
-            event.preventDefault()
-        });
+    </script>
+    @*    <script>
 
-        function myFunction() {
-            var x = document.getElementById("myDIV");
-            if
-                (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
+            $(".comment-back").click(function (event) {
+                event.preventDefault()
+            });
+
+            function myFunction() {
+                var x = document.getElementById("myDIV");
+                if
+                    (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
             }
-        }
-        $(".comment-back1").click(function (event) {
-            event.preventDefault()
-        });
-        function myFunction1() {
-            var x = document.getElementById("myDIV1");
-            if
-                (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
+            $(".comment-back1").click(function (event) {
+                event.preventDefault()
+            });
+            function myFunction1() {
+                var x = document.getElementById("myDIV1");
+                if
+                    (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
             }
-        }
-        $(".comment-back2").click(function (event) {
-            event.preventDefault()
-        });
-        function myFunction2() {
-            var x = document.getElementById("myDIV2");
-            if
-                (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
+            $(".comment-back2").click(function (event) {
+                event.preventDefault()
+            });
+            function myFunction2() {
+                var x = document.getElementById("myDIV2");
+                if
+                    (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
             }
-        }
-    </script>*@
+        </script>*@
 
 }
 

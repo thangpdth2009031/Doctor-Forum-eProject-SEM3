@@ -74,8 +74,20 @@
             <div class="col-9">
                 <div class="container">
                     <div class="row">
-                        @*@{Html.RenderAction("NewestPost", "Posts");}
-                        @{Html.RenderAction("TypeKnowledge", "Posts");}*@
+                        @if (Model.ToList().Count > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                if (item.Type.Value == 3)
+                                {
+                                    { Html.RenderAction("TypeKnowledge", "Posts"); }
+                                }
+                                else
+                                {
+                                    { Html.RenderAction("NewestPost", "Posts"); }
+                                }
+                            }
+                        }
                     </div>
                 </div>
                 <div class="container">
@@ -91,7 +103,7 @@
                                         </figure>
                                     </div>
                                     <div class="content-text col-8 pt-0">
-                                        @Html.ActionLink(item.Title, "PostDetail", "Home", new { id = item.Id }, new { @class = "title-post", id = item.Id })
+                                        @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
                                         <div class="an py-0 mb-1 an">
                                             @Html.Raw(item.Content)
                                         </div>
