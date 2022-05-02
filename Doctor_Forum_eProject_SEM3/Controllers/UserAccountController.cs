@@ -232,8 +232,20 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             return View();
         }
         public ActionResult AccountProfile()
-        {           
-            return View();
+        {
+            var account = (Account)Session[UserSession.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToAction("Login", "UserAccount");
+            }
+            else
+            {
+                ViewBag.Professional = db.Professionals.Where(p => p.AccountId == (account.Id)).ToList();
+                ViewBag.Qualification = db.Qualifications.Where(p => p.AccountId == (account.Id)).ToList();
+                ViewBag.Experience = db.Experiences.Where(p => p.AccountId == (account.Id)).ToList();
+                var post = db.Posts.Where((x => x.Status == (true) && x.AccountId == (account.Id))).ToList();
+                return View(post);
+            }
         }
     }
 }
