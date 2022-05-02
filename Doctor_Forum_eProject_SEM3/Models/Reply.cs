@@ -5,6 +5,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     public partial class Reply
     {
@@ -23,6 +24,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
 
         public int? AccountId { get; set; }
 
+        [AllowHtml]
         public string Message { get; set; }
 
         public bool Status { get; set; }
