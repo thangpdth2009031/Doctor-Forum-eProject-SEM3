@@ -70,6 +70,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 {
                     Account account = new Account();
                     account.RoleId = 1;
+                    account.GroupId = "MEMBER";
                     account.Avatar = accountModel.Avatar;
                     account.UserName = accountModel.UserName;
                     account.Password = Encryptor.MD5Hash(accountModel.Password);
