@@ -1,16 +1,32 @@
-﻿
+﻿@{var session = (Doctor_Forum_eProject_SEM3.Models.Account)Session[Doctor_Forum_eProject_SEM3.Common.UserSession.USER_SESSION]; }
 <style>
     .drop-button-image::after {
-     display:none
+        display: none
     }
+
     .drop-button-image {
-     background-color: white;
-     border-radius:40px;
-     border:none;
+        background-color: white;
+        border-radius: 40px;
+        border: none;
+        padding: 8px;
     }
-    .drop-button-image:hover{
-        background-color:aqua
+
+        .drop-button-image:hover {
+            background-color: #e7e7e7;
+        }
+    .btn-login-menu {
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 17px;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 13px 18px !important;
+        transition: .3s;
     }
+
+        .btn-login-menu:hover {
+            color: #bde7ea;
+        }
+        
 </style>
 <nav class=" mb-0 navbar navbar-expand-lg navbar-dark">
     <div class="container">
@@ -42,30 +58,39 @@
 
             </ul>
             <!--<ul class="navbar-nav position-absolute" style="right:0;background-color:white;border-radius:10px">
-                <li class="nav-item service d-flex align-items-center">-->
-                    @* <a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Log In</a>*@
-                    <!--<img src="https://res.cloudinary.com/datgutpoy/image/upload/v1650533423/Post/fsisxy9p2zft9kzrw8xu.png" style="width:32px;height:32px;object-fit:cover;border-radius:50%" />
-                </li>
-                <li class="nav-item service" style="display:flex; align-items:center">-->
-                    @*<a href="#" class="nav-link" data-toggle="modal" data-target="#myModal" style="border: 10px; background: #fff; cursor: pointer; color: #007bff ">Sign Up</a>*@
-                    <!--<i class="fa fa-bars" aria-hidden="true"></i>
-                </li>
-            </ul>-->
-            <div class="dropdown position-absolute" style="right:0">
-                <button class="btn btn-secondary dropdown-toggle drop-button-image position-relative" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="https://res.cloudinary.com/datgutpoy/image/upload/v1650533423/Post/fsisxy9p2zft9kzrw8xu.png" style="width:32px;height:32px;object-fit:cover;border-radius:50%" />
-                    <i class="fa fa-bars" aria-hidden="true" style="color:black;font-size:10px; padding-left:10px"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        Trang Cá Nhân
-                    </a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-info" aria-hidden="true"></i>Thông Tin Cá Nhân</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                    Đăng Xuất</a>
+    <li class="nav-item service d-flex align-items-center">-->
+            @* <a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Log In</a>*@
+            <!--<img src="https://res.cloudinary.com/datgutpoy/image/upload/v1650533423/Post/fsisxy9p2zft9kzrw8xu.png" style="width:32px;height:32px;object-fit:cover;border-radius:50%" />
+    </li>
+    <li class="nav-item service" style="display:flex; align-items:center">-->
+            @*<a href="#" class="nav-link" data-toggle="modal" data-target="#myModal" style="border: 10px; background: #fff; cursor: pointer; color: #007bff ">Sign Up</a>*@
+            <!--<i class="fa fa-bars" aria-hidden="true"></i>
+        </li>
+    </ul>-->
+
+
+            @if (session == null)
+            {
+                <a href="/UserAccount/Login" class="btn-login-menu position-absolute" style="right:0">
+                    Login
+                </a>
+            }
+            else
+            {
+                <div class="dropdown position-absolute" style="right:0">
+                    <button class="btn btn-secondary dropdown-toggle drop-button-image position-relative" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="@session.Avatar" style="width:32px;height:32px;object-fit:cover;border-radius:50%" />
+                        <i class="fa fa-bars" aria-hidden="true" style="color:black; padding: 0 10px"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/UserAccount/AccountProfile">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            Profile
+                        </a>                     
+                        <a class="dropdown-item" href="/UserAccount/Logout"><i class="fa fa-power-off mr-1" aria-hidden="true"></i>Logout</a>
+                    </div>
                 </div>
-            </div>
+            }
 
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog modal-lg">

@@ -1,9 +1,10 @@
 ﻿@model Doctor_Forum_eProject_SEM3.Models.Post
-
+@using Doctor_Forum_eProject_SEM3.Models
 @{
     ViewBag.Title = "PostDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.PostId = Model.Id;
+    IEnumerable<Reply> replies = ViewData["Reply"] as IEnumerable<Reply>;
 }
 <style>
     .content-text p {
@@ -48,32 +49,33 @@
                         <a href="https://tinhte.vn/tag/a53-5g/" class="jsx-3147581474">a53 5g</a>
                     </div>
                 </div>
-                @{Html.RenderAction("Comment", "Posts");}
-            <div class="form-area">
-                <div class="sec-title">
-                    <h6>Leave A Comment</h6>
-                </div>
-                @using (Html.BeginForm("PostComment", "Posts", FormMethod.Post, new { @class = "default-form", id = "formComment" }))
-                {
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <textarea value="@ViewBag.Message" name="Message" class="form-control textarea" placeholder="Your Review" , id="txtContent"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <input value="@ViewBag.PostId" type="hidden" name="PostId" class="form-control d-none" />
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group form-bottom">
-                                <button class="btn-style-one" id="btnsubmit" type="submit">Comment</button>
-                            </div>
-                        </div>
+                @{Html.RenderAction("Comment", "Posts", new { postId = Model.Id});}
+            
+                <div class="form-area">
+                    <div class="sec-title">
+                        <h6>Leave A Comment</h6>
                     </div>
-                }
-            </div>
+                    @using (Html.BeginForm("PostComment", "Posts", FormMethod.Post, new { @class = "default-form", id = "formComment" }))
+                    {
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <textarea value="@ViewBag.Message" name="Message" class="form-control textarea" placeholder="Your Review" , id="txtContent"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input value="@ViewBag.PostId" type="hidden" name="PostId" class="form-control d-none" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group form-bottom">
+                                    <button class="btn-style-one" id="btnsubmit" type="submit">Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
             <div class="col-lg-3">
                 <div class="right-side mt-0">
@@ -131,7 +133,11 @@
                     type: "POST",
                     dataType: 'json',
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    data: valdata
+                    data: valdata,
+                    success: function (data) {
+                        $('.comments-area .comment').append(data);
+                    },
+                    error: function (data) { }
                 });
             });
         });
