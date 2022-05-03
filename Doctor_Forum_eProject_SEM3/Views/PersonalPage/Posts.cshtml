@@ -63,14 +63,22 @@
                                             <a href="blog-details.html"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="@item.Image" alt=""></a>
                                         </figure>
                                     </div>
-                                    <div class="content-text col-9 pt-0" style="position:relative">                                      
-                                        @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
+                                    <div class="content-text col-9 pt-0" style="position:relative">
+                                        @if (item.Title != null)
+                                        {
+                                            @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
+                                        }
                                         <div class="content-personal py-0 mb-1 an">
                                             @Html.Raw(item.Content)
                                         </div>
                                         <div>
                                             @*<img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="@item.Account.Avatar">*@
-                                            <span class="mr-1">@item.Account.FullName</span>-<span class="ml-1">@item.Specialization.Name</span>
+                                            <span class="mr-1">@item.Account.FullName</span>-<span class="ml-1">
+                                                @if (item.Specialization != null)
+                                                {
+                                                    @item.Specialization.Name
+                                                }
+                                            </span>
                                         </div>
                                         <div class="dropdown" style="position:absolute; top: 0; right:0;">
 
@@ -83,7 +91,7 @@
                                             <!--Menu-->
                                             <div class="dropdown-menu dropdown-primary">
                                                 @*<a class="dropdown-item" href="#"><i class="fab fa-apple-pay"></i>&nbsp;&nbsp;Pay</a>*@
-                                                @Html.ActionLink("Edit", "Edit", "Posts", new { id = item.Id }, new { @class= "dropdown-item" })
+                                                @Html.ActionLink("Edit", "Edit", "Posts", new { id = item.Id }, new { @class = "dropdown-item" })
                                                 @Html.ActionLink("Details", "Details", "Posts", new { id = item.Id }, new { @class = "dropdown-item" })
                                                 @Html.ActionLink("Delete", "Delete", "Posts", new { id = item.Id }, new { @class = "dropdown-item" })
                                             </div>

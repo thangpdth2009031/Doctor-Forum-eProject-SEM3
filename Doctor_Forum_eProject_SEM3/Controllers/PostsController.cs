@@ -42,17 +42,18 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
 
         // GET: Admin/PostAdmin/Details/5
         public ActionResult Details(int? id)
-        {
+        {            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Post post = db.Posts.Find(id);
+            /*var replies = db.Replies.Where(x => x.Status == true).ToList();
+            ViewData["Reply"] = replies;*/            
             if (post == null)
             {
                 return HttpNotFound();
             }
-
             return View(post);
         }
         
@@ -183,29 +184,45 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             return View();
         }
         [ChildActionOnly]
-        public PartialViewResult Comment()
+        public PartialViewResult Comment(Post post)
         {
-            var comments = db.Replies.Where(x =>x.Status == true).ToList();
+            var comments = db.Replies.Where(x => x.PostId == post.Id && x.Status == true).ToList();
             return PartialView(comments);
-        }      
+        }
         [HttpPost]
-        public ActionResult PostComment(Reply reply)
+        public ActionResult PostComment(Reply reply, int postId)
         {
             
             if (ModelState.IsValid)
-            {
+            {                
                 var account = (Account)Session[UserSession.USER_SESSION];
-                reply.AccountId = account.Id;
-                reply.Status = true;
-                ViewBag.Message = reply.Message;
-                /*reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));*/
-                reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));
-                reply.UpdatedAt = DateTime.Now;
-                db.Replies.Add(reply);
-                db.SaveChanges();
-                return View();
+                var post = db.Posts.FirstOrDefault(p => p.Id == postId);
+                if (account != null && post != null)
+                {
+                    reply.AccountId = account.Id;
+                    reply.Status = true;
+                    ViewBag.Message = reply.Message;
+                    /*reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));*/
+                    reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));
+                    reply.UpdatedAt = DateTime.Now;
+                    db.Replies.Add(reply);
+                    db.SaveChanges();
+                }                              
             }          
-            return View(reply);
+            return RedirectToAction("Details", "Posts", new { id = postId});
+        }
+        public ActionResult UpdateComment(int id)
+        {
+            ViewBag.isEdit = true;
+            ViewBag.Feature = "Cập nhật";            
+
+            if (Request.Url != null)
+            {
+                ViewBag.BaseURL = string.Join("", Request.Url.Segments.Take(Request.Url.Segments.Length - 1));
+            }                
+
+            var reply = db.Replies.FirstOrDefault(x => x.Id == id);
+            return View("PostComment", reply);
         }
     }
 }

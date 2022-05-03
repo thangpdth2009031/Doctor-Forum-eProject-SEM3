@@ -13,27 +13,47 @@
     .image-text img {
         width: 100%;
     }
+    .right-button-reply {
+        right: 10px!important;
+    }
 </style>
 <div class="comments-area">
     <div class="sec-title">
         <h6>Comments (3)</h6>
     </div>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(x=>x.Status==true).Reverse())
     {
         <div class="comment mb-3">
             <div class="d-flex">
                 <div class="image-holder">
-                    <figure style="width: 50px; margin-right: 15px;">
-                        <img loading="lazy" src="@item.Account.Avatar" style="width: 100%; height: 50px; object-fit: cover" alt="">
+                    <figure style="width: 45px; margin-right: 15px;">
+                        <img loading="lazy" src="@item.Account.Avatar" style="width: 100%; height: 45px; object-fit: cover" alt="">
                     </figure>
                 </div>
                 <div class="image-text position-static">
                     <h6 class="p-0">@item.Account.FullName<span>@String.Format("{0:ddd, dd MMMM yyyy }", item.CreatedAt).ToString()</span></h6>
-                    <h5>
-                        <div onclick="myFunction()" class="comment-back" style="cursor: pointer">
+                    <h5 class="right-button-reply d-flex">
+                        <div onclick="myFunction()" class="comment-back" style="cursor: pointer; margin-right: 45px;">
                             <i class="fa fa-reply-all" aria-hidden="true"></i>Comment Back
                         </div>
+                        <div class="dropdown" style="position:absolute; top: 0; right:0;">
+
+                            <!--Trigger-->
+
+                            <a id="dropdownMenu2" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false" style="margin-right: 0px"><i class="fas fa-ellipsis-v" style="margin-right: 0px;"></i></a>
+
+
+                            <!--Menu-->
+                            <div class="dropdown-menu dropdown-primary">
+                                @*<a class="dropdown-item" href="#"><i class="fab fa-apple-pay"></i>&nbsp;&nbsp;Pay</a>*@
+                                @Html.ActionLink("Edit", "UpdateComment", "Posts", new { id = item.Id }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Details", "Details", "Posts", new { id = item.Id }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Delete", "Delete", "Posts", new { id = item.Id }, new { @class = "dropdown-item" })
+                            </div>
+                        </div>
                     </h5>
+                   
                     <p>
                         @MvcHtmlString.Create(HttpUtility.HtmlDecode(item.Message))
                     </p>
