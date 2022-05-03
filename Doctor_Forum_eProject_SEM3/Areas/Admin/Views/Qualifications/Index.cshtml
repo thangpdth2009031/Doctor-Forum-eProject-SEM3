@@ -41,6 +41,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    @if (ViewBag.SuccessMsg != null)
+                    {
+                        <div id="msgAlert" class="alert alert-success ">
+                            @ViewBag.SuccessMsg
+                        </div>
+                    }
                     <div class="card-body">
                         @using (Html.BeginForm("DeleteAll", "Qualifications", FormMethod.Post))
                         {
@@ -68,14 +74,14 @@
                                                 @Html.DisplayNameFor(model => model.Description)
                                             </th>
                                             @*<th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>*@
+                                                    @Html.DisplayNameFor(model => model.Status)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.CreatedAt)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.UpdatedAt)
+                                                </th>*@
                                             <th>
                                                 @Html.DisplayNameFor(model => model.School)
                                             </th>
@@ -86,45 +92,45 @@
 
                                         @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                                         {
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="ids" value="@item.Id" />
-                                            </td>
-                                            <td>
-                                                 <img src="@Html.DisplayFor(modelItem => item.Account.Avatar)" style="width:90px; height: 80px" />
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Year)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </td>
-                                            @*<td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>*@
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.School)
-                                            </td>
-                                            <td>
-                                                <div class="d-flex">
-                                                    <a class="m-1" href="/Admin/Qualifications/Edit/@item.Id">
-                                                        <h5><i class="fa-solid fa-pen icon-list"></i></h5>
-                                                    </a>
-                                                    <a class="m-1" href="/Admin/Qualifications/Details/@item.Id">
-                                                        <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
-                                                    </a>
-                                                    <a class="m-1" href="/Admin/Qualifications/Delete/@item.Id">
-                                                        <h5><i class="fa-solid fa-trash-can icon-list"></i></h5>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="ids" value="@item.Id" />
+                                                </td>
+                                                <td>
+                                                    <img src="@Html.DisplayFor(modelItem => item.Account.Avatar)" style="width: 90px; height: 80px" />
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Year)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Description)
+                                                </td>
+                                                @*<td>
+                                                        @Html.DisplayFor(modelItem => item.Status)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.UpdatedAt)
+                                                    </td>*@
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.School)
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a class="m-1" href="/Admin/Qualifications/Edit/@item.Id">
+                                                            <h5><i class="fa-solid fa-pen icon-list"></i></h5>
+                                                        </a>
+                                                        <a class="m-1" href="/Admin/Qualifications/Details/@item.Id">
+                                                            <h5><i class="fa-solid fa-circle-info icon-list"></i></h5>
+                                                        </a>
+                                                        <a class="m-1" href="/Admin/Qualifications/Delete/@item.Id">
+                                                            <h5><i class="fa-solid fa-trash-can icon-list"></i></h5>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -142,5 +148,11 @@
         $("#checkBoxAll").click(function () {
             $('input:checkbox').not(this).prop('checked', this.checked);
         });
+    </script>
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+
+        }, 2000)
     </script>
 }

@@ -10,7 +10,7 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class QualificationsController : Controller
+    public class QualificationsController : BaseController
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
 
@@ -18,6 +18,14 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var qualifications = db.Qualifications.Include(q => q.Account);
+
+
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+
             return View(qualifications.ToList());
         }
 
@@ -57,6 +65,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 qualification.UpdatedAt = DateTime.Now;
                 db.Qualifications.Add(qualification);
                 db.SaveChanges();
+                TempData["result"] = "Thêm mới thành công";
                 return RedirectToAction("Index");
             }
 
@@ -79,7 +88,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.Entry(todo).State = EntityState.Modified;
                 db.SaveChanges();
             }
-
+            TempData["result"] = "Xóa hết thành công";
             return RedirectToAction("Index");
         }
 
@@ -112,6 +121,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 qualification.UpdatedAt = DateTime.Now;
                 db.Entry(qualification).State = EntityState.Modified;
                 db.SaveChanges();
+
+                TempData["result"] = "Sửa thành công";
                 return RedirectToAction("Index");
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", qualification.AccountId);
@@ -141,6 +152,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             Qualification qualification = db.Qualifications.Find(id);
             db.Qualifications.Remove(qualification);
             db.SaveChanges();
+            TempData["result"] = "Xóa thành công";
             return RedirectToAction("Index");
         }
 

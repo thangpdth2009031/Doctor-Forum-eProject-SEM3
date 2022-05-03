@@ -10,13 +10,19 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class SpecializationsController : Controller
+    public class SpecializationsController : BaseController
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
 
         // GET: Admin/Specializations
         public ActionResult Index()
         {
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+
+
             return View(db.Specializations.ToList());
         }
 
@@ -55,6 +61,10 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 specialization.UpdatedAt = DateTime.Now;
                 db.Specializations.Add(specialization);
                 db.SaveChanges();
+
+
+                TempData["result"] = "Thêm mới thành công";
+
                 return RedirectToAction("Index");
             }
 
@@ -88,6 +98,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 specialization.UpdatedAt = DateTime.Now;
                 db.Entry(specialization).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["result"] = "Sửa thành công";
                 return RedirectToAction("Index");
             }
             return View(specialization);
@@ -116,6 +127,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             Specialization specialization = db.Specializations.Find(id);
             db.Specializations.Remove(specialization);
             db.SaveChanges();
+            TempData["result"] = "Sửa thành công";
             return RedirectToAction("Index");
         }
 
@@ -136,7 +148,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.Entry(todo).State = EntityState.Modified;
                 db.SaveChanges();
             }
-
+            TempData["result"] = "Xóa hết thành công";
             return RedirectToAction("Index");
         }
 

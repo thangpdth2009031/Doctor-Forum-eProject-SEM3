@@ -16,13 +16,14 @@ using System.Xml.Linq;
 namespace Doctor_Forum_eProject_SEM3.Controllers
 {
     public class UserAccountController : Controller
-    {   
-        private DoctorForumDbContext db;        
+    {
+        private DoctorForumDbContext db = null;
+
         public UserAccountController()
         {
-            db = new DoctorForumDbContext();           
+            db = new DoctorForumDbContext();
         }
-        
+
         public ActionResult Register()
         {
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
@@ -80,7 +81,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Status = true,
                         CreatedAt = DateTime.Now,
                         UpatedAt = DateTime.Now
-                    };                    
+                    };
                     Professional professional = new Professional()
                     {
                         ProfessionalName = accountModel.ProfessionalName,
@@ -88,7 +89,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Status = true,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
-                    };                    
+                    };
                     Qualification qualification = new Qualification()
                     {
                         Year = accountModel.Year,
@@ -98,7 +99,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Status = true,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now,
-                    };                    
+                    };
                     Experience experience = new Experience()
                     {
                         StartYear = accountModel.StartYear,
@@ -110,7 +111,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Status = true,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
-                    };                    
+                    };
                     var result = dao.Insert(account, professional, qualification, experience, achievement);
                     if (result > 0)
                     {
@@ -123,15 +124,18 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         ModelState.AddModelError("", "Đăng ký không thành công.");
                     }
                     return View(accountModel);
-                   
+
                 }
+
+                accountModel.Specialization =
+                    
                 ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
                 return View(accountModel);
             }
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            return RedirectToAction("Index", "Home");
+            // return RedirectToAction("Index", "Home");
+            return View(accountModel);
         }
-
         public ActionResult Login()
         {
             return View();

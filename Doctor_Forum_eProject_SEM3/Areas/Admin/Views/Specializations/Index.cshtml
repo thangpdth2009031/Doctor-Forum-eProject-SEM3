@@ -36,6 +36,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    @if (ViewBag.SuccessMsg != null)
+                    {
+                        <div id="msgAlert" class="alert alert-success ">
+                            @ViewBag.SuccessMsg
+                        </div>
+                    }
                     <div class="card-body">
                         <h5 class="card-title"></h5>
                         @using (Html.BeginForm("DeleteAll", "Specializations", FormMethod.Post))
@@ -87,7 +93,7 @@
                                                     @Html.DisplayFor(modelItem => item.Description)
                                                 </td>
                                                 <td>
-                                                    <img src="@Html.DisplayFor(modelItem => item.Image)" style="width:90px; height: 80px" />
+                                                    <img src="@Html.DisplayFor(modelItem => item.Image)" style="width: 90px; height: 80px" />
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
@@ -120,5 +126,11 @@
         $("#checkBoxAll").click(function () {
             $('input:checkbox').not(this).prop('checked', this.checked);
         });
+    </script>
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+
+        }, 2000)
     </script>
 }

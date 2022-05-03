@@ -21,48 +21,82 @@ Author URL: http://w3layouts.com
     <link rel="stylesheet" href="/Content/css/Login.css" type="text/css" media="all">
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/Areas/Admin/ContentAdmin/assets/images/doctor222.png" />
+    <!-- Custom CSS -->
+    <link href="/Areas/Admin/ContentAdmin/assets/libs/flot/css/float-chart.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="/Areas/Admin/ContentAdmin/dist/css/style.min.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="/Areas/Admin/ContentAdmin/assets/libs/jquery-steps/jquery.steps.css"
+          rel="stylesheet" />
+    <link href="/Areas/Admin/ContentAdmin/assets/libs/jquery-steps/steps.css" rel="stylesheet" />
+    
+    
 </head>
 <!-- //Head -->
 <!-- Body -->
 
 <body>
 
-    <section class="main">
-        <div class="logo text-center">
-            <h1> <a href="index.html"> Admin Doctor Forum</a></h1>
-        </div>
-        <div class="content-w3ls text-center">
+<section class="main">
+    <div class="logo text-center">
+        <h1> <a href="index.html"> Admin Doctor Forum</a></h1>
+    </div>
+    <div class="content-w3ls text-center">
+        
+        @if (ViewBag.SuccessMsg != null)
+        {
+            <div id="msgAlert" class="alert alert-success ">
+                @ViewBag.SuccessMsg
+            </div>
+        }
 
-            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
-            {
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
 
 
 
-                <img src="/Content/images/Login/admin.png" alt="" class="img-responsive">
-                @Html.ValidationSummary(false, "", new { @class = "alert-danger" })
+            <img src="/Content/images/Login/admin.png" alt="" class="img-responsive">
+            @Html.ValidationSummary(false, "", new {@class = "alert-danger"})
 
-                <div class="wthree-field">
-                    @Html.TextBoxFor(model => model.Username, new { @class = "text", @autofocus = "autofocus" })
-                </div>
-                <div class="wthree-field">
-                    @Html.PasswordFor(model => model.Password, new { @class = "password" })
-                </div>
-                <div class="wthree-field">
-                    <button type="submit" class="btn">Sign In</button>
-                </div>
-                <div class="login-bottom">
-                    <a href="#url" class="">Create An Account</a>
-                </div>
+            <div class="wthree-field">
+                @Html.TextBoxFor(model => model.Username, new {@class = "text", @autofocus = "autofocus"})
+            </div>
+            <div class="wthree-field">
+                @Html.PasswordFor(model => model.Password, new {@class = "password"})
+            </div>
+            <div class="wthree-field">
+                <button type="submit" class="btn">Sign In</button>
+            </div>
+            <div class="login-bottom">
+                <a href="#url" class="">Create An Account</a>
+            </div>
 
-            }
+        }
 
-        </div>
-        <div class="copyright">
-            <p>
-                © 2020 Universe Signin Form. Made with love | Designed by <a href="https://w3layouts.com" target="_blank">W3layouts</a>
-            </p>
-        </div>
-    </section>
+    </div>
+    <div class="copyright">
+        <p>
+            © 2020 Universe Signin Form. Made with love | Designed by <a href="https://w3layouts.com" target="_blank">W3layouts</a>
+        </p>
+    </div>
+</section>
+<script>
+    setTimeout(function () {
+        $('#msgAlert').fadeOut('slow');
+
+    }, 2000)
+</script>
 
 </body>
 <!-- //Body -->

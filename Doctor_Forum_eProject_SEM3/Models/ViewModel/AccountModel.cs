@@ -17,21 +17,22 @@ namespace Doctor_Forum_eProject_SEM3.Models.ViewModel
         public HttpPostedFileBase AvatarFile { get; set; }
         [StringLength(250)]
 
-        [Required(ErrorMessage = "Please enter your username")]
+        [Display(Name = "Tên đăng nhập")]
+        [Required(ErrorMessage = "Yêu cầu nhập tên đăng nhập")]
         public string UserName { get; set; }
 
-        [StringLength(50, ErrorMessage = "Maximum 100 characters")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password: ")]
+        [Display(Name = "Mật khẩu")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Độ dài mật khẩu ít nhất 6 ký tự.")]
+        [Required(ErrorMessage = "Yêu cầu nhập mật khẩu")]
         public string Password { get; set; }
 
 
-        [StringLength(50, ErrorMessage = "Maximum 100 characters")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password: ")]
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Compare("Password", ErrorMessage = "Xác nhận mật khẩu không đúng.")]
         public string ConfirmPassword { get; set; }
 
         [StringLength(250)]
+        [Display(Name = "Nhập Họ tên")]
         [Required(ErrorMessage = "Please enter your full name")]
         public string FullName { get; set; }
 
@@ -45,10 +46,13 @@ namespace Doctor_Forum_eProject_SEM3.Models.ViewModel
         public int? SpecializationId { get; set; }
 
         [StringLength(250)]
-        [Required(ErrorMessage = "Please enter your email")]
+        [Display(Name = "Nhập Email")]
+        [Required(ErrorMessage = "Yêu cầu nhập email")]
         public string Email { get; set; }
 
         [StringLength(15)]
+        [Display(Name = "Nhập số điện thoại")]
+        [Required(ErrorMessage = "Yêu cầu nhập số điện thoại")]
         public string Phone { get; set; }
 
         public int? Gender { get; set; }

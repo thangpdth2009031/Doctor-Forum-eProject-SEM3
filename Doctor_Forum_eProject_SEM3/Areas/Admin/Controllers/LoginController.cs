@@ -13,13 +13,15 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
     public class LoginController : Controller
     {
         // GET: Admin/Login
-        public ActionResult Index()
-        {
-            return View();
-        }
+
 
         public ActionResult Login()
         {
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
             return View();
         }
 
@@ -33,17 +35,21 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 if (result == 1)
                 {
                     var user = dao.GetById(model.Username);
-                    var userSession = new Account();
-                    userSession = user;
-
+                    var userSession = new UserLogin();
+                    userSession.UserName = user.UserName;
+                    userSession.GroupId = user.GroupId;
+                    userSession.Id = user.Id;
+        
                     // var listCredentials = dao.GetListCredential(model.Username);
-
-
+        
+        
                     // userSession.GroupID = user.GroupID;
                     // var listCredentials = dao.GetListCredential(model.UserName);
-
+        
                     // Session.Add(UserSession.SESSION_CREDENTIALS, listCredentials);
                     Session.Add(UserSession.USER_SESSION, userSession);
+
+                    TempData["result"] = "Đặng nhập thành công";
                     return RedirectToAction("Index", "HomeAdmin");
                 }
                 else if (result == 0)
@@ -67,9 +73,9 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                     ModelState.AddModelError("", "đăng nhập không đúng.");
                 }
             }
-
+        
             return View("Index");
         }
-
+        
+        }
     }
-}

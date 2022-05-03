@@ -10,7 +10,7 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class AchievementsController : Controller
+    public class AchievementsController : BaseController
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
 
@@ -18,6 +18,12 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var achievements = db.Achievements.Include(a => a.Account);
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+
             return View(achievements.ToList());
         }
 
@@ -57,6 +63,9 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 achievement.UpatedAt = DateTime.Now;
                 db.Achievements.Add(achievement);
                 db.SaveChanges();
+
+                TempData["result"] = "Thêm mới thành công";
+
                 return RedirectToAction("Index");
             }
 
@@ -93,6 +102,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 achievement.UpatedAt = DateTime.Now;
                 db.Entry(achievement).State = EntityState.Modified;
                 db.SaveChanges();
+
+                TempData["result"] = "Sửa thành công";
                 return RedirectToAction("Index");
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "UserName", achievement.AccountId);
@@ -131,12 +142,13 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.Entry(todo).State = EntityState.Modified;
                 db.SaveChanges();
             }
-
+            TempData["result"] = "Xóa thành công";
             return RedirectToAction("Index");
         }
 
         // POST: Admin/Achievements/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
