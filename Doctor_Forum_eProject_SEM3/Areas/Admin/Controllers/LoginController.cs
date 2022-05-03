@@ -33,10 +33,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 if (result == 1)
                 {
                     var user = dao.GetById(model.Username);
-                    var userSession = new UserLogin();
-                    userSession.UserName = user.UserName;
-                    userSession.UserId = user.Id;
-                    userSession.GroupId = user.GroupId;
+                    var userSession = new Account();
+                    userSession = user;
 
                     // var listCredentials = dao.GetListCredential(model.Username);
 
