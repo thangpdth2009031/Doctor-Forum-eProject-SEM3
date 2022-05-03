@@ -103,7 +103,10 @@
                                         </figure>
                                     </div>
                                     <div class="content-text col-8 pt-0">
-                                        @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
+                                        @if (item.Title != null)
+                                        {
+                                            @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
+                                        }
                                         <div class="an py-0 mb-1 an">
                                             @Html.Raw(item.Content)
                                         </div>
@@ -199,7 +202,7 @@
                         <div class="click-view-all" style="width:100%;text-align:center">
                             <div class="click-show-all-post" style="height:100%; border: none">Xem Tất Cả</div></div>
                     </div>
-                    <div class="row" style="margin-left:5px">
+                    <div class="row" style="margin-left:0px">
                         <div style="width: 33%; padding: 10px 5px 0 0">
                             <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="images/blog/Thắng.png">
                         </div>

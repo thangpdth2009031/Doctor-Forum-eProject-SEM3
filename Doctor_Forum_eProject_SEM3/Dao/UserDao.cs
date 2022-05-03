@@ -17,10 +17,14 @@ namespace Doctor_Forum_eProject_SEM3.Dao
             db = new DoctorForumDbContext();
         }
 
-        public int Insert(Account user)
+        public int Insert(Account user, Professional process, Qualification qualification, Experience experience, Achievement achievement)
         {
             try
             {
+                db.Professionals.Add(process);
+                db.Qualifications.Add(qualification);
+                db.Experiences.Add(experience);
+                db.Achievements.Add(achievement);
                 db.Accounts.Add(user);
                 db.SaveChanges();
             }
