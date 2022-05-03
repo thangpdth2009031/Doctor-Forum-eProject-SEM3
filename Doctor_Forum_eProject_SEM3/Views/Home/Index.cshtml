@@ -173,12 +173,10 @@
                                 {
                                     { Html.RenderAction("TypeKnowledge", "Posts"); }
                                 }
-                                else
-                                {
-                                    { Html.RenderAction("NewestPost", "Posts"); }
-                                }
+
                             }
                         }
+                        @{ Html.RenderAction("NewestPost", "Posts"); }
                     </div>
                 </div>
                 <div class="container">

@@ -59,16 +59,18 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Models.Account)Session[UserSession.USER_SESSION];
-                post.AccountId = account.Id;
-                post.Status = true;
-                post.CreatedAt = DateTime.Now;
-                post.UpdatedAt = DateTime.Now;
-                db.Posts.Add(post);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var account = (Account)Session[UserSession.USER_SESSION];
+                if (account != null)
+                {
+                    post.AccountId = account.Id;
+                    post.Status = true;
+                    post.CreatedAt = DateTime.Now;
+                    post.UpdatedAt = DateTime.Now;
+                    db.Posts.Add(post);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
             return View(post);
@@ -100,7 +102,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Models.Account)Session[UserSession.USER_SESSION];
+               var account = (Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
                 post.Status = true;
                 post.UpdatedAt = DateTime.Now;
