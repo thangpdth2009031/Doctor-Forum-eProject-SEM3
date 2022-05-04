@@ -18,7 +18,8 @@ namespace Doctor_Forum_eProject_SEM3.Models
             Qualifications = new HashSet<Qualification>();
             Replies = new HashSet<Reply>();
         }
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int? RoleId { get; set; }
