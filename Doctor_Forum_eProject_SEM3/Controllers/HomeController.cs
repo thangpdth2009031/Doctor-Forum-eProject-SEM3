@@ -15,6 +15,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         public ActionResult Index()
         {
             var posts = db.Posts.Where(x=>x.Status == true).ToList();
+            ViewBag.Specialization = db.Specializations.Where(x => x.Status == true).ToList();
             return View(posts);
         }
         [ChildActionOnly]
@@ -49,6 +50,12 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public PartialViewResult Specialzations()
+        {
+           var specialzations = db.Specializations.Where(x => x.Status == true).ToList();
+            return PartialView(specialzations);
         }
     }
 }

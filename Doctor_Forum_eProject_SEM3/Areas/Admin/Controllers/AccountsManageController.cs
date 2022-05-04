@@ -59,12 +59,15 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             
             if (ModelState.IsValid)
             {
-                string fileName = Path.GetFileNameWithoutExtension(account.AvatarFile.FileName);
-                string extension = Path.GetExtension(account.AvatarFile.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                account.Avatar = "/Areas/Admin/ContentAdmin/Image/" + fileName;
-                account.GroupId = "ADMIN"; 
-                account.AvatarFile.SaveAs(Path.Combine(Server.MapPath("/Areas/Admin/ContentAdmin/Image/"), fileName));                              
+                if(account.AvatarFile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(account.AvatarFile.FileName);
+                    string extension = Path.GetExtension(account.AvatarFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    account.Avatar = "/Areas/Admin/ContentAdmin/Image/" + fileName;
+                    account.GroupId = "ADMIN";
+                    account.AvatarFile.SaveAs(Path.Combine(Server.MapPath("/Areas/Admin/ContentAdmin/Image/"), fileName));
+                }                                 
                 account.CreatedAt = DateTime.Now;                
                 account.UpdatedAt = DateTime.Now;                
                 account.Status = true;                
