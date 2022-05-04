@@ -75,49 +75,49 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     {
                         account.DistrictId = int.Parse(accountModel.DistrictId);
                     }
-                //     db.Accounts.Add(account);
-                //     int pk = account.Id;
-                //     var achievement = new Achievement()
-                //     {
-                //         Year = accountModel.YearAchievement,
-                //         Description = accountModel.Description,
-                //         AccountId = pk,
-                //         Status = true,
-                //         CreatedAt = DateTime.Now,
-                //         UpatedAt = DateTime.Now,
-                //         
-                // };
-                //     var professional = new Professional()
-                //     {
-                //         ProfessionalName = accountModel.ProfessionalName,
-                //         AccountId = pk,
-                //         Status = true,
-                //         CreatedAt = DateTime.Now,
-                //         UpdatedAt = DateTime.Now
-                //     };
-                //     var qualification = new Qualification()
-                //     {
-                //         Year = accountModel.Year,
-                //         Description = accountModel.Description,
-                //         School = accountModel.School,
-                //         AccountId = pk,
-                //         Status = true,
-                //         CreatedAt = DateTime.Now,
-                //         UpdatedAt = DateTime.Now,
-                //     };
-                //     var experience = new Experience()
-                //     {
-                //         StartYear = accountModel.StartYear,
-                //         EndYear = accountModel.EndYear,
-                //         Description = accountModel.DescriptionExperiences,
-                //         Workplace = accountModel.Workplace,
-                //         Position = accountModel.Position,
-                //         AccountId = pk,
-                //         Status = true,
-                //         CreatedAt = DateTime.Now,
-                //         UpdatedAt = DateTime.Now
-                //     };
-                    var result = dao.Insert(account);
+                    db.Accounts.Add(account);
+                    int pk = account.Id;
+                    var achievement = new Achievement()
+                    {
+                        Year = accountModel.YearAchievement,
+                        Description = accountModel.Description,
+                        AccountId = pk,
+                        Status = true,
+                        CreatedAt = DateTime.Now,
+                        UpatedAt = DateTime.Now,
+                        
+                    };
+                    var professional = new Professional()
+                    {
+                        ProfessionalName = accountModel.ProfessionalName,
+                        AccountId = pk,
+                        Status = true,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now
+                    };
+                    var qualification = new Qualification()
+                    {
+                        Year = accountModel.Year,
+                        Description = accountModel.Description,
+                        School = accountModel.School,
+                        AccountId = pk,
+                        Status = true,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                    };
+                    var experience = new Experience()
+                    {
+                        StartYear = accountModel.StartYear,
+                        EndYear = accountModel.EndYear,
+                        Description = accountModel.DescriptionExperiences,
+                        Workplace = accountModel.Workplace,
+                        Position = accountModel.Position,
+                        AccountId = pk,
+                        Status = true,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now
+                    };
+                    var result = dao.Insert(account, professional, qualification, experience, achievement);
                     if (result > 0)
                     {
                         ViewBag.Success = "Đăng ký thành công";
