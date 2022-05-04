@@ -80,8 +80,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Status = true,
                         CreatedAt = DateTime.Now,
                         UpatedAt = DateTime.Now
-                    };
-                    db.Achievements.Add(achievement);
+                    };                    
                     Professional professional = new Professional()
                     {
                         ProfessionalName = accountModel.ProfessionalName,
@@ -89,8 +88,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Status = true,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
-                    };
-                    db.Professionals.Add(professional);
+                    };                    
                     Qualification qualification = new Qualification()
                     {
                         Year = accountModel.Year,
@@ -100,8 +98,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Status = true,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now,
-                    };
-                    db.Qualifications.Add(qualification);
+                    };                    
                     Experience experience = new Experience()
                     {
                         StartYear = accountModel.StartYear,
@@ -113,9 +110,8 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         Status = true,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
-                    };
-                    Debug.WriteLine(account.FullName);
-                    var result = dao.Insert(account);
+                    };                    
+                    var result = dao.Insert(account, professional, qualification, experience, achievement);
                     if (result > 0)
                     {
                         ViewBag.Success = "Đăng ký thành công";
@@ -232,8 +228,20 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             return View();
         }
         public ActionResult AccountProfile()
-        {           
-            return View();
+        {
+            var account = (Account)Session[UserSession.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToAction("Login", "UserAccount");
+            }
+            else
+            {
+                ViewBag.Professional = db.Professionals.Where(p => p.AccountId == (account.Id)).ToList();
+                ViewBag.Qualification = db.Qualifications.Where(p => p.AccountId == (account.Id)).ToList();
+                ViewBag.Experience = db.Experiences.Where(p => p.AccountId == (account.Id)).ToList();
+                var post = db.Posts.Where((x => x.Status == (true) && x.AccountId == (account.Id))).ToList();
+                return View(post);
+            }
         }
     }
 }
