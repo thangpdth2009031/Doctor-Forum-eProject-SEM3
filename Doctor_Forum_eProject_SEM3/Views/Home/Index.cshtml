@@ -165,6 +165,7 @@
             <div class="col-9">
                 <div class="container">
                     <div class="row">
+                        @{ Html.RenderAction("NewestPost", "Posts"); }
                         @if (Model.ToList().Count > 0)
                         {
                             foreach (var item in Model)
@@ -176,7 +177,7 @@
 
                             }
                         }
-                        @{ Html.RenderAction("NewestPost", "Posts"); }
+
                     </div>
                 </div>
                 <div class="container">
@@ -201,7 +202,7 @@
                                         </div>
                                         <div>
                                             <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="@item.Account.Avatar">
-                                            <span class="mr-1">@Html.ActionLink(item.Account.FullName, "AccountProfile", "AccountModels", new { id = item.Id }, new { @class = "link-profile" })</span>-<span class="ml-1">@*@item.Specialization.Name*@</span>
+                                            <span class="mr-1">@Html.ActionLink(item.Account.FullName, "UserProfile", "UserAccount", new { id = item.Id }, new { @class = "link-profile" })</span>-<span class="ml-1">@*@item.Specialization.Name*@</span>
                                         </div>
                                     </div>
                                 </div>

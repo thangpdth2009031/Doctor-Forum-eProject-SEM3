@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -227,9 +228,22 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 status = true
             });
         }
-        public ActionResult UserProfile()
-        {           
-            return View();
+        public ActionResult UserProfile(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Account account = db.Accounts.Find(id);
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Professional = db.Professionals.Where(p => p.AccountId == (account.Id)).ToList();
+            ViewBag.Qualification = db.Qualifications.Where(p => p.AccountId == (account.Id)).ToList();
+            ViewBag.Experience = db.Experiences.Where(p => p.AccountId == (account.Id)).ToList();
+            ViewBag.Post = db.Posts.Where((x => x.Status == (true) && x.AccountId == (account.Id))).ToList();
+            return View(account);
         }
         public ActionResult AccountProfile()
         {
