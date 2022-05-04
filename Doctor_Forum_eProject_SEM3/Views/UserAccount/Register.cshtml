@@ -1,6 +1,4 @@
 ﻿@model Doctor_Forum_eProject_SEM3.Models.ViewModel.AccountModel
-@* @model IEnumerable<Doctor_Forum_eProject_SEM3.Models.ViewModel.AccountModel> *@
-@using System.Collections
 @using Doctor_Forum_eProject_SEM3.Common
 @{
     ViewBag.Title = "Register";
@@ -286,16 +284,16 @@
                     {
                         @Html.AntiForgeryToken()
                         <!-- progressbar -->
-                <ul id="progressbar">
-                    <li class="active" id="account"><strong>Account</strong></li>
-                    <li id="personal"><strong>Detail</strong></li>
-                    <li id="payment"><strong>Professional</strong></li>
-                    <li id="confirm"><strong>Qualifications</strong></li>
-                    <li id="experiences"><strong>Experiences</strong></li>
-                    <li id="success"><strong>Success</strong></li>
-                   
+                        <ul id="progressbar">
+                            <li class="active" id="account"><strong>Account</strong></li>
+                            <li id="personal"><strong>Detail</strong></li>
+                            <li id="payment"><strong>Professional</strong></li>
+                            <li id="confirm"><strong>Qualifications</strong></li>
+                            <li id="experiences"><strong>Experiences</strong></li>
+                            <li id="success"><strong>Success</strong></li>
 
-                </ul>
+
+                        </ul>
                         <div class="progress">
                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                         </div> <br> <!-- fieldsets -->
@@ -309,13 +307,7 @@
                                         <h2 class="steps">Step 1 - 5</h2>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                                    @if (ViewBag.Success != null)
-                                    {
-                                        <div class="alert alert-success">@ViewBag.Success</div>
-                                    }
-                                </div>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -328,6 +320,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Specialization</label>
+                                            @Html.LabelFor(model => model.SpecializationId, htmlAttributes: new { @class = "control-label " })
                                             @Html.DropDownList("SpecializationId", (SelectList)ViewBag.SpecializationId, new { @class = "form-control dropdown-specialization-regis", @required = "required", @style = "padding: 0 15px;" })
                                             @Html.ValidationMessageFor(model => model.SpecializationId, "", new { @class = "text-danger" })
                                         </div>
@@ -511,7 +504,6 @@
                                                 @Html.ValidationMessageFor(model => model.YearAchievement, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
-
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 @Html.LabelFor(model => model.School, htmlAttributes: new { @class = "control-label" })
@@ -520,7 +512,6 @@
                                             </div>
                                         </div>
                                     </div>*@
-
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -623,27 +614,22 @@
                                                         <label>Start Year</label>
                                                         @Html.EditorFor(model => model.StartYear, new { htmlAttributes = new { @class = "form-control datepicker" } })
                                                         @Html.ValidationMessageFor(model => model.StartYear, "", new { @class = "text-danger" })
-
                                                     </div>
                                                 </div>
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>End Year</label>
                                                         @Html.EditorFor(model => model.EndYear, new { htmlAttributes = new { @class = "form-control datepicker" } })
                                                         @Html.ValidationMessageFor(model => model.EndYear, "", new { @class = "text-danger" })
-
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         @Html.LabelFor(model => model.Workplace, htmlAttributes: new { @class = "control-label" })
                                                         @Html.EditorFor(model => model.Workplace, new { htmlAttributes = new { @class = "form-control" } })
                                                         @Html.ValidationMessageFor(model => model.Workplace, "", new { @class = "text-danger" })
-
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -651,11 +637,9 @@
                                                         @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label" })
                                                         @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
                                                         @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
-
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
@@ -671,14 +655,12 @@
                                             </div>
                                         </div>*@
                                     <!--</div>
-
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Description Experiences</label>
                                                         @Html.EditorFor(model => model.DescriptionExperiences, new { htmlAttributes = new { @class = "form-control" } })
                                                         @Html.ValidationMessageFor(model => model.DescriptionExperiences, "", new { @class = "text-danger" })
-
                                                     </div>
                                                 </div>
                                             </div>`)})
@@ -715,22 +697,16 @@
 
     <script>
         $(document).ready(function () {
-
             var current_fs, next_fs, previous_fs; //fieldsets
             var opacity;
             var current = 1;
             var steps = $("fieldset").length;
-
             setProgressBar(current);
-
             $(".next").click(function () {
-
                 current_fs = $(this).parent();
                 next_fs = $(this).parent().next();
-
                 //Add Class Active
                 $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
                 //show the next fieldset
                 next_fs.show();
                 //hide the current fieldset with style
@@ -738,7 +714,6 @@
                     step: function (now) {
                         // for making fielset appear animation
                         opacity = 1 - now;
-
                         current_fs.css({
                             'display': 'none',
                             'position': 'relative'
@@ -749,24 +724,18 @@
                 });
                 setProgressBar(++current);
             });
-
             $(".previous").click(function () {
-
                 current_fs = $(this).parent();
                 previous_fs = $(this).parent().prev();
-
                 //Remove class active
                 $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
                 //show the previous fieldset
                 previous_fs.show();
-
                 //hide the current fieldset with style
                 current_fs.animate({ opacity: 0 }, {
                     step: function (now) {
                         // for making fielset appear animation
                         opacity = 1 - now;
-
                         current_fs.css({
                             'display': 'none',
                             'position': 'relative'
@@ -777,18 +746,15 @@
                 });
                 setProgressBar(--current);
             });
-
             function setProgressBar(curStep) {
                 var percent = parseFloat(100 / steps) * curStep;
                 percent = percent.toFixed();
                 $(".progress-bar")
                     .css("width", percent + "%")
             }
-
             $(".submit").click(function () {
                 return false;
             })
-
         });
     </script>
 
@@ -800,7 +766,6 @@
                 minViewMode: "years",
                 autoclose: true
             });
-
             $("#msform").on('click', '.datepicker', function (e) {
                 e.preventDefault();
                 $(this).datepicker({
@@ -811,7 +776,6 @@
                 });
                 $(this).datepicker("show");
             })
-
         })
     </script>
     <script src="~/Content/js/client/userRegister.js"></script>

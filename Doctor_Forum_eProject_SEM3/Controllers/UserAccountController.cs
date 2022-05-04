@@ -35,6 +35,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(AccountModel accountModel)
         {
+           
             DateTime dateTimeNow = DateTime.Now;
             if (ModelState.IsValid)
             {
@@ -49,7 +50,8 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 }
                 else
                 {
-                    Account account = new Account();
+                    var account = new Account();
+
                     account.RoleId = 1;
                     account.GroupId = "MEMBER";
                     account.Avatar = accountModel.Avatar;
@@ -60,7 +62,9 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     account.Email = accountModel.Email;
                     account.Phone = accountModel.Phone;
                     account.Gender = (int)accountModel.Gender;
-                    account.SpecializationId = accountModel.SpecializationId;
+                    account.SpecializationId = (int)accountModel.SpecializationId;
+                    ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
+
                     account.CreatedAt = dateTimeNow;
                     account.UpdatedAt = dateTimeNow;
                     account.Status = true;
@@ -72,71 +76,67 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     {
                         account.DistrictId = int.Parse(accountModel.DistrictId);
                     }
-                    db.Accounts.Add(account);
-                    int pk = account.Id;
-                    Achievement achievement = new Achievement()
-                    {
-                        Year = accountModel.YearAchievement,
-                        Description = accountModel.Description,
-                        AccountId = pk,
-                        Status = true,
-                        CreatedAt = DateTime.Now,
-                        UpatedAt = DateTime.Now
-                    };
-                    Professional professional = new Professional()
-                    {
-                        ProfessionalName = accountModel.ProfessionalName,
-                        AccountId = pk,
-                        Status = true,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now
-                    };
-                    Qualification qualification = new Qualification()
-                    {
-                        Year = accountModel.Year,
-                        Description = accountModel.Description,
-                        School = accountModel.School,
-                        AccountId = pk,
-                        Status = true,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                    };
-                    Experience experience = new Experience()
-                    {
-                        StartYear = accountModel.StartYear,
-                        EndYear = accountModel.EndYear,
-                        Description = accountModel.DescriptionExperiences,
-                        Workplace = accountModel.Workplace,
-                        Position = accountModel.Position,
-                        AccountId = pk,
-                        Status = true,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now
-                    };
-                    var result = dao.Insert(account, professional, qualification, experience, achievement);
+                //     db.Accounts.Add(account);
+                //     int pk = account.Id;
+                //     var achievement = new Achievement()
+                //     {
+                //         Year = accountModel.YearAchievement,
+                //         Description = accountModel.Description,
+                //         AccountId = pk,
+                //         Status = true,
+                //         CreatedAt = DateTime.Now,
+                //         UpatedAt = DateTime.Now,
+                //         
+                // };
+                //     var professional = new Professional()
+                //     {
+                //         ProfessionalName = accountModel.ProfessionalName,
+                //         AccountId = pk,
+                //         Status = true,
+                //         CreatedAt = DateTime.Now,
+                //         UpdatedAt = DateTime.Now
+                //     };
+                //     var qualification = new Qualification()
+                //     {
+                //         Year = accountModel.Year,
+                //         Description = accountModel.Description,
+                //         School = accountModel.School,
+                //         AccountId = pk,
+                //         Status = true,
+                //         CreatedAt = DateTime.Now,
+                //         UpdatedAt = DateTime.Now,
+                //     };
+                //     var experience = new Experience()
+                //     {
+                //         StartYear = accountModel.StartYear,
+                //         EndYear = accountModel.EndYear,
+                //         Description = accountModel.DescriptionExperiences,
+                //         Workplace = accountModel.Workplace,
+                //         Position = accountModel.Position,
+                //         AccountId = pk,
+                //         Status = true,
+                //         CreatedAt = DateTime.Now,
+                //         UpdatedAt = DateTime.Now
+                //     };
+                    var result = dao.Insert(account);
                     if (result > 0)
                     {
                         ViewBag.Success = "Đăng ký thành công";
                         accountModel = new AccountModel();
                         return RedirectToAction("Index", "Home");
+
                     }
                     else
                     {
                         ModelState.AddModelError("", "Đăng ký không thành công.");
                     }
-                    return View(accountModel);
-
                 }
-
-                accountModel.Specialization =
-                    
-                ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-                return View(accountModel);
+                
             }
-            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", accountModel.SpecializationId);
-            // return RedirectToAction("Index", "Home");
+            
             return View(accountModel);
         }
+
         public ActionResult Login()
         {
             return View();
