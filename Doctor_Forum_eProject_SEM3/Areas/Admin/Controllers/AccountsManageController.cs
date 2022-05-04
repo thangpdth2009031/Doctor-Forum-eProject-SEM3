@@ -16,7 +16,7 @@ using System.IO;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class AccountsManageController : Controller
+    public class AccountsManageController : BaseController
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
 

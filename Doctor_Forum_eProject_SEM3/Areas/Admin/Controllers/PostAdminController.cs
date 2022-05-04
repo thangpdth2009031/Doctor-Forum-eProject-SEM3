@@ -16,7 +16,7 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class PostAdminController : Controller
+    public class PostAdminController : BaseController
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
         Post post = new Post();
@@ -24,6 +24,13 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization);
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+
+
             return View(posts.ToList());
         }
 
@@ -47,6 +54,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
+
             return View();
         }
 
@@ -59,7 +67,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Account)Session[UserSession.USER_SESSION];
+                var account = (UserLogin)Session[UserSession.USER_SESSION];
                 if (account != null)
                 {
                     post.AccountId = account.Id;
@@ -68,7 +76,14 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                     post.UpdatedAt = DateTime.Now;
                     db.Posts.Add(post);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+
+
+
+                    TempData["result"] = "Thêm mới thành công";
+                        return RedirectToAction("Index");
+                    
+
+
                 }
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
@@ -90,6 +105,9 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
+
+
+
             return View(post);
         }
 
@@ -102,16 +120,30 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-               var account = (Account)Session[UserSession.USER_SESSION];
-                post.AccountId = account.Id;
-                post.Status = true;
-                post.UpdatedAt = DateTime.Now;
-                db.Entry(post).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+               var account = (UserLogin)Session[UserSession.USER_SESSION];
+
+               if (account != null)
+               {
+                   post.AccountId = account.Id;
+                   post.Status = true;
+                   post.UpdatedAt = DateTime.Now;
+                   db.Entry(post).State = EntityState.Modified;
+                   db.SaveChanges();
+
+                   TempData["result"] = "Sửa thành công";
+                    return RedirectToAction("Index");
+               }
+               else
+               {
+                  
+               }
+                
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
+
+
+           
             return View(post);
         }
 
@@ -127,6 +159,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(post);
         }
 
@@ -136,13 +169,20 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = (Models.Account)Session[UserSession.USER_SESSION];
-                post.AccountId = account.Id;
-                post.Status = false;
-                post.UpdatedAt = DateTime.Now;
-                db.Entry(post).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var account = (UserLogin)Session[UserSession.USER_SESSION];
+                if (account != null)
+                {
+                    post.AccountId = account.Id;
+                    post.Status = false;
+                    post.UpdatedAt = DateTime.Now;
+                    db.Entry(post).State = EntityState.Modified;
+                    db.SaveChanges();
+
+
+                    TempData["result"] = "Xóa thành công";
+                    return RedirectToAction("Index");
+                }
+                
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
             ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name", post.SpecializationId);
@@ -168,6 +208,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.SaveChanges();
             }
 
+            TempData["result"] = "Xóa hết thành công";
             return RedirectToAction("Index");
         }
 

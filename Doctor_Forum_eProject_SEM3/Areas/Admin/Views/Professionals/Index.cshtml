@@ -11,7 +11,7 @@
         color: white;
         padding: 5px;
     }
-</style>    
+</style>
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
@@ -37,6 +37,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    
+                    @if (ViewBag.SuccessMsg != null)
+                    {
+                        <div id="msgAlert" class="alert alert-success ">
+                            @ViewBag.SuccessMsg
+                        </div>
+                    }
                     <div class="card-body">
                         <h5 class="card-title"></h5>
                         @using (Html.BeginForm("DeleteAll", "Professionals", FormMethod.Post))
@@ -44,58 +51,58 @@
                             @Html.AntiForgeryToken()
 
                             <p>
-                                @Html.ActionLink("Create Professionals", "Create", null, new { @class = "btn btn-primary" })
-                                <input type="submit" value="Delete" onclick="return confirm('Are you sure you wish to delete selected?');" class="btn btn-danger" />
+                                @Html.ActionLink("Create Professionals", "Create", null, new {@class = "btn btn-primary"})
+                                <input type="submit" value="Delete" onclick="return confirm('Are you sure you wish to delete selected?');" class="btn btn-danger"/>
                             </p>
                             <div class="table-responsive">
                                 <table id="zero_config"
                                        class="table table-striped table-bordered">
                                     <thead>
-                                        <tr>
-                                            <th>
-                                                <input type="checkbox" id="checkBoxAll" class="custom-checkbox" />
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Account.Avatar)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.ProfessionalName)
-                                            </th>
-                                            @*<th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>*@
-                                            <th>Action</th>
-                                        </tr>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="checkBoxAll" class="custom-checkbox"/>
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Account.Avatar)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ProfessionalName)
+                                        </th>
+                                        @*<th>
+                                                    @Html.DisplayNameFor(model => model.Status)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.CreatedAt)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.UpdatedAt)
+                                                </th>*@
+                                        <th>Action</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach (var item in Model.Where(x => x.Status == true).Reverse())
-                                        {
+                                    @foreach (var item in Model.Where(x => x.Status == true).Reverse())
+                                    {
                                         <tr>
                                             <td>
-                                                <input type="checkbox" name="ids" value="@item.Id" />
+                                                <input type="checkbox" name="ids" value="@item.Id"/>
                                             </td>
                                             <td>
-                                                <img src="@Html.DisplayFor(modelItem => item.Account.Avatar)" style="width:90px; height: 80px" />
+                                                <img src="@Html.DisplayFor(modelItem => item.Account.Avatar)" style="width: 90px; height: 80px"/>
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.ProfessionalName)
                                             </td>
                                             @*<td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>*@                                           
+                                                        @Html.DisplayFor(modelItem => item.Status)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.UpdatedAt)
+                                                    </td>*@
                                             <td>
                                                 <div class="d-flex">
                                                     <a class="m-1" href="/Admin/Professionals/Edit/@item.Id">
@@ -110,7 +117,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        }
+                                    }
                                     </tbody>
                                 </table>
                             </div>
@@ -127,5 +134,11 @@
         $("#checkBoxAll").click(function () {
             $('input:checkbox').not(this).prop('checked', this.checked);
         });
+    </script>
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+
+        }, 2000)
     </script>
 }

@@ -10,7 +10,7 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class ProfessionalsController : Controller
+    public class ProfessionalsController : BaseController
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
 
@@ -18,6 +18,13 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var professionals = db.Professionals.Include(p => p.Account);
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+
+
             return View(professionals.ToList());
         }
 
@@ -57,6 +64,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 professional.UpdatedAt = DateTime.Now;
                 db.Professionals.Add(professional);
                 db.SaveChanges();
+
+                TempData["result"] = "Thêm mới thành công";
                 return RedirectToAction("Index");
             }
 
@@ -92,6 +101,8 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 professional.UpdatedAt = DateTime.Now;
                 db.Entry(professional).State = EntityState.Modified;
                 db.SaveChanges();
+
+                TempData["result"] = "Sửa thành công";
                 return RedirectToAction("Index");
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", professional.AccountId);
@@ -113,7 +124,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 db.Entry(todo).State = EntityState.Modified;
                 db.SaveChanges();
             }
-
+            TempData["result"] = "Xóa hết thành công";
             return RedirectToAction("Index");
         }
 
@@ -141,6 +152,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
             Professional professional = db.Professionals.Find(id);
             db.Professionals.Remove(professional);
             db.SaveChanges();
+            TempData["result"] = "Xóa thành công";
             return RedirectToAction("Index");
         }
 
