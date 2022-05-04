@@ -122,7 +122,6 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         };
                         db.Experiences.Add(experience);
                     }
-
                     /* var result = dao.Insert(account);*/
                     db.SaveChanges();
                     /* if (result > 0)

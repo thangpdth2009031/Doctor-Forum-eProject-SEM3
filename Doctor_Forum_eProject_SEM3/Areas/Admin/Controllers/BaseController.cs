@@ -13,7 +13,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var session = (UserLogin) Session[Common.UserSession.USER_SESSION];
+            var session = (Account) Session[Common.UserSession.USER_SESSION];
             if (session == null || session.GroupId == "MEMBER")
             {
                 filterContext.Result = new RedirectToRouteResult(new
