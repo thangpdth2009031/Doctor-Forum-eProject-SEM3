@@ -165,6 +165,7 @@
             <div class="col-9">
                 <div class="container">
                     <div class="row">
+                        @{ Html.RenderAction("NewestPost", "Posts"); }
                         @if (Model.ToList().Count > 0)
                         {
                             foreach (var item in Model)
@@ -176,7 +177,7 @@
 
                             }
                         }
-                        @{ Html.RenderAction("NewestPost", "Posts"); }
+
                     </div>
                 </div>
                 <div class="container">
@@ -683,13 +684,4 @@
         </div>
     </div>
 </section>
-<div class="section section-qa">
-    <div class="container">
-        <div class="row" style="margin-top: 10px; height: 380px">
-           
-            <div class="col-md-4">
-            </div>
-        </div>
-    </div>
-</div>
 
