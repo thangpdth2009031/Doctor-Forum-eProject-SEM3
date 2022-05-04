@@ -103,6 +103,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         CreatedAt = DateTime.Now,
                         UpatedAt = DateTime.Now
                     };
+                    db.Achievements.Add(achievement);
                     Professional professional = new Professional()
                     {
                         ProfessionalName = accountModel.ProfessionalName,
@@ -111,6 +112,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
                     };
+                    db.Professionals.Add(professional);
                     Qualification qualification = new Qualification()
                     {
                         Year = accountModel.Year,
@@ -121,6 +123,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now,
                     };
+                    db.Qualifications.Add(qualification);
                     Experience experience = new Experience()
                     {
                         StartYear = accountModel.StartYear,
@@ -133,17 +136,20 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
                     };
-                    var result = dao.Insert(account, professional, qualification, experience, achievement);
-                    if (result > 0)
-                    {
-                        ViewBag.Success = "Đăng ký thành công";
-                        accountModel = new AccountModel();
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Đăng ký không thành công.");
-                    }
+                    db.Experiences.Add(experience);
+                   /* var result = dao.Insert(account);*/
+                    db.SaveChanges();
+                    /* if (result > 0)
+                     {
+                         ViewBag.Success = "Đăng ký thành công";
+                         accountModel = new AccountModel();
+                         return RedirectToAction("Index", "Home");
+                     }
+                     else
+                     {
+                         ModelState.AddModelError("", "Đăng ký không thành công.");
+                     }
+                     return View(accountModel);*/
                     return View(accountModel);
 
                 }
