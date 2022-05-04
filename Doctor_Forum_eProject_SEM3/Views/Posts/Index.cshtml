@@ -84,7 +84,7 @@
                 <div class="container bg-white">
                     <div class="row" style="margin-top: 50px">
                         <div class="col-lg-12 wrapper mt-1">
-                            @foreach (var item in Model.Where(x => x.Status == true).Reverse())
+                            @foreach (var item in Model.Where(x => x.Status == true && x.Account.Status == true).Reverse())
                             {
                                 <div class="item-holder item row">
                                     <div class="image-box col-3">
@@ -96,10 +96,16 @@
                                         @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
                                         <div class="anen py-0">
                                             @Html.Raw(item.Content)
-                                        </div>
+                                        </div>                                       
                                         <div>
                                             <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="@item.Account.Avatar">
-                                            <span class="mr-1">@item.Account.FullName</span>-<span class="ml-1">@item.Specialization.Name</span>
+                                            <span class="mr-1">@Html.ActionLink(item.Account.FullName, "UserProfile", "UserAccount", new { id = item.Account.Id }, new { @class = "text-dark link-profile" })</span>-<span class="ml-1">@*@item.Specialization.Name*@</span>    
+                                            @*@if (item.Specialization.Name != null)
+        {
+            <span class="ml-1">
+                @item.Specialization.Name
+            </span>
+        }*@
                                         </div>
                                     </div>
                                 </div>
