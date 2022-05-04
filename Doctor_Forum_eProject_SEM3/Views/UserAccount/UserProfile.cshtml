@@ -1,9 +1,40 @@
-
-﻿
+﻿@model Doctor_Forum_eProject_SEM3.Models.Account
+@using Doctor_Forum_eProject_SEM3.Models
 @{
     ViewBag.Title = "UserProfile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<Professional> professionals = ViewBag.Professional as IEnumerable<Professional>;
+    IEnumerable<Experience> experiences = ViewBag.Experience as IEnumerable<Experience>;
+    IEnumerable<Qualification> qualifications = ViewBag.Qualification as IEnumerable<Qualification>;
+    IEnumerable<Post> posts = ViewBag.Post as IEnumerable<Post>;
 }
+
+<style>
+    .fs-title {
+        color: #48bdc5;
+    }
+
+    .content-post {
+        display: block;
+        display: -webkit-box;
+        height: 16px*1.3*3;
+        font-size: 16px;
+        line-height: 1.3;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 10px;
+    }
+
+    .a-link {
+        color: black;
+    }
+
+        .a-link:hover {
+            color: #4e4e4e;
+        }
+</style>
+
 <link href="~/Content/css/UserProfile.css" rel="stylesheet" />
 <div style="background-color: #f4f6f9;">
     <div class="container mt-5" style="">
@@ -11,22 +42,22 @@
             <div class="col-4">
                 <div class="card profile-header">
                     <div class="body text-center m-2" style="text-align: center">
-                        <div class="profile-image mb-4"> <img class="avatar-doctor" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt=""> </div>
+                        <div class="profile-image mb-4"> <img class="avatar-doctor" style="width: 160px; height: 155px; border: none;" src="@Html.DisplayFor(model => model.Avatar)" alt=""> </div>
                         <div>
-                            <h4 class="m-b-0"><strong>Dr. Charlotte</strong> Deo</h4>
-                            <span class="job_post">Neurologist</span>
-                            <p class="mt-2">795 Folsom Ave, Suite 600<br> San Francisco, CADGE 94107</p>
+                            <h4 class="m-b-0"><strong>Dr. @Html.DisplayFor(model => model.UserName)</strong></h4>
+                            <span class="job_post">Specialization:<br / @Html.DisplayFor(model => model.Specialization)</span>
+                            <p class="mt-2">Address: @Html.DisplayFor(model => model.AddressDetail)<br />Phone:@Html.DisplayFor(model => model.Phone)<br>Email: @Html.DisplayFor(model => model.Email)</p>
                         </div>
                         <div class="mt-4">
                             <button class="btn btn-primary btn-round">Follow</button>
                             <button class="btn btn-primary btn-round btn-simple">Message</button>
                         </div>
-                        <p class="social-icon mt-3">
-                            <a title="Twitter" href=""><i class="fa-brands fa-twitter"></i></a>
-                            <a title="Facebook" href=""><i class="fa-brands fa-facebook"></i></a>
-                            <a title="Google-plus" href=""><i class="fa-brands fa-instagram-square"></i></a>
-                            <a title="Behance" href=""><i class="fa-brands fa-behance-square"></i></a>
-                        </p>
+                        @*<p class="social-icon mt-3">
+                                <a title="Twitter" href=""><i class="fa-brands fa-twitter"></i></a>
+                                <a title="Facebook" href=""><i class="fa-brands fa-facebook"></i></a>
+                                <a title="Google-plus" href=""><i class="fa-brands fa-instagram-square"></i></a>
+                                <a title="Behance" href=""><i class="fa-brands fa-behance-square"></i></a>
+                            </p>*@
                     </div>
 
                 </div>
@@ -158,181 +189,118 @@
                     <div class="tab-content">
                         <div class="tab-pane body show active" id="about">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Full Name</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary"> Kenneth Valdez</div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Email</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary"> fip@jukmuh.al</div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Phone</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary"> (239) 816-9029</div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Mobile</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary"> (320) 380-4539</div>
-                                </div><hr><div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Address</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary"> Bay Area, San Francisco, CA</div>
-                                </div>
-                                <hr>
 
+                                @foreach (var item in experiences)
+                                {
+                                    <h4>Experience</h4>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-3" style="margin-top">
+                                            <h6 class="mb-0 mt-1 mt-1">Start Year:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">@item.StartYear</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0 mt-1">End Year:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">@item.EndYear</div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0 mt-1">Position:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">@item.Position</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0 mt-1">Workplace:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">@item.Workplace</div>
+                                    </div>
+                                }
+
+                                <hr>
+                                @foreach (var item in qualifications)
+                                {
+                                    <h4>Qualifications</h4>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0 mt-1">Year:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">@item.Year</div>
+                                    </div><hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0 mt-1">School:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">@item.School</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0 mt-1">Description:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">@item.Description</div>
+                                    </div><hr />
+                                }
+
+                                @foreach (var item in professionals)
+                                {
+                                    <h4>Professional</h4>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0 mt-1">Professional:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">@item.ProfessionalName</div>
+                                    </div>
+                                }
+                                <hr>
                             </div>
                         </div>
-                        <div class="tab-pane body show" id="Account">
-                            <div class="tab-content">
-                                <div class="post">
-                                    <div class="wrap-ut pull-left">
-                                        <div class="userinfo pull-left">
-                                            <div class="avatar">
-                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+                        @foreach (var item in posts)
+                        {
+                            <div class="tab-pane body show" id="Account">
+                                <div class="tab-content">
+                                    <div class="post" style="background-color: #f2f2f2; ">
+                                        <div class="wrap-ut pull-left">
+                                            <div class="userinfo pull-left" style="width: 15%; padding: 27px 0px; background-color: #f2f2f2">
+                                                <div class="avatar">
+                                                    <img style="width: 70px; height: 70px; border-radius: 0; object-fit: cover;" src="@item.Image" alt="">
 
-                                            </div>
+                                                </div>
 
-                                            <div class="icons">
-                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                                <div class="icons">
+                                                    <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
+                                                </div>
                                             </div>
+                                            <div class="posttext pull-left">
+                                                <h2>@Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "a-link", id = item.Id })</h2>
+                                                <div class="content-post"> @Html.Raw(item.Content)</div>
+                                            </div>
+                                            <div class="clearfix"></div>
                                         </div>
-                                        <div class="posttext pull-left">
-                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
-                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="postinfo pull-left">
-                                        <div class="comments">
-                                            <div class="commentbg">
-                                                560
-                                                <div class="mark"></div>
-                                            </div>
-
-                                        </div>
-                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
-                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="tab-content">
-                                <div class="post">
-                                    <div class="wrap-ut pull-left">
-                                        <div class="userinfo pull-left">
-                                            <div class="avatar">
-                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
+                                        <div class="postinfo pull-left">
+                                            <div class="comments">
+                                                <div class="commentbg">
+                                                    560
+                                                    <div class="mark"></div>
+                                                </div>
 
                                             </div>
-
-                                            <div class="icons">
-                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="posttext pull-left">
-                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
-                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
+                                            <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
+                                            <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="postinfo pull-left">
-                                        <div class="comments">
-                                            <div class="commentbg">
-                                                560
-                                                <div class="mark"></div>
-                                            </div>
-
-                                        </div>
-                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
-                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
-                                    </div>
-                                    <div class="clearfix"></div>
                                 </div>
                             </div>
-                            <div class="tab-content">
-                                <div class="post">
-                                    <div class="wrap-ut pull-left">
-                                        <div class="userinfo pull-left">
-                                            <div class="avatar">
-                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
-
-                                            </div>
-
-                                            <div class="icons">
-                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="posttext pull-left">
-                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
-                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="postinfo pull-left">
-                                        <div class="comments">
-                                            <div class="commentbg">
-                                                560
-                                                <div class="mark"></div>
-                                            </div>
-
-                                        </div>
-                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
-                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="tab-content">
-                                <div class="post">
-                                    <div class="wrap-ut pull-left">
-                                        <div class="userinfo pull-left">
-                                            <div class="avatar">
-                                                <img style="width: 50px;" src="https://lovicouple.com/wp-content/uploads/2019/12/vai-avatar-cap-cho-cac-ban-de-facebook-25.jpg" alt="">
-
-                                            </div>
-
-                                            <div class="icons">
-                                                <img src="images/icon1.jpg" alt=""><img src="images/icon4.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="posttext pull-left">
-                                            <h2><a style="color: #363838;" href="02_topic.html">10 Kids Unaware of Their Halloween Costume</a></h2>
-                                            <p>It's one thing to subject yourself to a Halloween costume mishap because, hey, that's your prerogative.</p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="postinfo pull-left">
-                                        <div class="comments">
-                                            <div class="commentbg">
-                                                560
-                                                <div class="mark"></div>
-                                            </div>
-
-                                        </div>
-                                        <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
-                                        <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-

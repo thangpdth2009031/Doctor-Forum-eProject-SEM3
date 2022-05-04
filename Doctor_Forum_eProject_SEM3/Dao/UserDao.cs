@@ -17,15 +17,12 @@ namespace Doctor_Forum_eProject_SEM3.Dao
             db = new DoctorForumDbContext();
         }
 
-        public long Insert(Account user, Professional process, Qualification qualification, Experience experience, Achievement achievement)
+        public long Insert(Account user)
         {
             try
             {
-                db.Professionals.Add(process);
-                db.Qualifications.Add(qualification);
-                db.Experiences.Add(experience);
-                db.Achievements.Add(achievement);
-                db.Accounts.Add(user);
+                db.Accounts.Add(user);        
+                
                 db.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)

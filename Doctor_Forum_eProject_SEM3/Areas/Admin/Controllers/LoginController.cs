@@ -39,7 +39,10 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                     userSession.UserName = user.UserName;
                     userSession.GroupId = user.GroupId;
                     userSession.Id = user.Id;
-        
+
+                    //var userSession = new Account();
+                    //userSession = user; 
+
                     // var listCredentials = dao.GetListCredential(model.Username);
         
         
