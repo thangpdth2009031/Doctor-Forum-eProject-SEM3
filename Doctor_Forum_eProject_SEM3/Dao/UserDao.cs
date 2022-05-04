@@ -17,7 +17,7 @@ namespace Doctor_Forum_eProject_SEM3.Dao
             db = new DoctorForumDbContext();
         }
 
-        public int Insert(Account user, Professional process, Qualification qualification, Experience experience, Achievement achievement)
+        public long Insert(Account user, Professional process, Qualification qualification, Experience experience, Achievement achievement)
         {
             try
             {
