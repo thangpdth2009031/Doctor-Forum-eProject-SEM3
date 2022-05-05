@@ -5,9 +5,37 @@
     IEnumerable<Specialization> specializations = ViewBag.Specialization as IEnumerable<Specialization>;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/simplePagination.min.css">
 <style>
+    .light-theme a:hover {
+        color: #48bdc5;
+    }
 
+    .light-theme .current {
+        background: #48bdc5;
+        color: #ffffff;
+        /* border-color: #444; */
+        /* box-shadow: 0 1px 0 rgb(255 255 255), 0 0 2px rgb(0 0 0 / 30%) inset; */
+        border: none;
+        padding: 9px 18px;
+        cursor: pointer;
+    }
+
+    .light-theme a, .light-theme span {
+        float: left;
+        color: #908a8a;
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 400;
+        text-align: center;
+        /* border: 1px solid #bbb; */
+        min-width: 14px;
+        padding: 8px 18px;
+        margin: 0 5px 0 0;
+        border-radius: 3px;
+    }
     .navbar-title {
         /* -webkit-line-clamp: 2; */
         display: block;
@@ -223,13 +251,13 @@
                 <div class="container">
                     <div class="row" style="margin-top: 20px">
                         @{Html.RenderAction("TypePost", "Posts");}
-                        <div class="col-lg-12 mt-5">
+                        <div class="col-lg-12 mt-5 wrapper">
                             @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                             {
-                                <div class="item-holder row">
+                                <div class="item-holder row item">
                                     <div class="image-box col-4">
                                         <figure>
-                                            <a href="blog-details.html"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="@item.Image" alt=""></a>
+                                            <a href="/Posts/Details/@item.Id"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="@item.Image" alt=""></a>
                                         </figure>
                                     </div>
                                     <div class="content-text col-8 pt-0">
@@ -248,6 +276,7 @@
                                 </div>
                             }
                         </div>
+                        <div id="pagination" style=" margin: 20px 0;"></div>
                         <div class="col-lg-12 mt-5">
                             <ul class="nav nav-tabs category-tab mb-3">
                                 <li class="nav-item" role="presentation">
@@ -274,7 +303,7 @@
                     </div>
                     <div class="search-box">
                         <form method="post" action="index.html">
-                            <div class="input-group">                               
+                            <div class="input-group">
                                 <input type="text" id="txtSearch" class="form-control" name="txtSearch" placeholder="Enter category.." value="" />
                             </div>
                         </form>
@@ -289,9 +318,9 @@
                             {
                                 <li class="item tr-list-doctor"><a href="#">@item.Name</a></li>
                             }
-                           
+
                         </ul>
-                         @*<div id="pagination"></div>*@
+                        @*<div id="pagination"></div>*@
                     </div>
                     <div class="tag-list">
                         <div class="text-title">
@@ -357,4 +386,21 @@
             }
         })
     })
+</script>
+<script>
+    $(".wrapper .item").slice(5).hide();
+    $('#pagination').pagination({
+
+        // Total number of items present
+        // in wrapper class
+        items: 30,
+
+        // Items allowed on a single page
+        itemsOnPage: 5,
+        onPageClick: function (noofele) {
+            $(".wrapper .item").hide()
+                .slice(5 * (noofele - 1),
+                    5 + 5 * (noofele - 1)).show();
+        }
+    });
 </script>

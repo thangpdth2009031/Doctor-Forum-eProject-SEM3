@@ -13,9 +13,11 @@
         margin: 0;
         padding: 0
     }
-    .fs-title {       
-        color: #48bdc5;    
+
+    .fs-title {
+        color: #48bdc5;
     }
+
     .content-post {
         display: block;
         display: -webkit-box;
@@ -279,7 +281,7 @@
                             <span class="job_post">Specialization: @session.SpecializationId</span>
                             <p class="mt-2">Address: @session.AddressDetail<br />Phone: @session.Phone<br>Email: @session.Email</p>
                         </div>
-                        <div class="mt-4">                         
+                        <div class="mt-4">
                             <a href="#" class="btn btn-primary btn-round btn-simple">Update Profile</a>
                         </div>
                         <p class="social-icon mt-3">
@@ -413,86 +415,94 @@
             <div class="col-lg-8 col-md-12">
                 <div class="card">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><a class="nav-link show active" data-toggle="tab" href="#about">Account</a></li>
-                        <li class="nav-item"><a class="nav-link show" data-toggle="tab" href="#Account">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link show active" data-toggle="tab" href="#Account">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link show " data-toggle="tab" href="#about">Account Detail</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane body show active" id="about">
-                            <div class="card-body">
-
+                        <div class="tab-pane body show" id="about">
+                            <div>
+                                <h4>Experience</h4>
                                 @foreach (var item in experiences)
                                 {
-                                    <h4>Experience</h4>
-                                    <div class="row mt-4">
-                                        <div class="col-sm-3" style="margin-top">
-                                            <h6 class="mb-0 mt-1 mt-1">Start Year:</h6>
+                                    <div class="card-body">
+                                        <div class="row mt-1">
+                                            <div class="col-sm-3" style="margin-top">
+                                                <h6 class="mb-0 mt-1 mt-1">Start Year:</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">@item.StartYear</div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">@item.StartYear</div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0 mt-1">End Year:</h6>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0 mt-1">End Year:</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">@item.EndYear</div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">@item.EndYear</div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0 mt-1">Position:</h6>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0 mt-1">Position:</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">@item.Position</div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">@item.Position</div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0 mt-1">Workplace:</h6>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0 mt-1">Workplace:</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">@item.Workplace</div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">@item.Workplace</div>
                                     </div>
                                 }
 
-                                <hr>
+                                <h4 class="mt-2">Qualifications</h4>
                                 @foreach (var item in qualifications)
                                 {
-                                    <h4>Qualifications</h4>
-                                    <div class="row mt-4">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0 mt-1">Year:</h6>
+                                    <div class="card-body">
+                                        <div class="row mt-1">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0 mt-1">Year:</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">@item.Year</div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">@item.Year</div>
-                                    </div><hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0 mt-1">School:</h6>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0 mt-1">School:</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">@item.School</div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">@item.School</div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0 mt-1">Description:</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">@item.Description</div>
+                                        </div>
+                                        <hr>
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0 mt-1">Description:</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">@item.Description</div>
-                                    </div><hr />
                                 }
-
+                                <h4>Professional</h4>
                                 @foreach (var item in professionals)
                                 {
-                                    <h4>Professional</h4>
-                                    <div class="row mt-4">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0 mt-1">Professional:</h6>
+                                    <div class="card-body">
+                                        <div class="row mt-1">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0 mt-1">Professional:</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">@item.ProfessionalName</div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">@item.ProfessionalName</div>
+                                        <hr>
                                     </div>
                                 }
-                                <hr>
+
                             </div>
                         </div>
-                        @foreach (var item in Model.Where(x => x.Status == true).Reverse())
-                        {
-                            <div class="tab-pane body show" id="Account">
+
+
+                        <div class="tab-pane body show active" id="Account">
+                            @foreach (var item in Model.Where(x => x.Status == true).Reverse())
+                            {                                 
                                 <div class="tab-content">
                                     <div class="post" style="background-color: #f2f2f2; ">
                                         <div class="wrap-ut pull-left">
@@ -526,8 +536,8 @@
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>                    
                     </div>
                 </div>
             </div>
