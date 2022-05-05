@@ -40,6 +40,12 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             var post = db.Posts.Where(x => x.Type == 3).OrderByDescending(p => p.Id).FirstOrDefault();
             return PartialView(post);
         }
+        [ChildActionOnly]
+        public PartialViewResult TypeQuestion()
+        {
+            var post = db.Posts.Where(x => x.Type == 1).OrderByDescending(p => p.Id).ToList();
+            return PartialView(post);
+        }
 
         // GET: Admin/PostAdmin/Details/5
         public ActionResult Details(int? id)
