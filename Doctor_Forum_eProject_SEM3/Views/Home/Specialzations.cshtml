@@ -1,23 +1,17 @@
 ﻿@model IEnumerable<Doctor_Forum_eProject_SEM3.Models.Specialization>
-@foreach (var item in Model.Where(x => x.Status == true))
-{
-    <div class="list-ng-categories">
-        <div class="row ">
-            <div class="col-sm-4 ">
-                <div class="cat-item specialist_data_detail d-flex"
-                     data-seo="Chẩn đoán hình ảnh">
-                    <div class="cat-image">
-                        <img src="@item.Image"
-                             alt="">
-                    </div>
-                    <div class="cat-model">
-                        <h3 class="cat-title"><a href="#">@item.Name</a></h3>
-                    </div>
-                </div><!-- END Cat Item -->
+    @foreach (var item in Model.Where(x => x.Status == true))
+    {
+    <div class="col-sm-4 ">
+        <div class="cat-item specialist_data_detail d-flex"
+             data-seo="Chẩn đoán hình ảnh">
+            <div class="cat-image">
+                <img style="width:50px; padding:10px;" src="@item.Image"
+                     alt="">
             </div>
-        </div>
-        <div class="row">
-            <div class="clearfix"></div>
-        </div>
+            <div class="cat-model">
+                <div class="cat-title"><a href="#">@item.Name</a></div>
+            </div>
+        </div><!-- END Cat Item -->
     </div>
-}
+    
+    }

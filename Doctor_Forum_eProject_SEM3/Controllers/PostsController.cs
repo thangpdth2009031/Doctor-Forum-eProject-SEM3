@@ -84,7 +84,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                 post.UpdatedAt = DateTime.Now;
                 db.Posts.Add(post);
                 db.SaveChanges();
-                return RedirectToAction("Posts", "PersonalPage");
+                return RedirectToAction("AccountProfile", "UserAccount");
             }
 
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar", post.AccountId);
