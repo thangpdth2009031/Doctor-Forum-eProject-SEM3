@@ -36,6 +36,7 @@
         margin: 0 5px 0 0;
         border-radius: 3px;
     }
+
     .navbar-title {
         /* -webkit-line-clamp: 2; */
         display: block;
@@ -234,17 +235,7 @@
                 <div class="container">
                     <div class="row">
                         @{ Html.RenderAction("NewestPost", "Posts"); }
-                        @if (Model.ToList().Count > 0)
-                        {
-                            foreach (var item in Model)
-                            {
-                                if (item.Type.Value == 3)
-                                {
-                                    { Html.RenderAction("TypeKnowledge", "Posts"); }
-                                }
-
-                            }
-                        }
+                        @{ Html.RenderAction("TypeKnowledge", "Posts"); }
 
                     </div>
                 </div>
@@ -254,37 +245,41 @@
                         <div class="col-lg-12 mt-5 wrapper">
                             @foreach (var item in Model.Where(x => x.Status == true).Reverse())
                             {
-                                <div class="item-holder row item">
-                                    <div class="image-box col-4">
-                                        <figure>
-                                            <a href="/Posts/Details/@item.Id"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="@item.Image" alt=""></a>
-                                        </figure>
-                                    </div>
-                                    <div class="content-text col-8 pt-0">
-                                        @if (item.Title != null)
-                                        {
-                                            @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
-                                        }
-                                        <div class="an py-0 mb-1 an">
-                                            @Html.Raw(item.Content)
+                                if (item.Type != 1)
+                                {
+                                    <div class="item-holder row item">
+                                        <div class="image-box col-4">
+                                            <figure>
+                                                <a href="/Posts/Details/@item.Id"><img style="height: 149px; object-fit: cover" loading="lazy" class="img-fluid" src="@item.Image" alt=""></a>
+                                            </figure>
                                         </div>
-                                        <div>
-                                            <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="@item.Account.Avatar">
-                                            <span class="mr-1">@Html.ActionLink(item.Account.FullName, "UserProfile", "UserAccount", new { id = item.Account.Id }, new { @class = "link-profile" })</span>-<span class="ml-1">@*@item.Specialization.Name*@</span>
+                                        <div class="content-text col-8 pt-0">
+                                            @if (item.Title != null)
+                                            {
+                                                @Html.ActionLink(item.Title, "Details", "Posts", new { id = item.Id }, new { @class = "title-post", id = item.Id })
+                                            }
+                                            <div class="an py-0 mb-1 an">
+                                                @Html.Raw(item.Content)
+                                            </div>
+                                            <div>
+                                                <img style="width: 40px;height: 40px; border-radius: 50%; object-fit: cover" src="@item.Account.Avatar">
+                                                <span class="mr-1">@Html.ActionLink(item.Account.FullName, "UserProfile", "UserAccount", new { id = item.Account.Id }, new { @class = "link-profile" })</span>-<span class="ml-1">@*@item.Specialization.Name*@</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
+
                             }
                         </div>
                         <div id="pagination" style=" margin: 20px 0;"></div>
                         <div class="col-lg-12 mt-5">
                             <ul class="nav nav-tabs category-tab mb-3">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mới trả lời</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Question</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Câu hỏi thường gặp</a>
-                                </li>
+                                @*  <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Câu hỏi thường gặp</a>
+                                    </li>*@
                             </ul>
 
                             <div class="custom-scrollbar tab-content" style="overflow-x: hidden; overflow-y: scroll; height: 454px">

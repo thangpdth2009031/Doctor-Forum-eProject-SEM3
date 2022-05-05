@@ -85,7 +85,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             {
                 var account = (Account)Session[UserSession.USER_SESSION];
                 post.AccountId = account.Id;
-                post.Status = true;
+                post.Status = false;
                 post.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));
                 post.UpdatedAt = DateTime.Now;
                 db.Posts.Add(post);
