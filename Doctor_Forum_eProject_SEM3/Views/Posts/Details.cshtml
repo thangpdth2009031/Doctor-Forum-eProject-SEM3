@@ -1,7 +1,7 @@
 ﻿@model Doctor_Forum_eProject_SEM3.Models.Post
 @using Doctor_Forum_eProject_SEM3.Models
 @{
-    ViewBag.Title = "PostDetail";
+    ViewBag.Title = "Post Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.PostId = Model.Id;
     IEnumerable<Reply> replies = ViewData["Reply"] as IEnumerable<Reply>;

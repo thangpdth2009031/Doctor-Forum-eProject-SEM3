@@ -152,7 +152,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(LoginModel model)     
         {
             if (ModelState.IsValid)
             {
