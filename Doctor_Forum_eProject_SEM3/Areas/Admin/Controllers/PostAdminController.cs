@@ -120,7 +120,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-               var account = (UserLogin)Session[UserSession.USER_SESSION];
+               var account = (Account)Session[UserSession.USER_SESSION];
 
                if (account != null)
                {
