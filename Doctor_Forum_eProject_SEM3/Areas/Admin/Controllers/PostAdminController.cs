@@ -11,12 +11,13 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Doctor_Forum_eProject_SEM3.Common;
+using Doctor_Forum_eProject_SEM3.Controllers;
 using Doctor_Forum_eProject_SEM3.Dao;
 using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class PostAdminController : BaseController
+    public class PostAdminController : BasesController
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
         Post post = new Post();

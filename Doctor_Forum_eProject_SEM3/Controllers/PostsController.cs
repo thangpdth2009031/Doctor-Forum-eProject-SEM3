@@ -11,7 +11,7 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Controllers
 {
-    public class PostsController : Controller
+    public class PostsController : BasesController
     {
         DateTime dateTimeNow = DateTime.Now;
         private DoctorForumDbContext db = new DoctorForumDbContext();
