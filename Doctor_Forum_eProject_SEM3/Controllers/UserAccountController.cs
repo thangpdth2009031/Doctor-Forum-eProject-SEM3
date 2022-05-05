@@ -122,7 +122,6 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                         };
                         db.Experiences.Add(experience);
                     }
-
                     /* var result = dao.Insert(account);*/
                     db.SaveChanges();
                     /* if (result > 0)
@@ -263,10 +262,10 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             }
             else
             {
-                ViewBag.Professional = db.Professionals.Where(p => p.AccountId == (account.Id)).ToList();
-                ViewBag.Qualification = db.Qualifications.Where(p => p.AccountId == (account.Id)).ToList();
-                ViewBag.Experience = db.Experiences.Where(p => p.AccountId == (account.Id)).ToList();
-                var post = db.Posts.Where((x => x.Status == (true) && x.AccountId == (account.Id))).ToList();
+                ViewBag.Professional = db.Professionals.Where(p => p.Status == (true) &&  p.AccountId == (account.Id)).ToList();
+                ViewBag.Qualification = db.Qualifications.Where(p => p.Status == (true) && p.AccountId == (account.Id)).ToList();
+                ViewBag.Experience = db.Experiences.Where(p => p.Status == (true) && p.AccountId == (account.Id)).ToList();
+                var post = db.Posts.Where((p => p.Status == (true) && p.AccountId == (account.Id))).ToList();
                 return View(post);
             }
         }

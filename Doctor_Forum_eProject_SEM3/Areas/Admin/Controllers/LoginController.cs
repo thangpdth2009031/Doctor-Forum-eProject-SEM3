@@ -35,7 +35,7 @@ namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
                 if (result == 1)
                 {
                     var user = dao.GetById(model.Username);
-                    var userSession = new UserLogin();
+                    var userSession = new Account();
                     userSession.UserName = user.UserName;
                     userSession.GroupId = user.GroupId;
                     userSession.Id = user.Id;

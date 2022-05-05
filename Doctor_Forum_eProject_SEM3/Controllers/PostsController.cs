@@ -19,6 +19,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         public ActionResult Index()
         {
             var posts = db.Posts.Include(p => p.Account).Include(p => p.Specialization).Where(p=>p.Status == true);
+            ViewBag.Specialization = db.Specializations.Where(x => x.Status == true).ToList();
             return View(posts.ToList());
         }
         [ChildActionOnly]
@@ -60,6 +61,7 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Specialization = db.Specializations.Where(x => x.Status == true).ToList();
             return View(post);
         }
         
