@@ -11,7 +11,7 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Controllers
 {
-    public class PostsController : BasesController
+    public class PostsController : Controller
     {
         DateTime dateTimeNow = DateTime.Now;
         private DoctorForumDbContext db = new DoctorForumDbContext();
@@ -210,7 +210,6 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     reply.AccountId = account.Id;
                     reply.Status = true;
                     ViewBag.Message = reply.Message;
-                    /*reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));*/
                     reply.CreatedAt = DateTime.Parse(dateTimeNow.ToString("ddd, dd MMMM yyyy"));
                     reply.UpdatedAt = DateTime.Now;
                     db.Replies.Add(reply);
