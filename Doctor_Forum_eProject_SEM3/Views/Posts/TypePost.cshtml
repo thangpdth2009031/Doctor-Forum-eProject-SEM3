@@ -11,18 +11,30 @@
         overflow: hidden;
         text-overflow: ellipsis;
         margin-top: 10px;
+        font-size: 18px;
+        color: black;
+        font-weight: 500;
+    }
+    .usname:hover {
+        color: #48bdc5;
     }
 </style>
 @foreach (var item in Model.Take(3))
 {
-    <div class="col-4">
-        <div>
-            <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="@item.Image">
+   
+        <div class="col-4">
+            <div>
+                <a href="/Posts/Details/@item.Id">
+                    <img style="height: 163px; width: 100%; object-fit: cover; border-radius: 5px" src="@item.Image">
+                </a>
+            </div>
+            <div style="padding: 7px">
+                <a style="color: #343434" href="/UserAccount/UserProfile/@item.Account.Id" class="d-block"><div class="usname">@item.Account.FullName</div></a>
+                <a href="/Posts/Details/@item.Id">
+                    <div class="click">@Html.Raw(item.Title)</div>
+                    </a>
+            </div>
         </div>
-        <div style="padding: 7px">
-            <a style="color: #343434" href="#" class="d-block"><div class="click">@item.Account.FullName</div></a>
-            <div class="click">@Html.Raw(item.Content)</div>
-        </div>
-    </div>
+   
 }
 

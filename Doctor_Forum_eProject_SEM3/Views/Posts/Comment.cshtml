@@ -15,7 +15,9 @@
         .image-text img {
             width: 100%;
         }
-
+    .ck-content {
+        height: 140px;
+    }
     .right-button-reply {
         right: 10px !important;
     }
@@ -25,7 +27,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/simplePagination.min.css">
 <div class="comments-area">
     <div class="sec-title">
-        <h6>Comments (3)</h6>
+        <h6>Comments (@Model.Count())</h6>
     </div>
     <div class="wrapper">
         @foreach (var item in Model.Where(x => x.Status == true).Reverse())
@@ -70,7 +72,11 @@
             </div>
         }
     </div>
-    <div id="pagination" style=" margin: 30px 0;"></div>
+    @if (Model.Count() > 4)
+    {
+        <div id="pagination" style=" margin: 30px 0;"></div>
+    }
+
 </div>
 <script>
     $(".wrapper .item").slice(4).hide();
@@ -78,7 +84,7 @@
 
         // Total number of items present
         // in wrapper class
-        items: 9,
+        items: 12,
 
         // Items allowed on a single page
         itemsOnPage: 4,

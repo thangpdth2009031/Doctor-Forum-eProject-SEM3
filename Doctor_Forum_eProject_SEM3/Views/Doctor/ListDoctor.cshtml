@@ -41,7 +41,7 @@
 <section class="team-section section">
     <div class="container">
 
-     @*   <div class="section-title text-center">
+        @*   <div class="section-title text-center">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -77,13 +77,16 @@
                                 <h4>@child.ProfessionalName - @item1.FullName</h4>
                             }
                             <p>@item1.AddressDetail</p>
-                            <a href="/Account/Profile/@item1.Id" class="btn btn-main">Watch information</a>
+                            <a href="/UserAccount/UserProfile/@item1.Id" class="btn btn-main">Watch information</a>
                         </div>
                     </div>
                 </div>
             }
-        </div>       
-            <div id="pagination" style=" margin: 50px 0;"></div>
+        </div>
+        @if (Model.Count() > 9)
+        {
+            <div id="pagination" style=" margin: 30px 0;"></div>
+        }
     </div>
 
 </section>
