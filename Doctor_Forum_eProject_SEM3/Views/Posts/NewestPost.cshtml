@@ -5,13 +5,19 @@
           font-weight: 500;
           color: #3a3a3a;
       }
+
           .link-new-post:hover {
-              color: #398fef;
+              color: #11eeff;
           }
+      .usname:hover {
+          color: #48bdc5;
+      }
   </style>
-<div class="col-8">
-    <img style="height: 337px; width: 100%; object-fit: cover; border-radius: 10px; margin: 10px 0 5px 0" src="@Model.Image">
-    <p class="m-0" style="font-size: 13px">@Model.Account.FullName</p>
-    <a href="/Posts/Details/@Model.Id" class="link-new-post"> @Model.Title</a>
-</div>
+  <div class="col-8">
+      <a href="/Posts/Details/@Model.Id">
+          <img style="height: 337px; width: 100%; object-fit: cover; border-radius: 10px; margin: 10px 0 5px 0" src="@Model.Image">
+      </a>
+      <a href="/UserAccount/UserProfile/@Model.Account.Id"> <p class="m-0 usname" style="font-size: 13px">@Model.Account.FullName</p></a>
+          <a href="/Posts/Details/@Model.Id"><div class="link-new-post usname">@Model.Title</div></a>
+  </div>
 

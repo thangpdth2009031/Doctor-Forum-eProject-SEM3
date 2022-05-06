@@ -1,4 +1,25 @@
 ﻿@model IEnumerable<Doctor_Forum_eProject_SEM3.Models.Specialization>
+    <style>
+        .cat-title {
+            font-size: 16px;
+            display: block;
+            display: -webkit-box;
+            height: 16px*1.3*3;
+            font-size: 16px;
+            line-height: 1.3;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 10px;
+        }
+        .linksp {
+            color: #636363;
+        }
+            .linksp:hover {
+                color: #48bdc5; 
+            }
+    </style>
     @foreach (var item in Model.Where(x => x.Status == true))
     {
     <div class="col-sm-4 ">
@@ -8,8 +29,8 @@
                 <img style="width:50px; padding:10px;" src="@item.Image"
                      alt="">
             </div>
-            <div class="cat-model">
-                <div class="cat-title"><a href="#">@item.Name</a></div>
+            <div class="cat-model" style="margin-top: 3px;">
+                <div class="cat-title"><a class="linksp" href="#">@item.Name</a></div>
             </div>
         </div><!-- END Cat Item -->
     </div>
