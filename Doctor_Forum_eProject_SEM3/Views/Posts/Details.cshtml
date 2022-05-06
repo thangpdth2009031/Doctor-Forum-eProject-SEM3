@@ -139,21 +139,33 @@
 @section jsFooter {
     <script>
         $(document).ready(function () {
+            $("#formDemo").validate({
+                rules: {
+                    Message: "required",
+                },
+                messages: {
+                    Message: "Vui lòng nhập họ",
+                }
+            });
             $("#btnsubmit").click(function (e) {
-                //Serialize the form datas.
-                var valdata = $("#formComment").serialize();
-                //to get alert popup
-                $.ajax({
-                    url: "/PostComment/Posts",
-                    type: "POST",
-                    dataType: 'json',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    data: valdata,
-                    success: function (data) {
-                        $('.comments-area .comment').append(data);
-                    },
-                    error: function (data) { }
-                });
+                alert(1);
+                if (txtMes != null) {
+                @*    var valdata = $("#formComment").serialize();
+                    //to get alert popup
+                    $.ajax({
+                        url: "/PostComment/Posts",
+                        type: "POST",
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        data: valdata,
+                        success: function (data) {
+                            $('.comments-area .comment').append(data);
+                        },
+                        error: function (data) { }
+                    });*@
+                } else {
+                    alert(1);
+                }
             });
         });
     </script>

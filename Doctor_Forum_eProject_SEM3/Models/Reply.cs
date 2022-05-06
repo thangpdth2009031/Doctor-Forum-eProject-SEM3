@@ -25,6 +25,7 @@ namespace Doctor_Forum_eProject_SEM3.Models
         public int? AccountId { get; set; }
 
         [AllowHtml]
+        [Required(ErrorMessage = "Please enter message")]
         public string Message { get; set; }
 
         public bool Status { get; set; }
