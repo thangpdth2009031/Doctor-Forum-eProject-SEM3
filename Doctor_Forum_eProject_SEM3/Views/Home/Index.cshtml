@@ -83,8 +83,7 @@
 
     .an {
         display: block;
-        display: -webkit-box;
-        height: 16px*1.3*3;
+        display: -webkit-box;     
         font-size: 16px;
         line-height: 1.3;
         -webkit-line-clamp: 3; /* số dòng hiển thị */
@@ -93,7 +92,6 @@
         text-overflow: ellipsis;
         margin-top: 10px;
     }
-
         .an p {
             padding: 0 !important;
         }
@@ -343,37 +341,39 @@
                         <a href="#">Pediatric</a>
                         <div class="click-view-all" style="width:100%;text-align:center">
                             <div class="click-show-all-post" style="height:100%; border: none">Bài viết liên quan</div>
-                        </div> 
-
-
-                    </div>
-                    @foreach (var item in Model.Where(x => x.Status == true && x.Type == 2).Reverse())
-                    {
-
-                        <div class="d-flex" style="margin-top: 10px">
-                            <div class="text">
-                                <p class="navbar-title"><a style="color: #868686;" href="/Posts/Details/@item.Id">@item.Title</a></p>
-                            </div>
-                            <div class="text-img">
-                                <a href="/Posts/Details/@item.Id" style="width: 33%; padding: 10px 5px 0 0">
-                                    <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="@item.Image">
-                                </a>
-                            </div>
                         </div>
-                    }
-                    <div class="click-view-all" style="width:100%;text-align:center">
-                        <div class="click-show-all-post" style="height:100%; border: none">Chia sẻ kinh nghiệm</div>
-                    </div>
-                    <div class="row" style="margin-left:0px">
-                        @foreach (var item in Model.Where(x => x.Status == true && x.Type == 3).Reverse())
-                        {
-                            <a href="/Posts/Details/@item.Id" style="width: 33%; padding: 10px 5px 0 0">
 
-                                <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="@item.Image">
-                            </a>
+
+                    </div>
+                    <div class="postlq">
+                        @foreach (var item in Model.Where(x => x.Status == true && x.Type == 2).Take(5))
+                        {
+                            <div class="d-flex" style="margin-top: 10px">
+                                <div class="text">
+                                    <p class="navbar-title"><a style="color: #868686;" href="/Posts/Details/@item.Id">@item.Title</a></p>
+                                </div>
+                                <div class="text-img">
+                                    <a href="/Posts/Details/@item.Id" style="width: 33%; padding: 10px 5px 0 0">
+                                        <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="@item.Image">
+                                    </a>
+                                </div>
+                            </div>
+
                         }
                     </div>
-                </div>
+                        <div class="click-view-all" style="width:100%;text-align:center">
+                            <div class="click-show-all-post" style="height:100%; border: none">Chia sẻ kinh nghiệm</div>
+                        </div>
+                        <div class="row" style="margin-left:0px">
+                            @foreach (var item in Model.Where(x => x.Status == true && x.Type == 3).Take(15))
+                            {
+                                <a href="/Posts/Details/@item.Id" style="width: 33%; padding: 10px 5px 0 0">
+
+                                    <img style="object-fit: cover; width: 100%; height: 55px; border-radius: 7px" src="@item.Image">
+                                </a>
+                            }
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -401,7 +401,7 @@
 
         // Total number of items present
         // in wrapper class
-        items: 108,
+        items: 50,
 
         // Items allowed on a single page
         itemsOnPage: 5,

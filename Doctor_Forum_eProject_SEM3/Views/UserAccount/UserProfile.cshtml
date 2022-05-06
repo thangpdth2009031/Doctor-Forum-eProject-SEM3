@@ -47,10 +47,10 @@
                             <h4 class="m-b-0"><strong>Dr. @Html.DisplayFor(model => model.UserName)</strong></h4>
                             <p class="mt-2">Address: @Html.DisplayFor(model => model.AddressDetail)<br />Phone:@Html.DisplayFor(model => model.Phone)<br>Email: @Html.DisplayFor(model => model.Email)</p>
                         </div>
-                        <div class="mt-4">
+                        @*<div class="mt-4">
                             <button class="btn btn-primary btn-round">Follow</button>
                             <button class="btn btn-primary btn-round btn-simple">Message</button>
-                        </div>
+                        </div>*@
                         @*<p class="social-icon mt-3">
                                 <a title="Twitter" href=""><i class="fa-brands fa-twitter"></i></a>
                                 <a title="Facebook" href=""><i class="fa-brands fa-facebook"></i></a>
@@ -60,7 +60,7 @@
                     </div>
 
                 </div>
-                <div class="card mt-3">
+                @*<div class="card mt-3">
                     <ul class="nav nav-tabs">
                         <li class="nav-item"><a class="nav-link show active" data-toggle="tab" href="#Followers">Followers</a></li>
                         <li class="nav-item"><a class="nav-link show" data-toggle="tab" href="#friends">Friends</a></li>
@@ -177,7 +177,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="card">
@@ -287,18 +287,7 @@
                                                 <div class="content-post"> @Html.Raw(item.Content)</div>
                                             </div>
                                             <div class="clearfix"></div>
-                                        </div>
-                                        <div class="postinfo pull-left">
-                                            <div class="comments">
-                                                <div class="commentbg">
-                                                    560
-                                                    <div class="mark"></div>
-                                                </div>
-
-                                            </div>
-                                            <div class="views"><i class="fa-solid fa-eye"></i> 1,568</div>
-                                            <div class="time"><i class="fa-solid fa-clock"></i> 24 min</div>
-                                        </div>
+                                        </div>                                     
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
