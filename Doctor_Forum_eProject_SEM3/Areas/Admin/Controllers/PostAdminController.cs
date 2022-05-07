@@ -17,7 +17,7 @@ using Doctor_Forum_eProject_SEM3.Models;
 
 namespace Doctor_Forum_eProject_SEM3.Areas.Admin.Controllers
 {
-    public class PostAdminController : BasesController
+    public class PostAdminController : Controller
     {
         private DoctorForumDbContext db = new DoctorForumDbContext();
         Post post = new Post();

@@ -69,9 +69,19 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
         // GET: Admin/PostAdmin/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
-            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
-            return View();
+            var account = (Account)Session[UserSession.USER_SESSION];
+
+            if (account == null)
+            {
+                return RedirectToAction("Login", "UserAccount");
+
+            }
+            else
+            {
+                ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Avatar");
+                ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
+                return View();
+            }
         }
 
         // POST: Admin/PostAdmin/Create
@@ -214,7 +224,11 @@ namespace Doctor_Forum_eProject_SEM3.Controllers
                     reply.UpdatedAt = DateTime.Now;
                     db.Replies.Add(reply);
                     db.SaveChanges();
-                }                              
+                }
+                else
+                {
+                    return RedirectToAction("Login", "UserAccount");
+                }                           
             }          
             return RedirectToAction("Details", "Posts", new { id = postId});
         }
